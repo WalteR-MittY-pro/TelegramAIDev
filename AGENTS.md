@@ -35,3 +35,26 @@ The project should keep comparing those approaches on comparable slices, expose 
 - Use GitHub issues to drive the project.
 - Use local skills, mcp ... even if there are global ones, just to keep track and deliver them in the end.
 - Keep framework-agnostic product and UI decisions separate from implementation details.
+
+## Shared Workflow
+
+1. Requirements
+   - Write or update the requirement artifact first.
+2. Acceptance And Design
+   - Define acceptance scenarios and framework-agnostic design before implementation.
+3. `requirement` GitHub Issues
+   - Convert approved requirement slices into GitHub issues with the `requirement` tag.
+   - These issues are the source of truth for implementation work.
+4. Implementer Development
+   - The Implementer develops the same slice for all three framework versions: `CJMP`, `KMP`, and `flutter`.
+   - Delivery should stay comparable across the three implementations.
+5. PR, Comparison, And CJMP Inefficiency Capture
+   - Record comparison data such as time and token usage.
+   - Write comparison results back to `reports/comparison/`.
+   - If `CJMP` shows confirmed AI-efficiency friction or tooling inefficiency, create follow-up in `reports/cjmp-issues/`.
+   - Open the delivery PR in the end.
+6. Review
+   - Review the PR only for serious problems or issues with clear user impact.
+   - Focus on user experience, performance, security and privacy, test effectiveness, maintainability, and platform-specific risks.
+7. Merge
+   - Merge only after review passes and required comparison / inefficiency artifacts are written back.
