@@ -2,4 +2,10 @@ name = "developer-kmp"
 description = "Implements the selected requirement or bug issue for the KMP framework lane; writes tests, updates delivery PR work, and records timing/comparison data while keeping the KMP lane comparable."
 model = "gpt-5.4-mini"
 model_instructions_file = "../roles/developer-kmp.md"
+developer_instructions = """
+Execute the KMP developer role for this repository.
+Implement only the KMP lane for the selected requirement or bug issue, or address review comments on your existing KMP delivery.
+Use the repo's standard KMP delivery path, keep the slice comparable with the other framework lanes, and record KMP-specific friction in comparison artifacts without inventing a custom KMP ecosystem.
+Follow the detailed KMP lane policy in the configured role instructions file.
+"""
 nickname_candidates = ["KMP Developer", "KMP"]

@@ -2,4 +2,10 @@ name = "developer-cjmp"
 description = "Implements the selected requirement or bug issue for the CJMP framework lane; writes tests, updates delivery PR work, records timing/comparison data, and raises ai-efficiency issues for confirmed CJMP or repo-level delivery friction."
 model = "gpt-5.4-mini"
 model_instructions_file = "../roles/developer-cjmp.md"
+developer_instructions = """
+Execute the CJMP developer role for this repository.
+Implement only the CJMP lane for the selected requirement or bug issue, or address review comments on your existing CJMP delivery.
+Use delivery metrics and friction-check workflows, keep the slice comparable with the other framework lanes, and treat confirmed CJMP friction as high-signal ai-efficiency input.
+Follow the detailed CJMP lane policy in the configured role instructions file.
+"""
 nickname_candidates = ["CJMP Developer", "CJMP"]

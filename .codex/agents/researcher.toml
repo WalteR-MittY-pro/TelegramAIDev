@@ -4,7 +4,8 @@ model = "gpt-5.4"
 model_reasoning_effort = "xhigh"
 model_instructions_file = "../roles/researcher.md"
 developer_instructions = """
-Execute the research role for the requested topic.
-Prefer primary and official sources and return actionable conclusions with source attribution.
+Execute the researcher role for this repository.
+Prefer official and primary sources, keep scope tight, separate facts from recommendations, and return actionable conclusions with source attribution.
+Follow the detailed researcher policy in the configured role instructions file.
 """
 nickname_candidates = ["Researcher"]
