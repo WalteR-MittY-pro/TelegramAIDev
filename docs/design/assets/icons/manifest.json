@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "package": "telegram-commercial-mvp-icons",
+  "sourceBoard": "docs/design/figma-source/index.html",
+  "sourceOfTruth": "docs/design/assets/icons",
+  "icons": [
+    {
+      "name": "telegram-brand-mark",
+      "file": "telegram-brand-mark.svg",
+      "viewBox": "0 0 48 48",
+      "sourceType": "extracted-inline-svg",
+      "usage": [
+        "login-brand-mark"
+      ],
+      "notes": "Use with a caller-provided accent background when the mark is embedded in a branded badge."
+    },
+    {
+      "name": "telegram-brand-badge",
+      "file": "telegram-brand-badge.svg",
+      "viewBox": "0 0 64 64",
+      "sourceType": "derived-from-brand-mark-and-css-badge",
+      "usage": [
+        "login-brand-badge"
+      ],
+      "notes": "Self-contained badge that matches the login header styling."
+    },
+    {
+      "name": "tab-chats",
+      "file": "tab-chats.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "extracted-inline-svg",
+      "usage": [
+        "home-tab-chats"
+      ]
+    },
+    {
+      "name": "tab-contacts",
+      "file": "tab-contacts.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "extracted-inline-svg",
+      "usage": [
+        "home-tab-contacts"
+      ]
+    },
+    {
+      "name": "tab-settings",
+      "file": "tab-settings.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "extracted-inline-svg",
+      "usage": [
+        "home-tab-settings"
+      ]
+    },
+    {
+      "name": "search",
+      "file": "search.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "🔍",
+      "usage": [
+        "chat-list-search",
+        "chat-list-loading-search"
+      ]
+    },
+    {
+      "name": "compose",
+      "file": "compose.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "✎",
+      "usage": [
+        "chat-list-compose"
+      ]
+    },
+    {
+      "name": "add",
+      "file": "add.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "＋",
+      "usage": [
+        "contacts-add"
+      ]
+    },
+    {
+      "name": "back",
+      "file": "back.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "‹",
+      "usage": [
+        "chat-detail-back"
+      ]
+    },
+    {
+      "name": "more",
+      "file": "more.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "⋯",
+      "usage": [
+        "chat-detail-more"
+      ]
+    },
+    {
+      "name": "send",
+      "file": "send.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "➤",
+      "usage": [
+        "chat-composer-send"
+      ],
+      "notes": "Designed for use on an accent button with currentColor set to white."
+    },
+    {
+      "name": "pending",
+      "file": "pending.svg",
+      "viewBox": "0 0 24 24",
+      "sourceType": "normalized-from-glyph",
+      "glyphSource": "⏳",
+      "usage": [
+        "message-pending-status",
+        "sending-locally-tag"
+      ]
+    }
+  ]
+}

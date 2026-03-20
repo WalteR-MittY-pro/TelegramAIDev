@@ -23,7 +23,9 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
 - app launch and startup routing
 - login with a demo-first phone/code flow
 - session restore on relaunch
-- chat list as the default home screen
+- home shell with Telegram-like primary navigation presence
+- chat list as the default home tab
+- visible `Contacts` and `Settings` tabs on the home shell, even if their inner functionality is not implemented in the MVP
 - chat detail screen with realistic message rendering
 - sending a local demo text message
 - core loading, empty, and error states on major screens
@@ -34,6 +36,8 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
 - real backend integration
 - real SMS verification
 - contacts sync
+- contacts management flows
+- settings detail flows
 - voice and video calls
 - channels, bots, payments, stories, mini apps
 - advanced moderation and admin controls
@@ -51,11 +55,12 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
 1. First launch without session
    - User opens the app and lands in login.
    - User can enter a demo phone number and continue into a demo verification step.
-   - Successful login routes to chat list.
+   - Successful login routes to the home shell with the chat list tab active.
 2. Relaunch with valid session
-   - User reopens the app and is routed directly into the chat list after restore.
+   - User reopens the app and is routed directly into the home shell with the chat list tab active after restore.
 3. Browse chats
-   - User sees a realistic list of conversations with avatar, title, snippet, timestamp, unread state, and pinned or muted cues where relevant.
+   - User sees a Telegram-like home shell with `Chats`, `Contacts`, and `Settings` tabs present.
+   - The `Chats` tab is active by default and shows a realistic list of conversations with avatar, title, snippet, timestamp, unread state, and pinned or muted cues where relevant.
 4. Open a conversation
    - User enters chat detail and sees a believable mix of incoming and outgoing messages, grouped with date separators and delivery states where relevant.
 5. Send a message
@@ -66,7 +71,7 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
 1. App shell and startup routing
 2. Demo login flow
 3. Session restore
-4. Chat list
+4. Home shell and chat list
 5. Chat detail
 6. Composer and local message send
 
@@ -79,6 +84,9 @@ If one framework is behind, the comparison artifact must record the gap explicit
 
 - acceptance: `docs/acceptance/telegram-commercial-mvp.md`
 - design: `docs/design/telegram-commercial-mvp.md`
+- design source board: `docs/design/figma-source/index.html`
+- shared icon assets: `docs/design/assets/icons/`
+- shared mock data: `docs/design/assets/mock-data.json`
 - aggregate comparison: `reports/comparison/telegram-commercial-mvp-comparison-overview.md`
 - `CJMP` round log: `reports/comparison/telegram-commercial-mvp-cjmp-rounds.md`
 - `KMP` round log: `reports/comparison/telegram-commercial-mvp-kmp-rounds.md`

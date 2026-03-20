@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "product": "telegram-commercial-mvp",
+  "sourceBoard": "docs/design/figma-source/index.html",
+  "usage": "framework-agnostic demo content and UI-state sample data",
+  "login": {
+    "brandTitle": "Telegram Demo",
+    "demoPhoneNumber": "+1 415 555 0199",
+    "invalidPhoneNumber": "+1 415 55",
+    "submitLabel": "Continue",
+    "hint": "No real SMS or backend. Keep the flow credible, but lightweight.",
+    "footer": "The first successful login routes into the home shell with the Chats tab active.",
+    "validationMessage": "Please enter a complete demo phone number before continuing.",
+    "validationHint": "Inline validation should be calm, visible, and intentional.",
+    "validationFooter": "Use concise feedback and keep the rest of the form stable when validation fails."
+  },
+  "homeShell": {
+    "defaultTab": "chats",
+    "tabs": [
+      {
+        "id": "chats",
+        "label": "Chats",
+        "icon": "tab-chats",
+        "mvpDepth": "core"
+      },
+      {
+        "id": "contacts",
+        "label": "Contacts",
+        "icon": "tab-contacts",
+        "mvpDepth": "surface-only"
+      },
+      {
+        "id": "settings",
+        "label": "Settings",
+        "icon": "tab-settings",
+        "mvpDepth": "surface-only"
+      }
+    ],
+    "actions": {
+      "searchIcon": "search",
+      "composeIcon": "compose",
+      "addIcon": "add"
+    }
+  },
+  "chatList": {
+    "conversations": [
+      {
+        "id": "alex-mercer",
+        "title": "Alex Mercer",
+        "avatarText": "A",
+        "avatarVariant": "default",
+        "timestampLabel": "09:42",
+        "preview": "The design pass looks solid. Ship the home shell with tabs visible in MVP.",
+        "unreadCount": 2,
+        "isActive": true,
+        "metaLabel": null
+      },
+      {
+        "id": "team-sync",
+        "title": "Team Sync",
+        "avatarText": "T",
+        "avatarVariant": "alt1",
+        "timestampLabel": "08:15",
+        "preview": "Need parity notes for CJMP, KMP, and flutter after the next round.",
+        "unreadCount": 0,
+        "isActive": false,
+        "metaLabel": "PINNED"
+      },
+      {
+        "id": "mina-park",
+        "title": "Mina Park",
+        "avatarText": "M",
+        "avatarVariant": "alt2",
+        "timestampLabel": "Yesterday",
+        "preview": "We can keep Contacts and Settings shallow for now, but they should be present.",
+        "unreadCount": 1,
+        "isActive": false,
+        "metaLabel": null
+      },
+      {
+        "id": "product-review",
+        "title": "Product Review",
+        "avatarText": "P",
+        "avatarVariant": "alt3",
+        "timestampLabel": "Tue",
+        "preview": "Customer demo quality matters more than feature count for the benchmark.",
+        "unreadCount": 0,
+        "isActive": false,
+        "metaLabel": "MUTED"
+      },
+      {
+        "id": "support-ops",
+        "title": "Support Ops",
+        "avatarText": "S",
+        "avatarVariant": "alt4",
+        "timestampLabel": "Mon",
+        "preview": "The loading, empty, and send-pending states should feel production-credible.",
+        "unreadCount": 0,
+        "isActive": false,
+        "metaLabel": null
+      }
+    ],
+    "loadingState": {
+      "title": "Loading conversations",
+      "body": "Use coherent, non-janky loading states instead of blank scaffolds.",
+      "skeletonRowCount": 3
+    },
+    "emptyState": {
+      "title": "No chats yet",
+      "body": "The empty state should still feel like a product surface, not a broken screen."
+    }
+  },
+  "contactsSurface": {
+    "title": "Contacts stays lightweight in MVP",
+    "body": "The tab exists to keep the product surface close to Telegram. Detailed contacts management is intentionally deferred.",
+    "skeletonLinePercents": [
+      88,
+      73,
+      81
+    ]
+  },
+  "chatDetail": {
+    "participant": {
+      "id": "alex-mercer",
+      "name": "Alex Mercer",
+      "subtitle": "last seen recently",
+      "typingSubtitle": "typing..."
+    },
+    "actions": {
+      "backIcon": "back",
+      "moreIcon": "more",
+      "sendIcon": "send",
+      "pendingIcon": "pending"
+    },
+    "dateLabel": "Today",
+    "messages": [
+      {
+        "id": "msg-1",
+        "direction": "in",
+        "text": "Let's keep the MVP narrow, but the surface should still feel close to Telegram.",
+        "timeLabel": "09:21",
+        "deliveryLabel": null
+      },
+      {
+        "id": "msg-2",
+        "direction": "out",
+        "text": "Agreed. Home shell, chats, detail, and send flow should all feel believable.",
+        "timeLabel": "09:24",
+        "deliveryLabel": "sent-read"
+      },
+      {
+        "id": "msg-3",
+        "direction": "in",
+        "text": "Also keep Contacts and Settings visible in the shell, even if they stay shallow.",
+        "timeLabel": "09:26",
+        "deliveryLabel": null
+      },
+      {
+        "id": "msg-4",
+        "direction": "out",
+        "text": "That keeps the demo credible without exploding the implementation scope.",
+        "timeLabel": "09:27",
+        "deliveryLabel": "sent-read"
+      }
+    ],
+    "composer": {
+      "placeholder": "Type a message..."
+    },
+    "pendingState": {
+      "draftText": "Shipping the MVP shell design now...",
+      "messageText": "Shipping the MVP shell design now. You can validate parity after implementation.",
+      "timeLabel": "09:35",
+      "deliveryLabel": "pending-local",
+      "tagLabel": "Sending locally"
+    }
+  }
+}

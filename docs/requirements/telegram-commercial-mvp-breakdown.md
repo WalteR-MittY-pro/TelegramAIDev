@@ -11,7 +11,7 @@
 1. App shell and startup routing across `CJMP`, `KMP`, and `flutter`
 2. Demo login flow across `CJMP`, `KMP`, and `flutter`
 3. Session restore across `CJMP`, `KMP`, and `flutter`
-4. Chat list core experience across `CJMP`, `KMP`, and `flutter`
+4. Home shell and chat list core experience across `CJMP`, `KMP`, and `flutter`
 5. Chat detail core conversation experience across `CJMP`, `KMP`, and `flutter`
 6. Composer and local message send across `CJMP`, `KMP`, and `flutter`
 
