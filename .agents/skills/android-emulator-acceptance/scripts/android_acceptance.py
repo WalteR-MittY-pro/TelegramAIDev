@@ -376,7 +376,7 @@ def format_emulator_launch_failure(log_path: Path) -> str:
 
 
 def resolve_runtime_helper_script() -> Path:
-    helper_path = Path(__file__).resolve().parents[2] / "android-emulator-runtime" / "scripts" / "android_emulator_runtime.py"
+    helper_path = Path(__file__).resolve().parents[2] / "android-emulator-deploy-run" / "scripts" / "android_emulator_runtime.py"
     if not helper_path.exists():
         raise SystemExit(f"Runtime helper script not found: {helper_path}")
     return helper_path

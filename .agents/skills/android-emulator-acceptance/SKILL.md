@@ -10,7 +10,7 @@ Use this skill for shared runtime acceptance on Android when the iOS path is slo
 This skill is intentionally repo-shared and framework-agnostic:
 
 - use lane-specific tooling only to build the app
-- use `android-emulator-runtime` to boot the emulator, install the APK, and start the app
+- use `android-emulator-deploy-run` to boot the emulator, install the APK, and start the app
 - use Android emulator plus `adb` for the actual acceptance interaction and evidence
 - keep acceptance scenario-driven and tied to the requirement, design, and acceptance docs
 
@@ -70,71 +70,27 @@ The script wraps the repetitive parts:
 - type text, send key events, swipe, and capture screenshots
 
 If you need to boot the emulator, install the APK, or start the app, use the
-separate `android-emulator-runtime` skill first. This skill is for acceptance
+separate `android-emulator-deploy-run` skill first. This skill is for acceptance
 interaction after runtime setup is done.
 
 ## Sandbox profile
 
-This repo now includes one shared Codex profile for Android acceptance:
+For this repo, `android_acceptance_min` is still a useful default shell for
+acceptance interaction:
 
 ```bash
 codex --profile android_acceptance_min
 ```
 
-Use `android_acceptance_min` first. It keeps `workspace-write` and only adds
-generic sandbox settings in repo config:
-
-- `sandbox_mode = "workspace-write"`
-- `approval_policy = "never"`
-- sandboxed network access enabled
-
-It also enables sandboxed network access for commands that need it. The narrow
-outside-sandbox exception lives in the runtime skill's repo-scoped execpolicy rule:
-
-```bash
-python3 .agents/skills/android-emulator-runtime/scripts/android_emulator_runtime.py boot --headless
-```
-
-That boot command is the only documented Android launch path that should be
-allowlisted outside the sandbox. Keep the allowlist scoped to the helper's
-`boot` subcommand, not the whole script.
+Use the profile when it helps keep the acceptance session narrow, but do not
+treat it as a requirement of `android-emulator-deploy-run`. The deploy/run
+helper is designed for normal user access and should not rely on a repo-specific
+privilege model as part of its contract.
 
 Keep host-specific Android paths out of committed repo config. If your local
 workflow needs extra writable roots such as the Android SDK directory or
-Android user state directories, add them per machine:
-
-```bash
-codex --profile android_acceptance_min \
-  --add-dir "$ANDROID_HOME" \
-  --add-dir "$HOME/.android"
-```
-
-Or put the same machine-specific roots in your user-level
+Android user state directories, add them per machine or in your user-level
 `~/.codex/config.toml`, not in this repository's `.codex/config.toml`.
-
-Real-world note from this repo: `adb`-level interaction can work under the
-minimal profile, but emulator boot itself may still fail under macOS sandboxing.
-So split the workflow like this when you want the least privilege:
-
-1. start a fresh Codex session so `.codex/rules/android-emulator.rules` is loaded
-2. use `android-emulator-runtime` to boot the emulator, install the APK, and start the app
-3. use this skill from `android_acceptance_min` for `dump-ui`, `find`, `tap`,
-   `type`, `keyevent`, `swipe`, `screenshot`, and other `adb`-driven checks
-
-If the boot command is still blocked in your environment, fall back to this split:
-
-1. launch the emulator outside Codex, or from a separate full-access Codex session
-2. use this skill from `android_acceptance_min` for `dump-ui`, `find`, `tap`,
-   `type`, `keyevent`, `swipe`, `screenshot`, and other `adb`-driven checks
-
-The intended order is:
-
-1. `codex --profile android_acceptance_min`
-2. if the allowlisted boot command still cannot boot the emulator, either:
-   - launch the emulator outside Codex first, or
-   - define a personal full-access fallback in `~/.codex/config.toml`, not in the shared repo config
-
-Important limit: changing `.codex/config.toml` affects future Codex sessions that load the repo config. It does not retroactively widen the sandbox of a session that is already running under tighter outer restrictions.
 
 ## Recommended workflow
 
@@ -145,10 +101,9 @@ Important limit: changing `.codex/config.toml` affects future Codex sessions tha
 3. Run:
 
 ```bash
-python3 .agents/skills/android-emulator-runtime/scripts/android_emulator_runtime.py doctor
-python3 .agents/skills/android-emulator-runtime/scripts/android_emulator_runtime.py boot --avd Pixel_3a_API_34
-python3 .agents/skills/android-emulator-runtime/scripts/android_emulator_runtime.py install-apk --apk path/to/app-debug.apk
-python3 .agents/skills/android-emulator-runtime/scripts/android_emulator_runtime.py start-app --apk path/to/app-debug.apk
+python3 .agents/skills/android-emulator-deploy-run/scripts/android_emulator_runtime.py doctor
+python3 .agents/skills/android-emulator-deploy-run/scripts/android_emulator_runtime.py boot --avd Pixel_3a_API_34
+python3 .agents/skills/android-emulator-deploy-run/scripts/android_emulator_runtime.py deploy --apk path/to/app-debug.apk
 ```
 
 4. Confirm the app is already running on the emulator.
@@ -158,7 +113,7 @@ python3 .agents/skills/android-emulator-runtime/scripts/android_emulator_runtime
 
 ## Fast-path commands
 
-For boot, install, and app launch commands, use `android-emulator-runtime`.
+For boot, install, and app launch commands, use `android-emulator-deploy-run`.
 This skill's fast path starts after the app is already running on the device.
 
 Inspect the current UI and persist the raw XML:

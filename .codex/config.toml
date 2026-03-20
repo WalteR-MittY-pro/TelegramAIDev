@@ -1,8 +1,21 @@
 #:schema https://developers.openai.com/codex/config-schema.json
 
+profile = "android_acceptance_min"
+
 [agents]
 max_threads = 6
 max_depth = 1
+
+[profiles.android_acceptance_min]
+# First-choice profile for Android acceptance: keep the repo config portable and
+# keep acceptance interaction inside normal sandboxed adb usage. Add
+# machine-specific Android directories with `codex --add-dir` or in user-level
+# `~/.codex/config.toml`, not in this shared repo config.
+sandbox_mode = "workspace-write"
+approval_policy = "never"
+
+[profiles.android_acceptance_min.sandbox_workspace_write]
+network_access = true
 
 [mcp_servers.dart]
 command = "dart"
