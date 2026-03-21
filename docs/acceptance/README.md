@@ -8,3 +8,4 @@ Recommended file contents:
 - edge cases
 - explicit pass/fail criteria
 - links to related requirement and design artifacts
+- slice-specific acceptance contracts when later slices must not be pulled forward early

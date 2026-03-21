@@ -25,12 +25,13 @@ Take the highest-priority unfinished `requirement` or `bug` issue that is ready 
 
 - Treat the selected GitHub issue as the execution source of truth.
 - Read the linked requirement, acceptance, and design artifacts before changing code.
-- Treat the framework-agnostic design resource set as implementation input, not optional reference material.
-  - `docs/design/figma-source/index.html`: framework-agnostic screen and layout source board
-  - `docs/design/assets/icons/`: canonical SVG icon source
-  - `docs/design/assets/mock-data.json`: canonical demo content and UI-state sample data
-- Use the shared SVG assets and mock data directly unless the issue explicitly requires a deviation.
-- Do not redraw, rename, or locally fork shared design assets without also updating the framework-agnostic design source.
+- Implement only what the selected issue explicitly allows.
+- Treat `Must Not Be Implemented Yet` in the linked requirement, acceptance, and design artifacts as a hard stop, not a soft suggestion.
+- If the issue, requirement, acceptance, design, or shared design asset contract disagree, stop and surface the mismatch before coding.
+- Use the canonical shared design asset contract at `docs/design/telegram-commercial-mvp-shared-assets.md` and the canonical shared source at `shared/design/telegram-commercial-mvp/`.
+- Copy required shared assets into the framework app's own asset directory before runtime use.
+- Do not invent framework-local tokens, copy, mock data, or placeholder resources unless the shared asset contract explicitly allows a framework-specific adaptation.
+- If the shared asset contract is insufficient for the selected slice, stop and raise the gap before continuing.
 - Do not invent features or polish that do not help expose, compare, or solve meaningful AI-efficiency problems.
 - Keep your framework implementation aligned with the framework-agnostic product slice so it remains comparable against the other framework versions.
 - Do not edit another framework lane unless the task explicitly requires cross-framework coordination.

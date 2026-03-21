@@ -1,0 +1,90 @@
+{
+  "startup": {
+    "defaultAuthenticatedDestination": "authenticated-placeholder"
+  },
+  "homeShell": {
+    "defaultTab": "chats",
+    "tabs": [
+      {
+        "id": "chats",
+        "labelKey": "homeShell.tabs.chats",
+        "iconId": "chat-bubble",
+        "implementedInSlice": 4
+      },
+      {
+        "id": "contacts",
+        "labelKey": "homeShell.tabs.contacts",
+        "iconId": "contacts",
+        "implementedInSlice": 4,
+        "placeholderDestination": true
+      },
+      {
+        "id": "settings",
+        "labelKey": "homeShell.tabs.settings",
+        "iconId": "settings",
+        "implementedInSlice": 4,
+        "placeholderDestination": true
+      }
+    ]
+  },
+  "chatList": {
+    "conversations": [
+      {
+        "id": "chat-alex",
+        "title": "Alex Mason",
+        "snippet": "Let's keep the startup slice tight for all three frameworks.",
+        "timestamp": "09:41",
+        "unreadCount": 2,
+        "pinned": true,
+        "muted": false,
+        "avatarResource": "avatar-placeholder.svg",
+        "avatarTint": "blue"
+      },
+      {
+        "id": "chat-design",
+        "title": "Design Sync",
+        "snippet": "Shared assets should prevent each framework from inventing its own look.",
+        "timestamp": "Yesterday",
+        "unreadCount": 0,
+        "pinned": false,
+        "muted": true,
+        "avatarResource": "avatar-placeholder.svg",
+        "avatarTint": "purple"
+      },
+      {
+        "id": "chat-ops",
+        "title": "Ops Bot",
+        "snippet": "Build is green. Token and time metrics were recorded.",
+        "timestamp": "Thu",
+        "unreadCount": 1,
+        "pinned": false,
+        "muted": false,
+        "avatarResource": "avatar-placeholder.svg",
+        "avatarTint": "green"
+      }
+    ]
+  },
+  "chatDetail": {
+    "placeholderConversationId": "chat-alex",
+    "messages": [
+      {
+        "id": "msg-1",
+        "direction": "incoming",
+        "text": "Later slices will turn this placeholder into the real chat detail screen.",
+        "deliveryState": "sent"
+      },
+      {
+        "id": "msg-2",
+        "direction": "outgoing",
+        "text": "For now, this data exists only to prevent frameworks from inventing their own seed content.",
+        "deliveryState": "sent"
+      }
+    ],
+    "localSend": {
+      "initialDeliveryState": "pending",
+      "settledDeliveryState": "sent",
+      "failureDeliveryState": "failed",
+      "clearComposerOnSuccess": true
+    }
+  }
+}

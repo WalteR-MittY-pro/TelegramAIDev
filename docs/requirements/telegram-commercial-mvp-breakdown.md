@@ -5,6 +5,9 @@
 - requirement: `docs/requirements/telegram-commercial-mvp.md`
 - acceptance: `docs/acceptance/telegram-commercial-mvp.md`
 - design: `docs/design/telegram-commercial-mvp.md`
+- shared design assets: `docs/design/telegram-commercial-mvp-shared-assets.md`
+
+Issue-by-issue implementation of slices `#1` through `#4` must follow the slice delivery contracts in the linked requirement, acceptance, and design artifacts.
 
 ## Requirement Issues
 

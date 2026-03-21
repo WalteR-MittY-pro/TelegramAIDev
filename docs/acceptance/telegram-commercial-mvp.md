@@ -6,9 +6,208 @@ This document defines the acceptance scenarios for the Telegram-like commercial 
 
 Related requirement: `docs/requirements/telegram-commercial-mvp.md`
 Related design: `docs/design/telegram-commercial-mvp.md`
-Related design source board: `docs/design/figma-source/index.html`
-Related shared icon assets: `docs/design/assets/icons/`
-Related shared mock data: `docs/design/assets/mock-data.json`
+
+## Slice Acceptance Contracts
+
+The scenarios below describe the cumulative full-MVP behavior after slices `#1` through `#6` are complete.
+For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts below instead of treating later-slice product behavior as early-slice acceptance scope.
+
+### Slice #1: App shell and startup routing
+
+#### Allowed In This Slice
+
+- bootstrap or loading gate
+- no-session handoff into login
+- startup failure state with recoverable fallback or explicit notice
+- authenticated route stub only if routing structure requires it
+
+#### Must Not Be Implemented Yet
+
+- demo verification
+- successful authenticated handoff after login
+- session persistence
+- session restore
+- home shell
+- chat list
+
+#### Temporary Placeholder Allowed
+
+- a minimal authenticated placeholder screen may exist behind the routing layer
+- the placeholder must not look like the real home shell or chat list
+
+#### Depends On Prior Slice Outputs
+
+- none
+
+#### Slice Pass Criteria
+
+- first launch without session reaches login cleanly
+- startup failure does not leave the app stuck on a spinner
+- any authenticated destination reachable in this slice is clearly a placeholder, not a later-slice implementation
+
+### Slice #2: Demo login flow
+
+#### Allowed In This Slice
+
+- phone input
+- continue CTA
+- validation and failure feedback
+- demo verification step
+- successful authenticated handoff into the authenticated placeholder
+
+#### Must Not Be Implemented Yet
+
+- session persistence
+- session restore on relaunch
+- real home shell
+- real chat list
+
+#### Temporary Placeholder Allowed
+
+- successful authentication may land on the authenticated placeholder from slice `#1`
+- the placeholder must not be presented as the real home shell
+
+#### Depends On Prior Slice Outputs
+
+- slice `#1` app shell and startup routing
+
+#### Slice Pass Criteria
+
+- the user can complete the demo login path without developer knowledge
+- invalid or incomplete input gets clear feedback
+- success ends in the authenticated placeholder handoff, not in the real home shell or chat list
+
+### Slice #3: Session restore
+
+#### Allowed In This Slice
+
+- local demo session persistence
+- restore on relaunch when the local session is valid
+- fallback to login when the local session is invalid or missing
+
+#### Must Not Be Implemented Yet
+
+- real home shell
+- real chat list
+- chat detail
+- composer
+
+#### Temporary Placeholder Allowed
+
+- restore may land on the same authenticated placeholder used in slice `#2`
+- the placeholder must not be mistaken for the real home shell or chat list
+
+#### Depends On Prior Slice Outputs
+
+- slice `#1` app shell and startup routing
+- slice `#2` demo login flow
+
+#### Slice Pass Criteria
+
+- relaunch with a valid local session lands in the authenticated placeholder without exposing broken intermediate states
+- invalid or missing session falls back to login cleanly
+- restore does not introduce the real home shell or chat list early
+
+### Slice #4: Home shell and chat list
+
+#### Allowed In This Slice
+
+- Telegram-like home shell
+- visible `Chats`, `Contacts`, and `Settings` tabs
+- `Chats` as the default active tab
+- chat list rows and metadata
+- loading, empty, and error states
+- stable list scrolling
+
+#### Must Not Be Implemented Yet
+
+- chat detail
+- composer
+- local send flow
+
+#### Temporary Placeholder Allowed
+
+- `Contacts` and `Settings` inner screens may be placeholder destinations
+- the placeholder destinations must look intentional and must not appear broken
+
+#### Depends On Prior Slice Outputs
+
+- slice `#1` app shell and startup routing
+- slice `#2` demo login flow
+- slice `#3` session restore
+
+#### Slice Pass Criteria
+
+- login and restore now land in the real home shell with `Chats` active
+- the home shell visibly includes `Chats`, `Contacts`, and `Settings`
+- the chat list meets the required metadata, state, and scrolling quality bar
+
+### Slice #5: Chat detail
+
+#### Allowed In This Slice
+
+- chat detail entry from the existing chat list
+- top bar with back navigation and conversation title
+- message history rendering
+- incoming and outgoing bubbles
+- date separators
+- stable scrolling for the shared seed conversation
+
+#### Must Not Be Implemented Yet
+
+- local text send flow
+- editable composer behavior
+- attachments, stickers, or voice notes
+- remote delivery receipts
+
+#### Temporary Placeholder Allowed
+
+- a non-interactive composer shell may exist to preserve the intended layout
+- the shell must not allow sending or local message append
+
+#### Depends On Prior Slice Outputs
+
+- slices `#1` through `#4`
+
+#### Slice Pass Criteria
+
+- the user can open the shared seed conversation from the chat list
+- the conversation looks believable for a commercial messaging app
+- incoming and outgoing messages are visually distinct and grouped coherently
+- if a composer shell is present, it is clearly inactive and cannot send
+
+### Slice #6: Composer and local message send
+
+#### Allowed In This Slice
+
+- text input composer
+- send action
+- local message append
+- pending-to-sent transition
+- clear composer on success
+- recoverable local send failure state when applicable
+
+#### Must Not Be Implemented Yet
+
+- remote delivery receipts
+- attachments, stickers, or voice message compose
+- media gallery or advanced message actions
+
+#### Temporary Placeholder Allowed
+
+- non-text composer affordances may remain absent or inert
+- local send may remain local-only and must not pretend to contact a real backend
+
+#### Depends On Prior Slice Outputs
+
+- slices `#1` through `#5`
+
+#### Slice Pass Criteria
+
+- sending a local text message works from chat detail
+- the local message appears immediately and settles into a stable state
+- the composer clears after success
+- any failure state remains recoverable without leaving the conversation broken
 
 ## Acceptance Scenario 1: First Launch Routes To Login
 
@@ -138,8 +337,8 @@ Related shared mock data: `docs/design/assets/mock-data.json`
 ## Cross-Framework Acceptance Rule
 
 - the same scenario set applies to `CJMP`, `KMP`, and `flutter`
-- acceptance should validate against the shared design resource set, not against framework-local restatements of the same UI assets or demo content
 - if one framework deviates, the difference must be recorded in the relevant framework round log and later reflected in `reports/comparison/telegram-commercial-mvp-comparison-overview.md`
+- use the slice acceptance contracts above to prevent early implementation of later slices
 
 ## Rejection Conditions
 

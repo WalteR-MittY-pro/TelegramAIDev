@@ -9,20 +9,19 @@ Related acceptance: `docs/acceptance/telegram-commercial-mvp.md`
 
 ## Figma Status
 
-- Figma artifact: capture started, final file generation still pending browser-side submission
-- Figma HTML source board: `docs/design/figma-source/index.html`
-- Shared icon assets: `docs/design/assets/icons/`
-- Shared mock data: `docs/design/assets/mock-data.json`
-- Until the Figma file is fully generated, this document, the HTML source board, the shared icon assets, and the shared mock data are the source of truth for framework-agnostic design decisions.
+- Figma artifact: pending
+- Until the Figma file is created, this document is the source of truth for framework-agnostic design decisions.
 
-## Shared Design Resources
+## Shared Design Asset Contract
 
-- `docs/design/figma-source/index.html`: screen inventory and layout source board
-- `docs/design/assets/icons/`: canonical SVG icon source for all framework lanes
-- `docs/design/assets/mock-data.json`: canonical demo content and UI-state sample data for all framework lanes
-- `docs/design/assets/README.md`: usage contract for shared design assets
+- shared asset spec: `docs/design/telegram-commercial-mvp-shared-assets.md`
+- canonical shared asset source: `shared/design/telegram-commercial-mvp/`
+- framework apps must copy required shared assets into their own local app asset paths before runtime use
+- framework apps must not load runtime assets directly from the shared source directory
+- if a required shared asset is missing, implementations must stop and surface the gap instead of inventing a local replacement
 
-All three framework lanes should consume these shared resources directly instead of recreating near-duplicate design assets or demo content locally.
+The existing startup or login-only JSON catalog pattern is not sufficient as the full shared design asset layer.
+The canonical shared asset contract now includes tokens, shared copy, shared mock data, and placeholder resources.
 
 ## Product Structure
 
@@ -31,6 +30,174 @@ All three framework lanes should consume these shared resources directly instead
 - Home shell
 - Chat list
 - Chat detail
+
+## Slice Design Contracts
+
+### Slice #1: App shell and startup routing
+
+#### Allowed In This Slice
+
+- startup loading gate
+- login handoff state
+- startup failure state
+- minimal route structure needed for authenticated and unauthenticated destinations
+- shared assets limited to the startup and login subset
+
+#### Must Not Be Implemented Yet
+
+- demo verification UI
+- persistent session behavior
+- real home shell
+- real chat list surface
+- chat rows
+
+#### Temporary Placeholder Allowed
+
+- a minimal authenticated placeholder screen may exist if the route structure requires it
+- the placeholder must not borrow the home shell tabs or chat list composition
+
+#### Depends On Prior Slice Outputs
+
+- shared design tokens
+- shared startup and login copy
+- shared startup and login mock data
+
+### Slice #2: Demo login flow
+
+#### Allowed In This Slice
+
+- phone entry UI
+- verification step UI
+- validation and failure states
+- authenticated handoff into the existing placeholder destination
+
+#### Must Not Be Implemented Yet
+
+- session persistence
+- session restore
+- real home shell
+- real chat list
+
+#### Temporary Placeholder Allowed
+
+- continue to use the authenticated placeholder from slice `#1`
+
+#### Depends On Prior Slice Outputs
+
+- slice `#1` route structure and placeholder destination
+- shared startup and login copy
+- shared startup and login mock data
+
+### Slice #3: Session restore
+
+#### Allowed In This Slice
+
+- persistence and restore state wiring
+- login fallback state
+- restore-time loading and failure messaging
+
+#### Must Not Be Implemented Yet
+
+- real home shell
+- real chat list
+- chat detail
+- composer
+
+#### Temporary Placeholder Allowed
+
+- restore may still land on the authenticated placeholder until slice `#4` ships
+
+#### Depends On Prior Slice Outputs
+
+- slice `#1` route structure
+- slice `#2` authenticated placeholder and login handoff
+- shared startup and login copy
+
+### Slice #4: Home shell and chat list
+
+#### Allowed In This Slice
+
+- real home shell
+- `Chats`, `Contacts`, and `Settings` tabs
+- shared home shell tab metadata
+- chat list rows and state surfaces
+- chat list mock data and placeholder avatar resources
+
+#### Must Not Be Implemented Yet
+
+- chat detail
+- composer
+- local send flow
+
+#### Temporary Placeholder Allowed
+
+- `Contacts` and `Settings` destinations may remain placeholders
+- placeholders must still use shared copy and tokens
+
+#### Depends On Prior Slice Outputs
+
+- slices `#1` through `#3`
+- shared design tokens
+- shared home shell copy and tab metadata
+- shared chat list mock data
+- shared placeholder resources
+
+### Slice #5: Chat detail
+
+#### Allowed In This Slice
+
+- chat detail route and conversation selection handoff
+- top bar with title and back navigation
+- shared seed conversation history
+- incoming and outgoing bubble styles
+- date separators
+- shared placeholder avatar resources where needed
+
+#### Must Not Be Implemented Yet
+
+- interactive text composer behavior
+- local message append
+- attachments, stickers, or voice notes
+- remote sync or delivery receipts
+
+#### Temporary Placeholder Allowed
+
+- a non-interactive composer shell may be shown to preserve the intended layout
+- if shown, it must use shared copy and tokens and remain inactive
+
+#### Depends On Prior Slice Outputs
+
+- slices `#1` through `#4`
+- shared chat detail copy
+- shared chat detail mock data
+- shared placeholder resources
+
+### Slice #6: Composer and local message send
+
+#### Allowed In This Slice
+
+- text composer field
+- send action
+- local message append using shared local-send behavior metadata
+- pending, sent, and failure states for the local-only send path
+- composer clear-on-success behavior
+
+#### Must Not Be Implemented Yet
+
+- remote delivery receipts
+- non-text composer actions as real features
+- media gallery or advanced message actions
+
+#### Temporary Placeholder Allowed
+
+- non-text composer affordances may remain absent or inert
+- the local send path may remain fully local-only
+
+#### Depends On Prior Slice Outputs
+
+- slices `#1` through `#5`
+- shared chat detail copy
+- shared chat detail mock data, including local-send behavior metadata
 
 ## Screen Inventory
 
@@ -122,6 +289,7 @@ All three framework lanes should consume these shared resources directly instead
 - do not leak framework-specific state containers or architectural decisions into the UI spec
 - prefer reusable structural components across all three frameworks
 - define the major states that materially affect implementation complexity and acceptance
+- do not treat framework-local assets as acceptable substitutes for missing shared design assets
 
 ## Figma Follow-Up
 
