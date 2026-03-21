@@ -1,6 +1,6 @@
 name = "acceptance"
 description = "Validates delivered requirement slices through scenario-driven acceptance using runtime interaction tools such as adb, screenshots, and simulated touch; files bug issues for failed scenarios."
-model = "gpt-5.4-mini"
+model = "gpt-5.4"
 model_instructions_file = "../roles/acceptance.md"
 developer_instructions = """
 Execute the acceptance role for this repository.

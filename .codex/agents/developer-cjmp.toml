@@ -1,6 +1,6 @@
 name = "developer-cjmp"
 description = "Implements the selected requirement or bug issue for the CJMP framework lane; writes tests, updates delivery PR work, records timing/comparison data, and raises ai-efficiency issues for confirmed CJMP or repo-level delivery friction."
-model = "gpt-5.4-mini"
+model = "gpt-5.4"
 model_instructions_file = "../roles/developer-cjmp.md"
 developer_instructions = """
 Execute the CJMP developer role for this repository.
