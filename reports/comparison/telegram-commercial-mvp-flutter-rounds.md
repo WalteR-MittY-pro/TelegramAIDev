@@ -217,3 +217,15 @@ Each round entry should include:
 - validation completed in the round: `dart format lib test`, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
 - parity impact, delivery status change, or notable workaround: Flutter slice `#5` now opens the shared seed conversation from the chat list and renders the shared canonical detail content in a standalone chat route while keeping composer interaction and local send explicitly out of scope. The canonical shared asset contract for this slice is now stronger because the separator-driving metadata lives in `shared/design/telegram-commercial-mvp/shared-mock-data.json` instead of framework-local code.
 - AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T10:00:58Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `bug-fix`, `issue-40 / pr-39`
+- concise working effort summary: Reworked the slice-`#5` inactive composer shell so it no longer presents a normal send-arrow affordance, replacing it with an explicit inactive treatment while preserving the layout and keeping send behavior out of scope.
+- total duration: `1m 23s`
+- internal step duration: understanding `22s`, validation `0s`, reporting `0s`
+- token consumption: `total=1652025, input=1648471, cached_input=1471744, output=3554, reasoning_output=1131`
+- validation completed in the round: `dart format lib test`, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
+- parity impact, delivery status change, or notable workaround: The chat-detail composer now looks unmistakably inactive in slice `#5`, which should clear the acceptance failure on bug `#40` without pulling any slice-`#6` local-send behavior forward.
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round

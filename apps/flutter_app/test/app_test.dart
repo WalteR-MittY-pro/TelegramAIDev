@@ -288,7 +288,9 @@ void main() {
       );
       expect(find.byTooltip('Read'), findsWidgets);
       expect(find.text('Type a message...'), findsOneWidget);
+      expect(find.text('Inactive'), findsOneWidget);
       expect(find.byType(TextField), findsNothing);
+      expect(find.byIcon(Icons.send_rounded), findsNothing);
       expect(find.byType(NavigationBar), findsNothing);
 
       await tester.drag(find.byType(ListView), const Offset(0, -120));
