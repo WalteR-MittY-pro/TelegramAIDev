@@ -109,3 +109,18 @@ Each round entry should include:
 - bug issue references created or updated in the round: none
 - acceptance gap, parity impact, or notable workaround: this round did not confirm a Flutter product bug. The remaining gap is a shared Android acceptance tooling block: `python3 .agents/skills/android-emulator-acceptance/scripts/android_acceptance.py type --value 14155550199` only populated `141` in the Flutter `EditText`, so the accepted login success path could not be completed with confidence.
 - AI-efficiency friction summary: confirmed shared acceptance-tooling friction, tracked in issue `#36`
+
+## 2026-03-22T08:42:52Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-22-acceptance-rerun`
+- concise working effort or acceptance summary: Re-ran the previously blocked Flutter requirement `#22` valid-login scenario on merged `main` after patching the shared Android acceptance helper to send digits-only input through per-digit keyevents. The rerun fully validated the successful login handoff into the authenticated placeholder.
+- total duration: `2m 23s`
+- internal step duration: prep `6s`, runtime `1m 28s`, reporting `26s`
+- token consumption: `total=1471443, input=1468092, cached_input=1321600, output=3351, reasoning_output=1387`
+- scenarios validated in the round: runtime-verified valid digits-only phone entry with `14155550199`, runtime-verified tapping `Continue`, and runtime-verified the authenticated placeholder handoff on the merged Flutter app
+- acceptance outcome: `accepted`
+- evidence captured or missing: captured fresh rerun evidence at `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-success.png` and `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-success.xml`, with additional confirmation from the connected Flutter widget tree reaching `AuthenticatedPlaceholderScreen`
+- bug issue references created or updated in the round: none
+- acceptance gap, parity impact, or notable workaround: the local shared acceptance-tooling patch removed the text-entry blocker that had weakened the earlier post-merge acceptance round, so Flutter slice `#22` is now fully accepted
+- AI-efficiency friction summary: the repo-level tooling friction in issue `#36` is fixed locally and validated by this rerun; keep the issue open until the tooling patch is committed and shared

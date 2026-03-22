@@ -51,6 +51,59 @@ class AndroidAcceptanceTests(unittest.TestCase):
             "demo%sphone%s\\&%smore",
         )
 
+    def test_is_digits_only_text(self) -> None:
+        self.assertTrue(android_acceptance.is_digits_only_text("14155550199"))
+        self.assertFalse(android_acceptance.is_digits_only_text("+14155550199"))
+        self.assertFalse(android_acceptance.is_digits_only_text("demo"))
+
+    @mock.patch.object(android_acceptance, "resolve_adb", return_value="adb")
+    @mock.patch.object(android_acceptance.time, "sleep")
+    @mock.patch.object(android_acceptance, "command_output")
+    def test_command_type_uses_keyevents_for_digits_only(
+        self,
+        command_output: mock.Mock,
+        sleep: mock.Mock,
+        resolve_adb: mock.Mock,
+    ) -> None:
+        args = argparse.Namespace(serial="emulator-5554", value="120")
+
+        self.assertEqual(android_acceptance.command_type(args), 0)
+        resolve_adb.assert_called()
+        command_output.assert_has_calls(
+            [
+                mock.call(
+                    ["adb", "-s", "emulator-5554", "shell", "input", "keyevent", "KEYCODE_1"],
+                    timeout=android_acceptance.INPUT_ACTION_TIMEOUT_SECONDS,
+                ),
+                mock.call(
+                    ["adb", "-s", "emulator-5554", "shell", "input", "keyevent", "KEYCODE_2"],
+                    timeout=android_acceptance.INPUT_ACTION_TIMEOUT_SECONDS,
+                ),
+                mock.call(
+                    ["adb", "-s", "emulator-5554", "shell", "input", "keyevent", "KEYCODE_0"],
+                    timeout=android_acceptance.INPUT_ACTION_TIMEOUT_SECONDS,
+                ),
+            ]
+        )
+        self.assertEqual(command_output.call_count, 3)
+        self.assertEqual(sleep.call_count, 3)
+
+    @mock.patch.object(android_acceptance, "resolve_adb", return_value="adb")
+    @mock.patch.object(android_acceptance, "command_output")
+    def test_command_type_uses_input_text_for_non_digit_values(
+        self,
+        command_output: mock.Mock,
+        resolve_adb: mock.Mock,
+    ) -> None:
+        args = argparse.Namespace(serial="emulator-5554", value="demo phone")
+
+        self.assertEqual(android_acceptance.command_type(args), 0)
+        resolve_adb.assert_called()
+        command_output.assert_called_once_with(
+            ["adb", "-s", "emulator-5554", "shell", "input", "text", "demo%sphone"],
+            timeout=android_acceptance.INPUT_ACTION_TIMEOUT_SECONDS,
+        )
+
     @mock.patch.object(android_acceptance, "command_output")
     @mock.patch.object(android_acceptance, "resolve_runtime_helper_script", return_value=Path("/tmp/android_emulator_runtime.py"))
     def test_command_boot_delegates_to_runtime_helper(

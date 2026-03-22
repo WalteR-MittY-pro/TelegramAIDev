@@ -18,6 +18,20 @@ BOUNDS_RE = re.compile(r"\[(\d+),(\d+)\]\[(\d+),(\d+)\]")
 POLL_INTERVAL_SECONDS = 0.5
 EMULATOR_LAUNCH_ATTEMPTS = 3
 EMULATOR_LAUNCH_RETRY_DELAY_SECONDS = 5.0
+INPUT_ACTION_TIMEOUT_SECONDS = 5.0
+KEYEVENT_INTERVAL_SECONDS = 0.1
+KEYCODE_BY_DIGIT = {
+    "0": "KEYCODE_0",
+    "1": "KEYCODE_1",
+    "2": "KEYCODE_2",
+    "3": "KEYCODE_3",
+    "4": "KEYCODE_4",
+    "5": "KEYCODE_5",
+    "6": "KEYCODE_6",
+    "7": "KEYCODE_7",
+    "8": "KEYCODE_8",
+    "9": "KEYCODE_9",
+}
 
 
 @dataclass(frozen=True)
@@ -415,6 +429,19 @@ def escape_input_text(value: str) -> str:
     return "".join(escaped)
 
 
+def is_digits_only_text(value: str) -> bool:
+    return bool(value) and all(character in KEYCODE_BY_DIGIT for character in value)
+
+
+def send_digit_keyevents(serial: str, value: str) -> None:
+    for character in value:
+        command_output(
+            adb_command(serial, "shell", "input", "keyevent", KEYCODE_BY_DIGIT[character]),
+            timeout=INPUT_ACTION_TIMEOUT_SECONDS,
+        )
+        time.sleep(KEYEVENT_INTERVAL_SECONDS)
+
+
 def command_doctor(args: argparse.Namespace) -> int:
     command = [sys.executable, str(resolve_runtime_helper_script()), "doctor"]
     add_runtime_storage_arguments(command, args)
@@ -524,22 +551,34 @@ def command_tap(args: argparse.Namespace) -> int:
         print(f"tap center=({x},{y})")
         return 0
 
-    command_output(adb_command(serial, "shell", "input", "tap", str(x), str(y)))
+    command_output(
+        adb_command(serial, "shell", "input", "tap", str(x), str(y)),
+        timeout=INPUT_ACTION_TIMEOUT_SECONDS,
+    )
     print(f"tapped ({x},{y})")
     return 0
 
 
 def command_type(args: argparse.Namespace) -> int:
     serial = resolve_serial(args.serial)
-    escaped_value = escape_input_text(args.value)
-    command_output(adb_command(serial, "shell", "input", "text", escaped_value))
+    if is_digits_only_text(args.value):
+        send_digit_keyevents(serial, args.value)
+    else:
+        escaped_value = escape_input_text(args.value)
+        command_output(
+            adb_command(serial, "shell", "input", "text", escaped_value),
+            timeout=INPUT_ACTION_TIMEOUT_SECONDS,
+        )
     print(f'typed "{args.value}"')
     return 0
 
 
 def command_keyevent(args: argparse.Namespace) -> int:
     serial = resolve_serial(args.serial)
-    command_output(adb_command(serial, "shell", "input", "keyevent", args.key))
+    command_output(
+        adb_command(serial, "shell", "input", "keyevent", args.key),
+        timeout=INPUT_ACTION_TIMEOUT_SECONDS,
+    )
     print(f"sent keyevent {args.key}")
     return 0
 
@@ -557,7 +596,8 @@ def command_swipe(args: argparse.Namespace) -> int:
             str(args.x2),
             str(args.y2),
             str(args.duration_ms),
-        )
+        ),
+        timeout=INPUT_ACTION_TIMEOUT_SECONDS,
     )
     print(f"swiped ({args.x1},{args.y1}) -> ({args.x2},{args.y2}) in {args.duration_ms}ms")
     return 0
