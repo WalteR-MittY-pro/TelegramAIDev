@@ -4,18 +4,23 @@ import 'package:flutter/foundation.dart';
 
 import '../shared/assets/shared_asset_repository.dart';
 import '../shared/assets/shared_models.dart';
+import '../shared/session/demo_session_store.dart';
 
 enum BootstrapPhase { loading, noSession, failure }
 
 enum DemoLoginPhase { idle, submitting, authenticated }
 
 class AppBootstrapController extends ChangeNotifier {
-  AppBootstrapController({required SharedAssetRepository repository})
-    : _repository = repository {
+  AppBootstrapController({
+    required SharedAssetRepository repository,
+    required DemoSessionStore sessionStore,
+  }) : _repository = repository,
+       _sessionStore = sessionStore {
     load();
   }
 
   final SharedAssetRepository _repository;
+  final DemoSessionStore _sessionStore;
 
   BootstrapPhase _phase = BootstrapPhase.loading;
   DemoLoginPhase _demoLoginPhase = DemoLoginPhase.idle;
@@ -52,7 +57,20 @@ class AppBootstrapController extends ChangeNotifier {
           .loadStartupConfig();
       _bootstrapCopy = startupConfig.bootstrapCopy;
       _startupConfig = startupConfig;
-      _phase = BootstrapPhase.noSession;
+      final DemoSessionRecord? restoredSession = await _sessionStore
+          .readSession();
+      if (restoredSession != null &&
+          _isValidPhoneNumber(restoredSession.phoneNumber)) {
+        _demoLoginPhase = DemoLoginPhase.authenticated;
+      } else {
+        if (restoredSession != null) {
+          await _sessionStore.clearSession();
+        }
+        _phase = BootstrapPhase.noSession;
+      }
+      if (_demoLoginPhase == DemoLoginPhase.authenticated) {
+        _phase = BootstrapPhase.noSession;
+      }
       notifyListeners();
     } catch (error, stackTrace) {
       log(
@@ -85,6 +103,9 @@ class AppBootstrapController extends ChangeNotifier {
     notifyListeners();
 
     await Future<void>.delayed(const Duration(milliseconds: 400));
+    await _sessionStore.writeSession(
+      DemoSessionRecord(phoneNumber: normalizedPhoneNumber),
+    );
     _demoLoginPhase = DemoLoginPhase.authenticated;
     notifyListeners();
   }

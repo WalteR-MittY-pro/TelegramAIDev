@@ -124,3 +124,30 @@ Each round entry should include:
 - bug issue references created or updated in the round: none
 - acceptance gap, parity impact, or notable workaround: the local shared acceptance-tooling patch removed the text-entry blocker that had weakened the earlier post-merge acceptance round, so Flutter slice `#22` is now fully accepted
 - AI-efficiency friction summary: the repo-level tooling friction in issue `#36` is fixed locally and validated by this rerun; keep the issue open until the tooling patch is committed and shared
+
+## 2026-03-22T03:54:57Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-25`
+- concise working effort summary: Implemented Flutter slice `#3` local demo-session persistence and restore on top of merged slices `#1` and `#2`, storing a valid local demo session after successful login, restoring valid sessions on relaunch into the authenticated placeholder, and clearing invalid stored sessions back to the login handoff.
+- total duration: `6m 54s`
+- internal step duration: understanding `28s`, implementation `4m 7s`, validation `7s`, reporting `13s`
+- token consumption: `total=3643435, input=3628584, cached_input=3385216, output=14851, reasoning_output=3200`
+- validation completed in the round: `dart format .`, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
+- parity impact, delivery status change, or notable workaround: Flutter slice `#3` now persists only the local demo phone-number session needed for the MVP comparison flow and restores it directly to the existing authenticated placeholder; missing or invalid local session state falls back cleanly to the login route without introducing the real home shell, chat list, chat detail, or composer.
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T09:11:22Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-25-acceptance`
+- concise working effort or acceptance summary: Accepted Flutter requirement `#25` on Android emulator `emulator-5554` by runtime-validating the clean missing-session login fallback, a persisted valid demo session restoring directly into the authenticated placeholder on relaunch, and an intentionally corrupted stored session falling back to the login handoff without exposing a real home shell or chat list.
+- total duration: `5m 59s`
+- internal step duration: prep `29s`, runtime `5m 4s`, reporting `19s`
+- token consumption: `total=3823601, input=3816237, cached_input=3795456, output=7364, reasoning_output=3132`
+- scenarios validated in the round: runtime-verified initial missing-session launch reaching the login handoff; runtime-verified successful demo login persisting the local session and reaching the authenticated placeholder; runtime-verified relaunch with a valid stored session restoring directly to the authenticated placeholder; runtime-verified an intentionally invalid stored session value falling back to the login handoff instead of any real home shell or chat list
+- acceptance outcome: `accepted`
+- evidence captured or missing: captured runtime evidence at `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-initial.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-initial.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-login-success.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-login-success.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-restored.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-restored.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-invalid-session-prefs.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-invalid-fallback.png`, and `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-3/.cache/android-acceptance/issue25-invalid-fallback.xml`, with supporting Flutter widget-tree confirmation for both placeholder and login states
+- bug issue references created or updated in the round: none
+- acceptance gap, parity impact, or notable workaround: the slice now satisfies the required session-restore behavior while intentionally keeping the authenticated destination on the placeholder surface from slice `#2`; no later-slice home shell or chat list behavior was pulled forward
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
