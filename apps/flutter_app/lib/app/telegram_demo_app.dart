@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../features/chat/chat_detail_screen.dart';
 import '../features/home/chat_list_screen.dart';
 import '../features/home/home_shell_screen.dart';
 import '../features/home/home_tab_placeholder_screen.dart';
@@ -31,6 +32,8 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
   static const String chatsPath = '/home/chats';
   static const String contactsPath = '/home/contacts';
   static const String settingsPath = '/home/settings';
+  static const String chatDetailPath = '/chat/:chatId';
+  static const String chatDetailPathPrefix = '/chat/';
 
   late final AppBootstrapController _controller;
   late final GoRouter _router;
@@ -81,6 +84,24 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
             );
           },
         ),
+        GoRoute(
+          path: chatDetailPath,
+          builder: (BuildContext context, GoRouterState state) {
+            final SharedStartupConfig config =
+                _controller.startupConfig ?? _fallbackConfig();
+            final String chatId = state.pathParameters['chatId'] ?? '';
+            final ChatConversation conversation = _findConversation(
+              config: config,
+              chatId: chatId,
+            );
+            return ChatDetailScreen(
+              conversation: conversation,
+              chatDetailCopy: config.chatDetailCopy,
+              chatDetailData: config.chatDetailData,
+              onBack: () => context.go(chatsPath),
+            );
+          },
+        ),
         ShellRoute(
           builder: (BuildContext context, GoRouterState state, Widget child) {
             return AnimatedBuilder(
@@ -121,6 +142,13 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
                       avatarPlaceholderAssetPath:
                           config.avatarPlaceholderAssetPath,
                       state: listState,
+                      onOpenConversation: (String conversationId) {
+                        if (conversationId !=
+                            config.chatDetailData.placeholderConversationId) {
+                          return;
+                        }
+                        context.go('/chat/$conversationId');
+                      },
                     );
                   },
                 );
@@ -165,7 +193,7 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
         return startupPath;
       case BootstrapPhase.noSession:
         if (_controller.isAuthenticated) {
-          if (_isHomeLocation(location)) {
+          if (_isAuthenticatedLocation(location)) {
             return null;
           }
           return _defaultHomePath;
@@ -191,8 +219,10 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
       loginCopy: LoginCopy.fallback(),
       homeShellCopy: HomeShellCopy.fallback(),
       chatListCopy: ChatListCopy.fallback(),
+      chatDetailCopy: ChatDetailCopy.fallback(),
       homeShellData: HomeShellData.fallback(),
       chatConversations: const <ChatConversation>[],
+      chatDetailData: ChatDetailData.fallback(),
       placeholderNotice: PlaceholderCopy.fallback().placeholderNotice,
       appMarkAssetPath: null,
       avatarPlaceholderAssetPath: null,
@@ -213,10 +243,11 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
     return fallbackTabId;
   }
 
-  bool _isHomeLocation(String location) {
+  bool _isAuthenticatedLocation(String location) {
     return location == chatsPath ||
         location == contactsPath ||
-        location == settingsPath;
+        location == settingsPath ||
+        location.startsWith(chatDetailPathPrefix);
   }
 
   String _pathForTab(String tabId) {
@@ -229,6 +260,31 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
       default:
         return chatsPath;
     }
+  }
+
+  ChatConversation _findConversation({
+    required SharedStartupConfig config,
+    required String chatId,
+  }) {
+    for (final ChatConversation conversation in config.chatConversations) {
+      if (conversation.id == chatId) {
+        return conversation;
+      }
+    }
+    if (config.chatConversations.isNotEmpty) {
+      return config.chatConversations.first;
+    }
+    return const ChatConversation(
+      id: 'missing-chat',
+      title: 'Conversation',
+      snippet: '',
+      timestamp: '',
+      unreadCount: 0,
+      pinned: false,
+      muted: false,
+      avatarAssetPath: '',
+      avatarTintName: 'blue',
+    );
   }
 
   @override

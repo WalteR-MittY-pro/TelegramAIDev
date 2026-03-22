@@ -12,6 +12,7 @@ class ChatListScreen extends StatelessWidget {
     required this.conversations,
     required this.avatarPlaceholderAssetPath,
     required this.state,
+    this.onOpenConversation,
     this.onRetry,
   });
 
@@ -19,6 +20,7 @@ class ChatListScreen extends StatelessWidget {
   final List<ChatConversation> conversations;
   final String? avatarPlaceholderAssetPath;
   final ChatListViewState state;
+  final ValueChanged<String>? onOpenConversation;
   final VoidCallback? onRetry;
 
   @override
@@ -60,6 +62,9 @@ class ChatListScreen extends StatelessWidget {
             return _ConversationRow(
               conversation: conversation,
               avatarPlaceholderAssetPath: avatarPlaceholderAssetPath,
+              onTap: onOpenConversation == null
+                  ? null
+                  : () => onOpenConversation!(conversation.id),
             );
           },
         );
@@ -71,10 +76,12 @@ class _ConversationRow extends StatelessWidget {
   const _ConversationRow({
     required this.conversation,
     required this.avatarPlaceholderAssetPath,
+    required this.onTap,
   });
 
   final ChatConversation conversation;
   final String? avatarPlaceholderAssetPath;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +91,8 @@ class _ConversationRow extends StatelessWidget {
 
     return Card(
       child: InkWell(
-        onTap: null,
+        key: ValueKey<String>('conversation-row-${conversation.id}'),
+        onTap: onTap,
         borderRadius: BorderRadius.circular(18),
         child: Padding(
           padding: const EdgeInsets.all(14),

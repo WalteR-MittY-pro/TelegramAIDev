@@ -178,3 +178,69 @@ Each round entry should include:
 - bug issue references created or updated in the round: none
 - acceptance gap, parity impact, or notable workaround: the slice now satisfies the required real home-shell handoff while intentionally leaving chat detail and composer behavior out of scope; no product bug or acceptance gap remained in this round
 - AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T09:40:47Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-31`
+- concise working effort summary: Stopped before implementation because the canonical shared chat-detail mock data is insufficient for slice `#5`: the shared seed messages include `direction`, `text`, and `deliveryState`, but no date or date-label metadata to drive the required date separators without inventing Flutter-local content.
+- total duration: `blocked during understanding`
+- internal step duration: understanding `32s`
+- token consumption: `pending round close`
+- validation completed in the round: none; implementation did not proceed because the shared mock-data contract is missing separator-driving chat-detail metadata
+- parity impact, delivery status change, or notable workaround: Flutter slice `#5` is blocked on a shared asset gap rather than a Flutter implementation gap. The current shared source can support a basic conversation title and delivery-state cue rendering, but not the required date separators from canonical data.
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T09:57:30Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-31-acceptance`
+- concise working effort or acceptance summary: Runtime-validated Flutter PR `#39` on Android emulator `emulator-5554`. The slice successfully opened the shared seed conversation from the chat list, rendered a believable chat detail with distinct incoming and outgoing bubbles, showed the `Today` date separator, and preserved the no-backend local session flow. Acceptance still failed because the composer shell shows a normal-looking send-arrow affordance even though slice `#5` requires any composer shell to be clearly inactive and unable to send.
+- total duration: `6m 6s`
+- internal step duration: prep `34s`, runtime `4m 8s`, reporting `56s`
+- token consumption: `total=6326069, input=6314131, cached_input=6138240, output=11938, reasoning_output=3601`
+- scenarios validated in the round: runtime-verified login to the home shell; runtime-verified opening the `Alex Mason` conversation from the chat list; runtime-verified date separator rendering; runtime-verified distinct incoming and outgoing message presentation with delivery-state cue visibility in the screenshot; runtime-verified no attachments or remote-sync surface; runtime-verified tapping the visible send-arrow affordance does not append a message or activate local send
+- acceptance outcome: `failed`
+- evidence captured or missing: captured runtime evidence at `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-initial.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-initial.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-after-login.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-after-login.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-detail.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-detail.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-composer-tap.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-composer-tap.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-send-tap.png`, and `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-send-tap.xml`
+- bug issue references created or updated in the round: `#40`
+- acceptance gap, parity impact, or notable workaround: the visible send-arrow affordance makes the slice-`#5` composer shell look interactive even though send is intentionally out of scope, so PR `#39` should not merge until the shell is clearly inactive
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T09:50:18Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-31`
+- concise working effort summary: Promoted separator-driving chat-detail fields from the existing richer repo design data into the canonical shared mock asset, copied the updated canonical asset into the Flutter app, and implemented slice `#5` chat-detail routing, title/back navigation, shared seed conversation rendering, date separator, delivery-state cues, stable scroll behavior, and a clearly inactive composer shell without pulling local send forward.
+- total duration: `7m 20s`
+- internal step duration: understanding `2m 54s`, implementation `1m 4s`, validation `0s`, reporting `0s`
+- token consumption: `total=4224458, input=4205314, cached_input=4008832, output=19144, reasoning_output=7521`
+- validation completed in the round: `dart format lib test`, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
+- parity impact, delivery status change, or notable workaround: Flutter slice `#5` now opens the shared seed conversation from the chat list and renders the shared canonical detail content in a standalone chat route while keeping composer interaction and local send explicitly out of scope. The canonical shared asset contract for this slice is now stronger because the separator-driving metadata lives in `shared/design/telegram-commercial-mvp/shared-mock-data.json` instead of framework-local code.
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T10:00:58Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `bug-fix`, `issue-40 / pr-39`
+- concise working effort summary: Reworked the slice-`#5` inactive composer shell so it no longer presents a normal send-arrow affordance, replacing it with an explicit inactive treatment while preserving the layout and keeping send behavior out of scope.
+- total duration: `1m 23s`
+- internal step duration: understanding `22s`, validation `0s`, reporting `0s`
+- token consumption: `total=1652025, input=1648471, cached_input=1471744, output=3554, reasoning_output=1131`
+- validation completed in the round: `dart format lib test`, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
+- parity impact, delivery status change, or notable workaround: The chat-detail composer now looks unmistakably inactive in slice `#5`, which should clear the acceptance failure on bug `#40` without pulling any slice-`#6` local-send behavior forward.
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T10:10:10Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `bug-fix`, `issue-40-acceptance`
+- concise working effort or acceptance summary: Re-accepted Flutter bug `#40` on PR `#39` by runtime-validating the updated chat-detail composer shell after the inactive-treatment fix. The rerun confirmed that the slice-`#5` composer now reads as explicitly inactive, remains non-clickable, and preserves the believable chat-detail presentation without pulling local-send behavior forward.
+- total duration: `5m 52s`
+- internal step duration: prep `22s`, runtime `4m 31s`, reporting `12s`
+- token consumption: `total=6386689, input=6377167, cached_input=6348928, output=9522, reasoning_output=2791`
+- scenarios validated in the round: runtime-verified login to the home shell, runtime-verified opening `Alex Mason` from the chat list, runtime-verified believable chat detail with distinct incoming and outgoing bubbles, runtime-verified the `Today` date separator, runtime-verified the composer shell showing an explicit `Inactive` treatment, and runtime-verified tapping the inactive control leaves the UI unchanged and does not expose local-send behavior
+- acceptance outcome: `accepted`
+- evidence captured or missing: captured runtime evidence at `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-reaccept-detail.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-reaccept-detail.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-reaccept-after-inactive-tap.png`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-reaccept-after-inactive-tap.xml`, `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-reaccept-home.png`, and `/Users/haifengsong/code-base/telegram/worktrees/flutter-issue-5/.cache/android-acceptance/issue31-reaccept-home.xml`
+- bug issue references created or updated in the round: closed `#40`
+- acceptance gap, parity impact, or notable workaround: the rerun closed the only remaining slice-`#5` product bug; PR `#39` is now clear to merge from an acceptance standpoint
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round

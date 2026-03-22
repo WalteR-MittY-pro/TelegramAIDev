@@ -66,20 +66,42 @@
   },
   "chatDetail": {
     "placeholderConversationId": "chat-alex",
+    "subtitle": "last seen recently",
+    "typingSubtitle": "typing...",
+    "dateLabel": "Today",
     "messages": [
       {
         "id": "msg-1",
         "direction": "incoming",
-        "text": "Later slices will turn this placeholder into the real chat detail screen.",
-        "deliveryState": "sent"
+        "text": "Let's keep the MVP narrow, but the surface should still feel close to Telegram.",
+        "timeLabel": "09:21",
+        "deliveryLabel": null
       },
       {
         "id": "msg-2",
         "direction": "outgoing",
-        "text": "For now, this data exists only to prevent frameworks from inventing their own seed content.",
-        "deliveryState": "sent"
+        "text": "Agreed. Home shell, chats, detail, and send flow should all feel believable.",
+        "timeLabel": "09:24",
+        "deliveryLabel": "sent-read"
+      },
+      {
+        "id": "msg-3",
+        "direction": "incoming",
+        "text": "Also keep Contacts and Settings visible in the shell, even if they stay shallow.",
+        "timeLabel": "09:26",
+        "deliveryLabel": null
+      },
+      {
+        "id": "msg-4",
+        "direction": "outgoing",
+        "text": "That keeps the demo credible without exploding the implementation scope.",
+        "timeLabel": "09:27",
+        "deliveryLabel": "sent-read"
       }
     ],
+    "composer": {
+      "placeholder": "Type a message..."
+    },
     "localSend": {
       "initialDeliveryState": "pending",
       "settledDeliveryState": "sent",

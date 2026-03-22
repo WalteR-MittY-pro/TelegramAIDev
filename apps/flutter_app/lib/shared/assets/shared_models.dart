@@ -7,8 +7,10 @@ class SharedStartupConfig {
     required this.loginCopy,
     required this.homeShellCopy,
     required this.chatListCopy,
+    required this.chatDetailCopy,
     required this.homeShellData,
     required this.chatConversations,
+    required this.chatDetailData,
     required this.placeholderNotice,
     required this.appMarkAssetPath,
     required this.avatarPlaceholderAssetPath,
@@ -20,8 +22,10 @@ class SharedStartupConfig {
   final LoginCopy loginCopy;
   final HomeShellCopy homeShellCopy;
   final ChatListCopy chatListCopy;
+  final ChatDetailCopy chatDetailCopy;
   final HomeShellData homeShellData;
   final List<ChatConversation> chatConversations;
+  final ChatDetailData chatDetailData;
   final String placeholderNotice;
   final String? appMarkAssetPath;
   final String? avatarPlaceholderAssetPath;
@@ -220,6 +224,51 @@ class ChatListCopy {
   final String errorBody;
 }
 
+class ChatDetailCopy {
+  const ChatDetailCopy({
+    required this.titleFallback,
+    required this.composerPlaceholder,
+    required this.sendLabel,
+    required this.sendFailureNotice,
+  });
+
+  factory ChatDetailCopy.fromJson(Map<String, dynamic> json) {
+    final Map<String, dynamic> chatDetail = _readMap(
+      json['chatDetail'],
+      'chatDetail',
+    );
+    return ChatDetailCopy(
+      titleFallback: _readString(
+        chatDetail['titleFallback'],
+        'chatDetail.titleFallback',
+      ),
+      composerPlaceholder: _readString(
+        chatDetail['composerPlaceholder'],
+        'chatDetail.composerPlaceholder',
+      ),
+      sendLabel: _readString(chatDetail['sendLabel'], 'chatDetail.sendLabel'),
+      sendFailureNotice: _readString(
+        chatDetail['sendFailureNotice'],
+        'chatDetail.sendFailureNotice',
+      ),
+    );
+  }
+
+  factory ChatDetailCopy.fallback() {
+    return const ChatDetailCopy(
+      titleFallback: 'Conversation',
+      composerPlaceholder: 'Message',
+      sendLabel: 'Send',
+      sendFailureNotice: 'The local demo message could not be sent. Try again.',
+    );
+  }
+
+  final String titleFallback;
+  final String composerPlaceholder;
+  final String sendLabel;
+  final String sendFailureNotice;
+}
+
 class PlaceholderCopy {
   const PlaceholderCopy({required this.placeholderNotice});
 
@@ -398,6 +447,122 @@ class ChatConversation {
   final bool muted;
   final String avatarAssetPath;
   final String avatarTintName;
+}
+
+class ChatDetailData {
+  const ChatDetailData({
+    required this.placeholderConversationId,
+    required this.subtitle,
+    required this.typingSubtitle,
+    required this.dateLabel,
+    required this.composerPlaceholder,
+    required this.messages,
+  });
+
+  factory ChatDetailData.fromJson(Map<String, dynamic> json) {
+    final Map<String, dynamic> chatDetail = _readMap(
+      json['chatDetail'],
+      'chatDetail',
+    );
+    final Object? rawMessages = chatDetail['messages'];
+    if (rawMessages is! List<Object?>) {
+      throw const FormatException('chatDetail.messages must be a list.');
+    }
+
+    return ChatDetailData(
+      placeholderConversationId: _readString(
+        chatDetail['placeholderConversationId'],
+        'chatDetail.placeholderConversationId',
+      ),
+      subtitle: _readString(chatDetail['subtitle'], 'chatDetail.subtitle'),
+      typingSubtitle: _readString(
+        chatDetail['typingSubtitle'],
+        'chatDetail.typingSubtitle',
+      ),
+      dateLabel: _readString(chatDetail['dateLabel'], 'chatDetail.dateLabel'),
+      composerPlaceholder: _readString(
+        _readMap(chatDetail['composer'], 'chatDetail.composer')['placeholder'],
+        'chatDetail.composer.placeholder',
+      ),
+      messages: rawMessages
+          .map(
+            (Object? item) => ChatDetailMessage.fromJson(
+              _readMap(item, 'chatDetail.message'),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  factory ChatDetailData.fallback() {
+    return const ChatDetailData(
+      placeholderConversationId: 'chat-alex',
+      subtitle: 'last seen recently',
+      typingSubtitle: 'typing...',
+      dateLabel: 'Today',
+      composerPlaceholder: 'Type a message...',
+      messages: <ChatDetailMessage>[
+        ChatDetailMessage(
+          id: 'msg-1',
+          direction: ChatMessageDirection.incoming,
+          text:
+              "Let's keep the MVP narrow, but the surface should still feel close to Telegram.",
+          timeLabel: '09:21',
+          deliveryLabel: null,
+        ),
+        ChatDetailMessage(
+          id: 'msg-2',
+          direction: ChatMessageDirection.outgoing,
+          text:
+              'Agreed. Home shell, chats, detail, and send flow should all feel believable.',
+          timeLabel: '09:24',
+          deliveryLabel: 'sent-read',
+        ),
+      ],
+    );
+  }
+
+  final String placeholderConversationId;
+  final String subtitle;
+  final String typingSubtitle;
+  final String dateLabel;
+  final String composerPlaceholder;
+  final List<ChatDetailMessage> messages;
+}
+
+enum ChatMessageDirection { incoming, outgoing }
+
+class ChatDetailMessage {
+  const ChatDetailMessage({
+    required this.id,
+    required this.direction,
+    required this.text,
+    required this.timeLabel,
+    required this.deliveryLabel,
+  });
+
+  factory ChatDetailMessage.fromJson(Map<String, dynamic> json) {
+    return ChatDetailMessage(
+      id: _readString(json['id'], 'chatDetail.message.id'),
+      direction: _readDirection(
+        _readString(json['direction'], 'chatDetail.message.direction'),
+      ),
+      text: _readString(json['text'], 'chatDetail.message.text'),
+      timeLabel: _readString(json['timeLabel'], 'chatDetail.message.timeLabel'),
+      deliveryLabel: _readNullableString(
+        json['deliveryLabel'],
+        'chatDetail.message.deliveryLabel',
+      ),
+    );
+  }
+
+  final String id;
+  final ChatMessageDirection direction;
+  final String text;
+  final String timeLabel;
+  final String? deliveryLabel;
+
+  bool get isOutgoing => direction == ChatMessageDirection.outgoing;
 }
 
 class ResourceManifest {
@@ -649,6 +814,26 @@ bool? _readBool(Object? value, String label) {
     return value;
   }
   throw FormatException('Expected bool at $label.');
+}
+
+String? _readNullableString(Object? value, String label) {
+  if (value == null) {
+    return null;
+  }
+  if (value is String) {
+    return value;
+  }
+  throw FormatException('Expected nullable string at $label.');
+}
+
+ChatMessageDirection _readDirection(String value) {
+  switch (value) {
+    case 'incoming':
+      return ChatMessageDirection.incoming;
+    case 'outgoing':
+      return ChatMessageDirection.outgoing;
+  }
+  throw FormatException('Unsupported chat message direction: $value');
 }
 
 Color _parseColor(String value) {

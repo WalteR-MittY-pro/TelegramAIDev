@@ -98,8 +98,10 @@ class RootBundleSharedAssetRepository implements SharedAssetRepository {
       loginCopy: LoginCopy.fromJson(copyMap),
       homeShellCopy: HomeShellCopy.fromJson(copyMap),
       chatListCopy: ChatListCopy.fromJson(copyMap),
+      chatDetailCopy: ChatDetailCopy.fromJson(copyMap),
       homeShellData: homeShellData,
       chatConversations: chatConversations,
+      chatDetailData: ChatDetailData.fromJson(mockDataMap),
       placeholderNotice: PlaceholderCopy.fromJson(copyMap).placeholderNotice,
       appMarkAssetPath: resourceManifest.resolveAssetPath(
         resourceId: 'app-mark',

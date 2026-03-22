@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_app/app/telegram_demo_app.dart';
+import 'package:flutter_app/features/chat/chat_detail_screen.dart';
 import 'package:flutter_app/features/home/chat_list_screen.dart';
 import 'package:flutter_app/shared/assets/shared_asset_repository.dart';
 import 'package:flutter_app/shared/assets/shared_models.dart';
@@ -51,6 +52,43 @@ void main() {
     ];
   }
 
+  List<ChatDetailMessage> buildChatDetailMessages() {
+    return const <ChatDetailMessage>[
+      ChatDetailMessage(
+        id: 'msg-1',
+        direction: ChatMessageDirection.incoming,
+        text:
+            "Let's keep the MVP narrow, but the surface should still feel close to Telegram.",
+        timeLabel: '09:21',
+        deliveryLabel: null,
+      ),
+      ChatDetailMessage(
+        id: 'msg-2',
+        direction: ChatMessageDirection.outgoing,
+        text:
+            'Agreed. Home shell, chats, detail, and send flow should all feel believable.',
+        timeLabel: '09:24',
+        deliveryLabel: 'sent-read',
+      ),
+      ChatDetailMessage(
+        id: 'msg-3',
+        direction: ChatMessageDirection.incoming,
+        text:
+            'Also keep Contacts and Settings visible in the shell, even if they stay shallow.',
+        timeLabel: '09:26',
+        deliveryLabel: null,
+      ),
+      ChatDetailMessage(
+        id: 'msg-4',
+        direction: ChatMessageDirection.outgoing,
+        text:
+            'That keeps the demo credible without exploding the implementation scope.',
+        timeLabel: '09:27',
+        deliveryLabel: 'sent-read',
+      ),
+    ];
+  }
+
   SharedStartupConfig buildConfig({List<ChatConversation>? conversations}) {
     return SharedStartupConfig(
       tokens: DesignTokens.fallback(),
@@ -58,8 +96,17 @@ void main() {
       loginCopy: LoginCopy.fallback(),
       homeShellCopy: HomeShellCopy.fallback(),
       chatListCopy: ChatListCopy.fallback(),
+      chatDetailCopy: ChatDetailCopy.fallback(),
       homeShellData: HomeShellData.fallback(),
       chatConversations: conversations ?? buildConversations(),
+      chatDetailData: ChatDetailData(
+        placeholderConversationId: 'chat-alex',
+        subtitle: 'last seen recently',
+        typingSubtitle: 'typing...',
+        dateLabel: 'Today',
+        composerPlaceholder: 'Type a message...',
+        messages: buildChatDetailMessages(),
+      ),
       placeholderNotice: PlaceholderCopy.fallback().placeholderNotice,
       appMarkAssetPath: null,
       avatarPlaceholderAssetPath: avatarAssetPath,
@@ -206,6 +253,88 @@ void main() {
       expect(find.text('Start with your phone number'), findsNothing);
     },
   );
+
+  testWidgets(
+    'shared seed conversation opens chat detail with date separator and inactive composer',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        TelegramDemoApp(
+          repository: FakeSharedAssetRepository(configFactory: buildConfig),
+          sessionStore: FakeDemoSessionStore(
+            initialSession: const DemoSessionRecord(
+              phoneNumber: '+14155550199',
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      await tester.tap(
+        find.byKey(const ValueKey<String>('conversation-row-chat-alex')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.byType(ChatDetailScreen), findsOneWidget);
+      expect(find.text('Alex Mason'), findsOneWidget);
+      expect(find.text('last seen recently'), findsOneWidget);
+      expect(find.text('Today'), findsOneWidget);
+      expect(
+        find.text(
+          "Let's keep the MVP narrow, but the surface should still feel close to Telegram.",
+        ),
+        findsOneWidget,
+      );
+      expect(find.byTooltip('Read'), findsWidgets);
+      expect(find.text('Type a message...'), findsOneWidget);
+      expect(find.text('Inactive'), findsOneWidget);
+      expect(find.byType(TextField), findsNothing);
+      expect(find.byIcon(Icons.send_rounded), findsNothing);
+      expect(find.byType(NavigationBar), findsNothing);
+
+      await tester.drag(find.byType(ListView), const Offset(0, -120));
+      await tester.pumpAndSettle();
+      expect(
+        find.text(
+          'That keeps the demo credible without exploding the implementation scope.',
+        ),
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets('chat detail back navigation returns to the chat list', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      TelegramDemoApp(
+        repository: FakeSharedAssetRepository(configFactory: buildConfig),
+        sessionStore: FakeDemoSessionStore(
+          initialSession: const DemoSessionRecord(phoneNumber: '+14155550199'),
+        ),
+      ),
+    );
+
+    await tester.pump();
+    await tester.pumpAndSettle();
+
+    await tester.tap(
+      find.byKey(const ValueKey<String>('conversation-row-chat-alex')),
+    );
+    await tester.pumpAndSettle();
+    expect(find.byType(ChatDetailScreen), findsOneWidget);
+
+    await tester.tap(find.byTooltip('Back'));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(ChatDetailScreen), findsNothing);
+    expect(find.text('Telegram'), findsOneWidget);
+    expect(
+      find.byKey(const ValueKey<String>('conversation-row-chat-alex')),
+      findsOneWidget,
+    );
+  });
 
   testWidgets(
     'invalid local demo session falls back to login and clears stored state',
