@@ -124,3 +124,15 @@ Each round entry should include:
 - bug issue references created or updated in the round: none
 - acceptance gap, parity impact, or notable workaround: the local shared acceptance-tooling patch removed the text-entry blocker that had weakened the earlier post-merge acceptance round, so Flutter slice `#22` is now fully accepted
 - AI-efficiency friction summary: the repo-level tooling friction in issue `#36` is fixed locally and validated by this rerun; keep the issue open until the tooling patch is committed and shared
+
+## 2026-03-22T03:54:57Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-25`
+- concise working effort summary: Implemented Flutter slice `#3` local demo-session persistence and restore on top of merged slices `#1` and `#2`, storing a valid local demo session after successful login, restoring valid sessions on relaunch into the authenticated placeholder, and clearing invalid stored sessions back to the login handoff.
+- total duration: `6m 54s`
+- internal step duration: understanding `28s`, implementation `4m 7s`, validation `7s`, reporting `13s`
+- token consumption: `total=3643435, input=3628584, cached_input=3385216, output=14851, reasoning_output=3200`
+- validation completed in the round: `dart format .`, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
+- parity impact, delivery status change, or notable workaround: Flutter slice `#3` now persists only the local demo phone-number session needed for the MVP comparison flow and restores it directly to the existing authenticated placeholder; missing or invalid local session state falls back cleanly to the login route without introducing the real home shell, chat list, chat detail, or composer.
+- AI-efficiency friction summary: no confirmed AI-efficiency friction in this round

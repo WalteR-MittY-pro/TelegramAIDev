@@ -6,6 +6,7 @@ import 'package:flutter_app/app/telegram_demo_app.dart';
 import 'package:flutter_app/features/placeholder/authenticated_placeholder_screen.dart';
 import 'package:flutter_app/shared/assets/shared_asset_repository.dart';
 import 'package:flutter_app/shared/assets/shared_models.dart';
+import 'package:flutter_app/shared/session/demo_session_store.dart';
 
 void main() {
   SharedStartupConfig buildConfig() {
@@ -25,6 +26,7 @@ void main() {
     await tester.pumpWidget(
       TelegramDemoApp(
         repository: FakeSharedAssetRepository(configFactory: buildConfig),
+        sessionStore: FakeDemoSessionStore(),
       ),
     );
 
@@ -43,6 +45,7 @@ void main() {
     await tester.pumpWidget(
       TelegramDemoApp(
         repository: FakeSharedAssetRepository(configFactory: buildConfig),
+        sessionStore: FakeDemoSessionStore(),
       ),
     );
 
@@ -70,6 +73,7 @@ void main() {
       await tester.pumpWidget(
         TelegramDemoApp(
           repository: FakeSharedAssetRepository(configFactory: buildConfig),
+          sessionStore: FakeDemoSessionStore(),
         ),
       );
 
@@ -99,6 +103,7 @@ void main() {
     await tester.pumpWidget(
       TelegramDemoApp(
         repository: FakeSharedAssetRepository(error: StateError('load failed')),
+        sessionStore: FakeDemoSessionStore(),
       ),
     );
 
@@ -123,6 +128,7 @@ void main() {
             bundle: _ThrowingAssetBundle(),
             forceStartupFailure: true,
           ),
+          sessionStore: FakeDemoSessionStore(),
         ),
       );
 
@@ -159,6 +165,65 @@ void main() {
     expect(find.text('Chats'), findsNothing);
     expect(find.text('Settings'), findsNothing);
   });
+
+  testWidgets(
+    'valid local demo session restores directly into the authenticated placeholder',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        TelegramDemoApp(
+          repository: FakeSharedAssetRepository(configFactory: buildConfig),
+          sessionStore: FakeDemoSessionStore(
+            initialSession: const DemoSessionRecord(
+              phoneNumber: '+14155550199',
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text(
+          'This destination is intentionally scoped as a placeholder in the current MVP slice.',
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Start with your phone number'), findsNothing);
+      expect(find.text('Chats'), findsNothing);
+    },
+  );
+
+  testWidgets(
+    'invalid local demo session falls back to login and clears stored state',
+    (WidgetTester tester) async {
+      final FakeDemoSessionStore sessionStore = FakeDemoSessionStore(
+        initialSession: const DemoSessionRecord(phoneNumber: '4155550199'),
+      );
+
+      await tester.pumpWidget(
+        TelegramDemoApp(
+          repository: FakeSharedAssetRepository(configFactory: buildConfig),
+          sessionStore: sessionStore,
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump();
+      await tester.pumpAndSettle();
+
+      expect(find.text('Start with your phone number'), findsOneWidget);
+      expect(
+        find.text(
+          'This destination is intentionally scoped as a placeholder in the current MVP slice.',
+        ),
+        findsNothing,
+      );
+      expect(sessionStore.session, isNull);
+      expect(sessionStore.clearCount, 1);
+    },
+  );
 }
 
 class _ThrowingAssetBundle extends CachingAssetBundle {
@@ -195,5 +260,31 @@ class FakeSharedAssetRepository implements SharedAssetRepository {
       throw StateError('Missing startup config');
     }
     return config;
+  }
+}
+
+class FakeDemoSessionStore implements DemoSessionStore {
+  FakeDemoSessionStore({DemoSessionRecord? initialSession})
+    : _session = initialSession;
+
+  DemoSessionRecord? _session;
+  int clearCount = 0;
+
+  DemoSessionRecord? get session => _session;
+
+  @override
+  Future<void> clearSession() async {
+    clearCount += 1;
+    _session = null;
+  }
+
+  @override
+  Future<DemoSessionRecord?> readSession() async {
+    return _session;
+  }
+
+  @override
+  Future<void> writeSession(DemoSessionRecord session) async {
+    _session = session;
   }
 }

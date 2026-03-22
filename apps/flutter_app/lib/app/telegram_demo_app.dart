@@ -6,12 +6,18 @@ import '../features/placeholder/authenticated_placeholder_screen.dart';
 import '../features/startup/startup_gate_screen.dart';
 import '../shared/assets/shared_asset_repository.dart';
 import '../shared/assets/shared_models.dart';
+import '../shared/session/demo_session_store.dart';
 import 'app_bootstrap_controller.dart';
 
 class TelegramDemoApp extends StatefulWidget {
-  const TelegramDemoApp({super.key, required this.repository});
+  const TelegramDemoApp({
+    super.key,
+    required this.repository,
+    required this.sessionStore,
+  });
 
   final SharedAssetRepository repository;
+  final DemoSessionStore sessionStore;
 
   @override
   State<TelegramDemoApp> createState() => _TelegramDemoAppState();
@@ -29,7 +35,10 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
   @override
   void initState() {
     super.initState();
-    _controller = AppBootstrapController(repository: widget.repository);
+    _controller = AppBootstrapController(
+      repository: widget.repository,
+      sessionStore: widget.sessionStore,
+    );
     _router = GoRouter(
       initialLocation: startupPath,
       refreshListenable: _controller,
