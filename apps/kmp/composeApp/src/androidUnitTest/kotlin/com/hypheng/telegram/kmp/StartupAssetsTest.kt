@@ -1,5 +1,6 @@
 package com.hypheng.telegram.kmp
 
+import androidx.compose.ui.graphics.toArgb
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlinx.serialization.json.Json
@@ -57,7 +58,14 @@ class StartupAssetsTest {
 
     @Test
     fun convertsHexTokenToColor() {
-        assertEquals(0xFF2AABEEu, "#2AABEE".asColor().value)
-        assertEquals(0xFF17212Bu, "#17212B".asColor().value)
+        assertEquals(0xFF2AABEE.toInt(), "#2AABEE".asColor().toArgb())
+        assertEquals(0x8017212B.toInt(), "#8017212B".asColor().toArgb())
+    }
+
+    @Test
+    fun parsedColorsRemainUsableInMaterialCopies() {
+        val copied = "#2AABEE".asColor().copy(alpha = 0.5f)
+
+        assertEquals(0x802AABEE.toInt(), copied.toArgb())
     }
 }

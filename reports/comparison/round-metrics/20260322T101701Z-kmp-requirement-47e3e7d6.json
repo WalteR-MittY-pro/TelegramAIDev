@@ -1,0 +1,90 @@
+{
+  "codex_session_file": "/Users/haifengsong/.codex/sessions/2026/03/22/rollout-2026-03-22T18-16-21-019d150b-b3b1-7b01-9da7-80c323bb527b.jsonl",
+  "codex_thread_id": "019d150b-b3b1-7b01-9da7-80c323bb527b",
+  "ended_at": "2026-03-22T10:21:40Z",
+  "framework_lane": "kmp",
+  "round_id": "20260322T101701Z-kmp-requirement-47e3e7d6",
+  "started_at": "2026-03-22T10:17:01Z",
+  "steps": [
+    {
+      "duration_sec": 28,
+      "ended_at": "2026-03-22T10:17:37Z",
+      "name": "artifact-read",
+      "started_at": "2026-03-22T10:17:09Z"
+    },
+    {
+      "duration_sec": 81,
+      "ended_at": "2026-03-22T10:19:03Z",
+      "name": "deploy-setup",
+      "started_at": "2026-03-22T10:17:42Z"
+    },
+    {
+      "duration_sec": 118,
+      "ended_at": "2026-03-22T10:21:04Z",
+      "name": "runtime-validation",
+      "started_at": "2026-03-22T10:19:06Z"
+    },
+    {
+      "duration_sec": 28,
+      "ended_at": "2026-03-22T10:21:35Z",
+      "name": "report-closeout",
+      "started_at": "2026-03-22T10:21:07Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 1695360,
+    "input_tokens": 1768291,
+    "output_tokens": 8818,
+    "reasoning_output_tokens": 2799,
+    "total_tokens": 1777109
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 1695360,
+    "input_tokens": 1768291,
+    "output_tokens": 8818,
+    "reasoning_output_tokens": 2799,
+    "total_tokens": 1777109
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 66176,
+      "input_tokens": 67479,
+      "output_tokens": 282,
+      "reasoning_output_tokens": 156,
+      "total_tokens": 67761
+    },
+    "model_context_window": 258400,
+    "timestamp": "2026-03-22T10:21:35.145Z",
+    "total": {
+      "cached_input_tokens": 1723520,
+      "input_tokens": 1821613,
+      "output_tokens": 9715,
+      "reasoning_output_tokens": 3133,
+      "total_tokens": 1831328
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 24704,
+      "input_tokens": 28992,
+      "output_tokens": 349,
+      "reasoning_output_tokens": 203,
+      "total_tokens": 29341
+    },
+    "model_context_window": 258400,
+    "timestamp": "2026-03-22T10:16:55.235Z",
+    "total": {
+      "cached_input_tokens": 28160,
+      "input_tokens": 53322,
+      "output_tokens": 897,
+      "reasoning_output_tokens": 334,
+      "total_tokens": 54219
+    }
+  },
+  "total_duration_sec": 279,
+  "version": 1,
+  "work_item_ref": "issue-18",
+  "work_item_type": "requirement",
+  "working_effort_summary": "Accepted merged KMP requirement #18 on Android emulator: built and deployed the merged-main app, validated the no-session startup/login scenario, captured immediate startup crash evidence, and filed bug #42 after placeholder verification became blocked by the crash."
+}

@@ -383,10 +383,15 @@ internal fun DesignTokens.toShapes() = Shapes(
 
 internal fun String.asColor(): Color {
     val sanitized = removePrefix("#")
-    val colorLong = when (sanitized.length) {
-        6 -> "FF$sanitized".toULong(16)
-        8 -> sanitized.toULong(16)
+    val (alpha, red, green, blue) = when (sanitized.length) {
+        6 -> listOf("FF") + sanitized.chunked(2)
+        8 -> sanitized.chunked(2)
         else -> error("Unsupported color token: $this")
     }
-    return Color(colorLong)
+    return Color(
+        red = red.toInt(16),
+        green = green.toInt(16),
+        blue = blue.toInt(16),
+        alpha = alpha.toInt(16),
+    )
 }
