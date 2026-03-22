@@ -54,9 +54,18 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
         GoRoute(
           path: loginPath,
           builder: (BuildContext context, GoRouterState state) {
-            return LoginHandoffScreen(
-              loginCopy: _controller.startupConfig?.loginCopy,
-              appMarkAssetPath: _controller.startupConfig?.appMarkAssetPath,
+            return AnimatedBuilder(
+              animation: _controller,
+              builder: (BuildContext context, Widget? child) {
+                return LoginHandoffScreen(
+                  loginCopy: _controller.startupConfig?.loginCopy,
+                  appMarkAssetPath: _controller.startupConfig?.appMarkAssetPath,
+                  errorMessage: _controller.loginErrorMessage,
+                  isSubmitting: _controller.isSubmittingLogin,
+                  onSubmitPhoneNumber: _controller.submitDemoLogin,
+                  onInputChanged: _controller.clearLoginError,
+                );
+              },
             );
           },
         ),
@@ -84,6 +93,12 @@ class _TelegramDemoAppState extends State<TelegramDemoApp> {
         }
         return startupPath;
       case BootstrapPhase.noSession:
+        if (_controller.isAuthenticated) {
+          if (location == authenticatedPlaceholderPath) {
+            return null;
+          }
+          return authenticatedPlaceholderPath;
+        }
         if (location == loginPath) {
           return null;
         }

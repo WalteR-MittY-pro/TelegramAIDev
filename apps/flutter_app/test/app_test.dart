@@ -33,9 +33,65 @@ void main() {
 
     expect(find.text('Telegram Demo'), findsOneWidget);
     expect(find.text('Start with your phone number'), findsOneWidget);
-    expect(find.byType(TextField), findsNothing);
-    expect(find.text('Continue'), findsNothing);
+    expect(find.byType(TextField), findsOneWidget);
+    expect(find.text('Continue'), findsOneWidget);
   });
+
+  testWidgets('invalid or incomplete phone input gets clear feedback', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      TelegramDemoApp(
+        repository: FakeSharedAssetRepository(configFactory: buildConfig),
+      ),
+    );
+
+    await tester.pump();
+    await tester.pump();
+
+    await tester.tap(find.text('Continue'));
+    await tester.pump();
+
+    expect(
+      find.text('Enter a valid demo phone number to continue.'),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'This destination is intentionally scoped as a placeholder in the current MVP slice.',
+      ),
+      findsNothing,
+    );
+  });
+
+  testWidgets(
+    'successful demo login hands off into the authenticated placeholder',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(
+        TelegramDemoApp(
+          repository: FakeSharedAssetRepository(configFactory: buildConfig),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump();
+
+      await tester.enterText(find.byType(TextField), '+1 415 555 0199');
+      await tester.tap(find.text('Continue'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 450));
+      await tester.pumpAndSettle();
+
+      expect(
+        find.text(
+          'This destination is intentionally scoped as a placeholder in the current MVP slice.',
+        ),
+        findsOneWidget,
+      );
+      expect(find.text('Chats'), findsNothing);
+      expect(find.text('Settings'), findsNothing);
+    },
+  );
 
   testWidgets('startup failure shows an explicit notice instead of a spinner', (
     WidgetTester tester,
