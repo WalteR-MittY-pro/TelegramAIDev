@@ -94,3 +94,18 @@ Each round entry should include:
 - validation completed in the round: `dart format` on changed Flutter files, `flutter analyze`, and `flutter test` all passed in `apps/flutter_app`
 - parity impact, delivery status change, or notable workaround: Flutter slice `#2` now exposes the demo login flow required by issue `#22` while intentionally keeping the successful handoff on the authenticated placeholder from slice `#1`; no session persistence, restore, home shell, or chat list was added.
 - AI-efficiency friction summary: no confirmed AI-efficiency friction in this round
+
+## 2026-03-22T03:39:47Z
+
+- framework lane: `flutter`
+- work item type and issue reference: `requirement`, `issue-22-acceptance`
+- concise working effort or acceptance summary: Ran post-merge Android emulator acceptance for Flutter requirement `#22`. Verified the login surface and invalid-input feedback at runtime, but the shared Android acceptance typing path only entered a partial value into the Flutter phone field during the valid-login scenario, blocking runtime verification of the placeholder handoff.
+- total duration: `7m 47s`
+- internal step duration: prep `17s`, runtime `5m 29s`, reporting `1m 13s`
+- token consumption: `not observable`
+- scenarios validated in the round: runtime-verified login screen with phone field and primary continue CTA; runtime-verified invalid or incomplete input feedback showing `Enter a valid demo phone number to continue.`; attempted digits-only valid login path with `14155550199`, but the field only reflected `141` before tapping continue
+- acceptance outcome: `partially verified`
+- evidence captured or missing: captured runtime screenshots/UI dumps at `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-login.png`, `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-login.xml`, `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-invalid-feedback.png`, `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-invalid-feedback.xml`, `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-digits-entered.png`, `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-digits-entered.xml`, `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-after-digits-continue.png`, and `/Users/haifengsong/code-base/telegram/TelegramAIDev/.cache/android-acceptance/issue22-after-digits-continue.xml`
+- bug issue references created or updated in the round: none
+- acceptance gap, parity impact, or notable workaround: this round did not confirm a Flutter product bug. The remaining gap is a shared Android acceptance tooling block: `python3 .agents/skills/android-emulator-acceptance/scripts/android_acceptance.py type --value 14155550199` only populated `141` in the Flutter `EditText`, so the accepted login success path could not be completed with confidence.
+- AI-efficiency friction summary: confirmed shared acceptance-tooling friction, tracked in issue `#36`
