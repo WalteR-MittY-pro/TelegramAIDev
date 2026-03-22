@@ -60,7 +60,11 @@ class LoginCopy {
     required this.brandTitle,
     required this.headline,
     required this.body,
+    required this.phoneLabel,
+    required this.phoneHint,
+    required this.continueLabel,
     required this.footer,
+    required this.invalidInputNotice,
   });
 
   factory LoginCopy.fromJson(Map<String, dynamic> json) {
@@ -69,7 +73,14 @@ class LoginCopy {
       brandTitle: _readString(login['brandTitle'], 'login.brandTitle'),
       headline: _readString(login['headline'], 'login.headline'),
       body: _readString(login['body'], 'login.body'),
+      phoneLabel: _readString(login['phoneLabel'], 'login.phoneLabel'),
+      phoneHint: _readString(login['phoneHint'], 'login.phoneHint'),
+      continueLabel: _readString(login['continueLabel'], 'login.continueLabel'),
       footer: _readString(login['footer'], 'login.footer'),
+      invalidInputNotice: _readString(
+        login['invalidInputNotice'],
+        'login.invalidInputNotice',
+      ),
     );
   }
 
@@ -79,15 +90,23 @@ class LoginCopy {
       headline: 'Start with your phone number',
       body:
           'Complete the demo sign-in flow to unlock the authenticated app shell.',
+      phoneLabel: 'Phone number',
+      phoneHint: '+1 415 555 0199',
+      continueLabel: 'Continue',
       footer:
           'Demo verification is local-only and does not contact a real backend.',
+      invalidInputNotice: 'Enter a valid demo phone number to continue.',
     );
   }
 
   final String brandTitle;
   final String headline;
   final String body;
+  final String phoneLabel;
+  final String phoneHint;
+  final String continueLabel;
   final String footer;
+  final String invalidInputNotice;
 }
 
 class PlaceholderCopy {
