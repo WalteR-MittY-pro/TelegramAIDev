@@ -26,7 +26,10 @@ class MainActivity : ComponentActivity() {
             isDebuggable = isDebuggableBuild(),
         )
         setContent {
-            TelegramDemoApp(startupRuntimeHook = startupRuntimeHook)
+            TelegramDemoApp(
+                startupRuntimeHook = startupRuntimeHook,
+                sessionStore = AndroidDemoSessionStore(applicationContext),
+            )
         }
     }
 }

@@ -48,6 +48,7 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 internal fun TelegramDemoApp(
     startupRuntimeHook: StartupRuntimeHook = StartupRuntimeHook.None,
+    sessionStore: DemoSessionStore = NoOpDemoSessionStore,
 ) {
     var startupAssets by remember { mutableStateOf<StartupAssets?>(null) }
     val navController = rememberNavController()
@@ -69,9 +70,10 @@ internal fun TelegramDemoApp(
                 composable(AppRoute.Bootstrap.route) {
                     BootstrapRoute(
                         startupRuntimeHook = startupRuntimeHook,
-                        onLoaded = { assets ->
+                        sessionStore = sessionStore,
+                        onLoaded = { assets, initialRoute ->
                             startupAssets = assets
-                            navController.navigate(AppRoute.Login.route) {
+                            navController.navigate(initialRoute.route) {
                                 popUpTo(AppRoute.Bootstrap.route) { inclusive = true }
                                 launchSingleTop = true
                             }
@@ -85,6 +87,7 @@ internal fun TelegramDemoApp(
                     } else {
                         LoginRoute(
                             assets = assets,
+                            sessionStore = sessionStore,
                             onAuthenticated = {
                                 navController.navigate(AppRoute.AuthenticatedPlaceholder.route) {
                                     popUpTo(AppRoute.Login.route) { inclusive = true }
@@ -110,7 +113,8 @@ internal fun TelegramDemoApp(
 @Composable
 private fun BootstrapRoute(
     startupRuntimeHook: StartupRuntimeHook,
-    onLoaded: (StartupAssets) -> Unit,
+    sessionStore: DemoSessionStore,
+    onLoaded: (StartupAssets, AppRoute) -> Unit,
 ) {
     var bootstrapCopy by remember { mutableStateOf<BootstrapCopy?>(null) }
     var failureMessage by remember { mutableStateOf<String?>(null) }
@@ -122,7 +126,13 @@ private fun BootstrapRoute(
         )
         bootstrapCopy = result.bootstrapCopy
         when (val outcome = result.outcome) {
-            is BootstrapLoadOutcome.Loaded -> onLoaded(outcome.assets)
+            is BootstrapLoadOutcome.Loaded -> onLoaded(
+                outcome.assets,
+                DemoSessionManager.determineInitialRoute(
+                    sessionStore = sessionStore,
+                    authenticatedRoute = outcome.assets.sharedMockData.startup.defaultAuthenticatedDestination,
+                ),
+            )
             is BootstrapLoadOutcome.Failure -> failureMessage = outcome.notice
         }
     }
@@ -194,6 +204,7 @@ private fun BootstrapFallbackScreen() {
 @Composable
 private fun LoginRoute(
     assets: StartupAssets,
+    sessionStore: DemoSessionStore,
     onAuthenticated: () -> Unit,
 ) {
     val authenticatedRoute = assets.sharedMockData.startup.defaultAuthenticatedDestination
@@ -213,6 +224,12 @@ private fun LoginRoute(
         }
         loginState = result.state
         if (result.nextRoute == AppRoute.AuthenticatedPlaceholder.route) {
+            DemoSessionManager.persistAuthenticatedSession(
+                sessionStore = sessionStore,
+                normalizedPhoneNumber = result.state.normalizedPhoneNumber.ifBlank {
+                    DemoLoginFlow.normalizePhoneNumber(result.state.rawPhoneNumber)
+                },
+            )
             onAuthenticated()
         }
     }
@@ -507,7 +524,7 @@ private fun AppMark(
     )
 }
 
-private enum class AppRoute(val route: String) {
+internal enum class AppRoute(val route: String) {
     Bootstrap("bootstrap"),
     Login("login"),
     AuthenticatedPlaceholder("authenticated-placeholder"),

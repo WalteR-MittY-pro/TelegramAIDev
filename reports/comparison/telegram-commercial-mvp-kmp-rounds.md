@@ -165,3 +165,54 @@ Each round entry should include:
 - validation completed in the round: `cd apps/kmp && ./gradlew --no-daemon :composeApp:testDebugUnitTest :composeApp:assembleDebug` ✅
 - parity impact, delivery status change, or notable workaround: KMP slice `#2` now exposes the intended two-step local demo login flow and still lands only in the existing authenticated placeholder from slice `#1`, avoiding any early session-restore, home-shell, or chat-list implementation. The app-local shared mock-data copy was refreshed from the canonical shared asset source so the richer login-adjacent schema stays aligned with the repo contract.
 - AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
+
+## 2026-03-23T03:15:16Z — KMP requirement issue-21 acceptance
+
+- framework lane: `KMP`
+- work item type and issue reference: `requirement`, `issue-21`
+- scenarios validated in the round:
+  - empty input shows clear validation feedback
+  - valid phone input advances into the local demo verification step
+  - successful verification lands in the authenticated placeholder, not a real home shell or chat list
+- acceptance outcome: `passed`
+- concise working effort or acceptance summary: Accepted merged `origin/main` at commit `9d02b19` for KMP requirement `#21` on Android emulator by validating the login happy path, inline empty-input feedback, the intermediate demo verification step, and the final authenticated placeholder handoff on the shipped debug build.
+- total duration: `15m 55s`
+- internal step duration:
+  - `artifact-review`: `29s`
+  - `deploy-setup`: `52s`
+  - `runtime-validation`: `13m 45s`
+  - `report-closeout`: `24s`
+- token consumption: `total=5422853, input=5406976, cached_input=4978816, output=15877, reasoning_output=5650`
+- evidence captured or missing:
+  - captured: `.cache/android-acceptance/req21-happy-fresh.png`
+  - captured: `.cache/android-acceptance/req21-happy-fresh.xml`
+  - captured: `.cache/android-acceptance/req21-empty-continue.png`
+  - captured: `.cache/android-acceptance/req21-empty-continue.xml`
+  - captured: `.cache/android-acceptance/req21-happy-phone-entered.png`
+  - captured: `.cache/android-acceptance/req21-happy-phone-entered.xml`
+  - captured: `.cache/android-acceptance/req21-happy-after-continue.png`
+  - captured: `.cache/android-acceptance/req21-happy-after-continue.xml`
+  - captured: `.cache/android-acceptance/req21-auth-placeholder.png`
+  - captured: `.cache/android-acceptance/req21-auth-placeholder.xml`
+  - missing: none
+- bug issue references created or updated in the round:
+  - none
+- acceptance gap, parity impact, or notable workaround: KMP slice `#2` is acceptance-verified on merged main and still routes only to the scoped authenticated placeholder from slice `#1`, preserving the no-home-shell boundary required before session restore and home-shell slices.
+- AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
+
+## 2026-03-23T03:26:09Z — KMP requirement issue-24
+
+- framework lane: `KMP`
+- work item type and issue reference: `requirement`, `issue-24`
+- concise working effort summary: Implemented KMP slice `#3` local demo-session persistence and restore by saving a verified phone session to Android-backed local storage, resolving valid stored sessions through the bootstrap gate into the existing authenticated placeholder, and clearing invalid stored session state back to login without introducing any home-shell or chat-detail behavior.
+- total duration: `5m 20s`
+- internal step duration:
+  - `context-and-docs`: `1m 16s`
+  - `implementation`: `1m 54s`
+  - `validation`: `30s`
+  - `report-and-pr`: `1m 4s`
+  - `round-log-update`: `25s`
+- token consumption: `total=1852118, input=1838450, cached_input=1817216, output=13668, reasoning_output=7250`
+- validation completed in the round: `cd apps/kmp && ./gradlew --no-daemon :composeApp:testDebugUnitTest :composeApp:assembleDebug` ✅
+- parity impact, delivery status change, or notable workaround: KMP slice `#3` now restores directly back to the scoped authenticated placeholder after relaunch when the local demo session is valid, while invalid or unsupported stored state is cleared and routed back to login. The slice still does not expose any real home shell, chat list, chat detail, or composer behavior ahead of their later requirements.
+- AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
