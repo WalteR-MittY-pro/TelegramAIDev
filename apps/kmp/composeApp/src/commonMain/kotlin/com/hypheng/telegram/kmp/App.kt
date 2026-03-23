@@ -49,6 +49,7 @@ import androidx.navigation.compose.rememberNavController
 internal fun TelegramDemoApp(
     startupRuntimeHook: StartupRuntimeHook = StartupRuntimeHook.None,
     sessionStore: DemoSessionStore = NoOpDemoSessionStore,
+    chatListDebugState: ChatListDebugState = ChatListDebugState.Default,
 ) {
     var startupAssets by remember { mutableStateOf<StartupAssets?>(null) }
     val navController = rememberNavController()
@@ -88,12 +89,23 @@ internal fun TelegramDemoApp(
                         LoginRoute(
                             assets = assets,
                             sessionStore = sessionStore,
-                            onAuthenticated = {
-                                navController.navigate(AppRoute.AuthenticatedPlaceholder.route) {
+                            onAuthenticated = { destination ->
+                                navController.navigate(destination.route) {
                                     popUpTo(AppRoute.Login.route) { inclusive = true }
                                     launchSingleTop = true
                                 }
                             },
+                        )
+                    }
+                }
+                composable(AppRoute.Home.route) {
+                    val assets = startupAssets
+                    if (assets == null) {
+                        BootstrapFallbackScreen()
+                    } else {
+                        HomeShellRoute(
+                            assets = assets,
+                            chatListDebugState = chatListDebugState,
                         )
                     }
                 }
@@ -130,7 +142,7 @@ private fun BootstrapRoute(
                 outcome.assets,
                 DemoSessionManager.determineInitialRoute(
                     sessionStore = sessionStore,
-                    authenticatedRoute = outcome.assets.sharedMockData.startup.defaultAuthenticatedDestination,
+                    authenticatedRoute = authenticatedRouteForAssets(outcome.assets).route,
                 ),
             )
             is BootstrapLoadOutcome.Failure -> failureMessage = outcome.notice
@@ -205,9 +217,9 @@ private fun BootstrapFallbackScreen() {
 private fun LoginRoute(
     assets: StartupAssets,
     sessionStore: DemoSessionStore,
-    onAuthenticated: () -> Unit,
+    onAuthenticated: (AppRoute) -> Unit,
 ) {
-    val authenticatedRoute = assets.sharedMockData.startup.defaultAuthenticatedDestination
+    val authenticatedRoute = authenticatedRouteForAssets(assets)
     val loginCopy = assets.sharedCopy.login
     var loginState by remember { mutableStateOf(DemoLoginFlowState()) }
     val continueSubmission = {
@@ -219,18 +231,18 @@ private fun LoginRoute(
 
             DemoLoginStep.Verification -> DemoLoginFlow.submitVerification(
                 state = loginState,
-                authenticatedRoute = authenticatedRoute,
+                authenticatedRoute = authenticatedRoute.route,
             )
         }
         loginState = result.state
-        if (result.nextRoute == AppRoute.AuthenticatedPlaceholder.route) {
+        if (result.nextRoute == authenticatedRoute.route) {
             DemoSessionManager.persistAuthenticatedSession(
                 sessionStore = sessionStore,
                 normalizedPhoneNumber = result.state.normalizedPhoneNumber.ifBlank {
                     DemoLoginFlow.normalizePhoneNumber(result.state.rawPhoneNumber)
                 },
             )
-            onAuthenticated()
+            onAuthenticated(authenticatedRoute)
         }
     }
     val verificationPhoneNumber = loginState.normalizedPhoneNumber.ifBlank {
@@ -527,7 +539,15 @@ private fun AppMark(
 internal enum class AppRoute(val route: String) {
     Bootstrap("bootstrap"),
     Login("login"),
+    Home("home"),
     AuthenticatedPlaceholder("authenticated-placeholder"),
+}
+
+internal fun authenticatedRouteForAssets(assets: StartupAssets): AppRoute {
+    val homeShell = assets.sharedMockData.homeShell
+    val homeTabReady = homeShell.defaultTab == "chats" &&
+        homeShell.tabs.any { it.id == "chats" && it.implementedInSlice <= 4 }
+    return if (homeTabReady) AppRoute.Home else AppRoute.AuthenticatedPlaceholder
 }
 
 internal fun DesignTokens.toColorScheme() = lightColorScheme(

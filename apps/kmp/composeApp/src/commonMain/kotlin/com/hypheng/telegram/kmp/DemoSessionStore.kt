@@ -25,7 +25,10 @@ internal object DemoSessionManager {
         sessionStore: DemoSessionStore,
         authenticatedRoute: String,
     ): AppRoute {
-        if (authenticatedRoute != AppRoute.AuthenticatedPlaceholder.route) {
+        if (
+            authenticatedRoute != AppRoute.AuthenticatedPlaceholder.route &&
+            authenticatedRoute != AppRoute.Home.route
+        ) {
             clearSessionQuietly(sessionStore)
             return AppRoute.Login
         }
@@ -42,7 +45,11 @@ internal object DemoSessionManager {
             return AppRoute.Login
         }
 
-        return AppRoute.AuthenticatedPlaceholder
+        return if (authenticatedRoute == AppRoute.Home.route) {
+            AppRoute.Home
+        } else {
+            AppRoute.AuthenticatedPlaceholder
+        }
     }
 
     fun persistAuthenticatedSession(

@@ -9,6 +9,7 @@ import androidx.activity.enableEdgeToEdge
 
 internal const val STARTUP_DEBUG_HOOK_EXTRA = "startup_debug_hook"
 internal const val STARTUP_DEBUG_HOOK_FORCE_FAILURE_VALUE = "force_failure"
+internal const val HOME_DEBUG_STATE_EXTRA = "home_debug_state"
 
 /**
  * Debug-only acceptance hook for issue #45.
@@ -25,10 +26,15 @@ class MainActivity : ComponentActivity() {
             intent = intent,
             isDebuggable = isDebuggableBuild(),
         )
+        val chatListDebugState = resolveChatListDebugState(
+            intent = intent,
+            isDebuggable = isDebuggableBuild(),
+        )
         setContent {
             TelegramDemoApp(
                 startupRuntimeHook = startupRuntimeHook,
                 sessionStore = AndroidDemoSessionStore(applicationContext),
+                chatListDebugState = chatListDebugState,
             )
         }
     }
@@ -53,6 +59,21 @@ internal fun resolveStartupRuntimeHook(
     return when (hookValue) {
         STARTUP_DEBUG_HOOK_FORCE_FAILURE_VALUE -> StartupRuntimeHook.ForceFailure
         else -> StartupRuntimeHook.None
+    }
+}
+
+internal fun resolveChatListDebugState(
+    intent: Intent?,
+    isDebuggable: Boolean,
+): ChatListDebugState {
+    if (!isDebuggable) {
+        return ChatListDebugState.Default
+    }
+    return when (intent?.getStringExtra(HOME_DEBUG_STATE_EXTRA)) {
+        "loading" -> ChatListDebugState.Loading
+        "empty" -> ChatListDebugState.Empty
+        "error" -> ChatListDebugState.Error
+        else -> ChatListDebugState.Default
     }
 }
 

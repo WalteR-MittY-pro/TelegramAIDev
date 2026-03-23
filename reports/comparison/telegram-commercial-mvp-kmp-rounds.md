@@ -216,3 +216,56 @@ Each round entry should include:
 - validation completed in the round: `cd apps/kmp && ./gradlew --no-daemon :composeApp:testDebugUnitTest :composeApp:assembleDebug` ✅
 - parity impact, delivery status change, or notable workaround: KMP slice `#3` now restores directly back to the scoped authenticated placeholder after relaunch when the local demo session is valid, while invalid or unsupported stored state is cleared and routed back to login. The slice still does not expose any real home shell, chat list, chat detail, or composer behavior ahead of their later requirements.
 - AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
+
+## 2026-03-23T03:31:37Z — KMP requirement issue-24 acceptance
+
+- framework lane: `KMP`
+- work item type and issue reference: `requirement`, `issue-24`
+- scenarios validated in the round:
+  - missing session falls back cleanly to login on first launch
+  - valid local session restores to the authenticated placeholder after relaunch
+  - invalid stored session is cleared and falls back to login without exposing the real home shell or chat list
+- acceptance outcome: `passed`
+- concise working effort or acceptance summary: Accepted merged `origin/main` at commit `201d9ce` for KMP requirement `#24` on Android emulator by validating clean missing-session fallback, creating a valid demo session through the shipped login flow, cold-relaunching into the authenticated placeholder, corrupting the persisted session via debug `run-as`, and confirming the app cleared the invalid state back to login.
+- total duration: `4m 38s`
+- internal step duration:
+  - `artifact-review`: `16s`
+  - `deploy-setup`: `38s`
+  - `runtime-validation`: `2m 16s`
+  - `report-closeout`: `1m 15s`
+- token consumption: `total=3488045, input=3477972, cached_input=3359360, output=10073, reasoning_output=2768`
+- evidence captured or missing:
+  - captured: `.cache/android-acceptance/req24/missing-session-login.png`
+  - captured: `.cache/android-acceptance/req24/missing-session-login.xml`
+  - captured: `.cache/android-acceptance/req24/session-create-phone-entered.png`
+  - captured: `.cache/android-acceptance/req24/session-create-phone-entered.xml`
+  - captured: `.cache/android-acceptance/req24/session-create-verification.png`
+  - captured: `.cache/android-acceptance/req24/session-create-verification.xml`
+  - captured: `.cache/android-acceptance/req24/session-create-placeholder.png`
+  - captured: `.cache/android-acceptance/req24/session-create-placeholder.xml`
+  - captured: `.cache/android-acceptance/req24/relaunch-valid-session-placeholder.png`
+  - captured: `.cache/android-acceptance/req24/relaunch-valid-session-placeholder.xml`
+  - captured: `.cache/android-acceptance/req24/invalid-session-before-relaunch.txt`
+  - captured: `.cache/android-acceptance/req24/invalid-session-login-fallback.png`
+  - captured: `.cache/android-acceptance/req24/invalid-session-login-fallback.xml`
+  - captured: `.cache/android-acceptance/req24/invalid-session-after-relaunch.txt`
+  - missing: no direct frame-by-frame boot video evidence for the absence of intermediate-state flicker, but repeated cold relaunches landed on the expected placeholder/login surfaces with no home-shell exposure
+- bug issue references created or updated in the round:
+  - none
+- acceptance gap, parity impact, or notable workaround: KMP slice `#3` is acceptance-verified on merged main. The invalid-session scenario was made deterministic by corrupting the app's stored shared-preferences session file via debug `run-as`, which confirmed the app clears bad local session state back to login instead of surfacing a broken or premature post-login shell.
+- AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
+
+## 2026-03-23T03:44:41Z — KMP requirement issue-27
+
+- framework lane: `KMP`
+- work item type and issue reference: `requirement`, `issue-27`
+- concise working effort summary: Implemented KMP slice `#4` by replacing the post-login placeholder landing with a real shared-asset-backed home shell, adding visible `Chats`, `Contacts`, and `Settings` tabs, rendering the seeded chat list rows from canonical mock data, and wiring deterministic loading/empty/error chat-list states through a debug-only Android intent hook for acceptance without pulling chat detail or composer behavior forward.
+- total duration: `8m 24s`
+- internal step duration:
+  - `context-and-docs`: `2m 9s`
+  - `implementation`: `5m 48s`
+  - `report-and-pr`: `22s`
+- token consumption: `total=5991066, input=5972225, cached_input=5920384, output=18841, reasoning_output=5319`
+- validation completed in the round: `cd apps/kmp && ./gradlew --no-daemon :composeApp:testDebugUnitTest :composeApp:assembleDebug` ✅
+- parity impact, delivery status change, or notable workaround: KMP slice `#4` now lands login and restored sessions in a real home shell with `Chats` active, while `Contacts` and `Settings` remain clearly intentional placeholder tabs. The seeded chat list is still strictly non-navigating so chat detail, composer, and local-send behavior remain reserved for later slices.
+- AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
