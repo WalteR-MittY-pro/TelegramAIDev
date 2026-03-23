@@ -120,3 +120,48 @@ Each round entry should include:
   - `cd apps/kmp && ./gradlew --no-daemon :composeApp:testDebugUnitTest :composeApp:assembleDebug` ✅
 - parity impact, delivery status change, or notable workaround: KMP slice `#1` now exposes a deterministic non-production startup-failure path from the shipped debug APK via `adb shell am start -n com.hypheng.telegram.kmp/.MainActivity --es startup_debug_hook force_failure`, while default first launch without the extra still routes cleanly to login. This unblocks runtime verification of the required failure-state branch for requirement `#18` without adding a user-visible setting or release-only behavior.
 - AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
+
+## 2026-03-23T02:46:40Z — KMP requirement issue-18 final acceptance
+
+- framework lane: `KMP`
+- work item type and issue reference: `requirement`, `issue-18`
+- scenarios validated in the round:
+  - first launch without session reaches login cleanly
+  - startup failure does not leave the app stuck on a spinner
+  - any authenticated destination reachable in this slice is clearly a placeholder, not a later-slice implementation
+- acceptance outcome: `passed`
+- concise working effort or acceptance summary: Re-accepted merged `origin/main` for KMP requirement `#18` after PRs `#44` and `#46`. Clean first launch reached the login surface, the debug-only hook `adb shell am start -n com.hypheng.telegram.kmp/.MainActivity --es startup_debug_hook force_failure` reached the startup failure notice instead of a stuck spinner, and no later-slice home or chat UI became reachable during the round.
+- total duration: `15h 57m 32s` (measurement quality is weak because the acceptance agent hit a usage limit before the report-closeout step and the round was closed manually afterward)
+- internal step duration:
+  - `acceptance-prep`: `41s`
+  - `build-deploy`: `36s`
+  - `runtime-validation`: `3m 54s`
+  - `report-update`: `15h 52m 10s`
+- token consumption: `total=2061627, input=2050812, cached_input=1938560, output=10815, reasoning_output=4293`
+- evidence captured or missing:
+  - captured: `.cache/android-acceptance/req18-final/clean-login.png`
+  - captured: `.cache/android-acceptance/req18-final/clean-login.xml`
+  - captured: `.cache/android-acceptance/req18-final/force-failure-t5.png`
+  - captured: `.cache/android-acceptance/req18-final/force-failure-t5.xml`
+  - captured: `.cache/android-acceptance/req18-final/force-failure-logcat.txt`
+  - captured: `.cache/android-acceptance/req18-final/force-failure-t5-logcat.txt`
+  - no authenticated destination was reachable in this slice, so no placeholder navigation evidence was required beyond confirming the login-only surface remained in place
+- bug issue references created or updated in the round:
+  - none
+- acceptance gap, parity impact, or notable workaround: Slice `#1` is now fully acceptance-verified on merged main for KMP. The runtime-only startup-failure hook remains debug-only and does not alter default startup behavior, which preserves slice parity while making the failure-state branch testable.
+- AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`
+
+## 2026-03-23T02:48:28Z — KMP requirement issue-21
+
+- framework lane: `KMP`
+- work item type and issue reference: `requirement`, `issue-21`
+- concise working effort summary: Implemented KMP slice `#2` demo login flow on top of the merged slice-1 app shell by replacing the static login preview with editable phone entry, inline validation feedback, a local demo verification step, authenticated placeholder handoff, and shared-asset-backed state logic plus regression tests.
+- total duration: `7m 43s`
+- internal step duration:
+  - `context-and-docs`: `1m 30s`
+  - `implementation`: `4m 20s`
+  - `validation`: `35s`
+- token consumption: `total=1613137, input=1595216, cached_input=1511040, output=17921, reasoning_output=8439`
+- validation completed in the round: `cd apps/kmp && ./gradlew --no-daemon :composeApp:testDebugUnitTest :composeApp:assembleDebug` ✅
+- parity impact, delivery status change, or notable workaround: KMP slice `#2` now exposes the intended two-step local demo login flow and still lands only in the existing authenticated placeholder from slice `#1`, avoiding any early session-restore, home-shell, or chat-list implementation. The app-local shared mock-data copy was refreshed from the canonical shared asset source so the richer login-adjacent schema stays aligned with the repo contract.
+- AI-efficiency friction summary: `no confirmed AI-efficiency friction in this round`

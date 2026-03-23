@@ -3,8 +3,8 @@ package com.hypheng.telegram.kmp
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,10 +19,10 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Shapes
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.lightColorScheme
@@ -31,19 +31,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.launch
 
 @Composable
 internal fun TelegramDemoApp(
@@ -83,7 +83,15 @@ internal fun TelegramDemoApp(
                     if (assets == null) {
                         BootstrapFallbackScreen()
                     } else {
-                        LoginRoute(assets)
+                        LoginRoute(
+                            assets = assets,
+                            onAuthenticated = {
+                                navController.navigate(AppRoute.AuthenticatedPlaceholder.route) {
+                                    popUpTo(AppRoute.Login.route) { inclusive = true }
+                                    launchSingleTop = true
+                                }
+                            },
+                        )
                     }
                 }
                 composable(AppRoute.AuthenticatedPlaceholder.route) {
@@ -184,13 +192,55 @@ private fun BootstrapFallbackScreen() {
 }
 
 @Composable
-private fun LoginRoute(assets: StartupAssets) {
-    val snackbarHostState = remember { SnackbarHostState() }
-    val coroutineScope = rememberCoroutineScope()
+private fun LoginRoute(
+    assets: StartupAssets,
+    onAuthenticated: () -> Unit,
+) {
+    val authenticatedRoute = assets.sharedMockData.startup.defaultAuthenticatedDestination
     val loginCopy = assets.sharedCopy.login
+    var loginState by remember { mutableStateOf(DemoLoginFlowState()) }
+    val continueSubmission = {
+        val result = when (loginState.currentStep) {
+            DemoLoginStep.PhoneEntry -> DemoLoginFlow.submitPhoneNumber(
+                state = loginState,
+                invalidInputNotice = loginCopy.invalidInputNotice,
+            )
 
+            DemoLoginStep.Verification -> DemoLoginFlow.submitVerification(
+                state = loginState,
+                authenticatedRoute = authenticatedRoute,
+            )
+        }
+        loginState = result.state
+        if (result.nextRoute == AppRoute.AuthenticatedPlaceholder.route) {
+            onAuthenticated()
+        }
+    }
+    val verificationPhoneNumber = loginState.normalizedPhoneNumber.ifBlank {
+        DemoLoginFlow.normalizePhoneNumber(loginState.rawPhoneNumber)
+    }
+    LoginRoute(
+        assets = assets,
+        loginState = loginState,
+        verificationPhoneNumber = verificationPhoneNumber,
+        onPhoneChanged = { updatedPhoneNumber ->
+            loginState = DemoLoginFlow.onPhoneChanged(loginState, updatedPhoneNumber)
+        },
+        onContinue = continueSubmission,
+    )
+}
+
+@Composable
+private fun LoginRoute(
+    assets: StartupAssets,
+    loginState: DemoLoginFlowState,
+    verificationPhoneNumber: String,
+    onPhoneChanged: (String) -> Unit,
+    onContinue: () -> Unit,
+) {
+    val loginCopy = assets.sharedCopy.login
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) },
+        snackbarHost = { SnackbarHost(remember { androidx.compose.material3.SnackbarHostState() }) },
         containerColor = MaterialTheme.colorScheme.surface,
     ) { padding ->
         Column(
@@ -224,57 +274,23 @@ private fun LoginRoute(assets: StartupAssets) {
                 Column(
                     modifier = Modifier.padding(assets.tokens.spacing.xl.dp),
                 ) {
-                    Text(
-                        text = loginCopy.headline,
-                        style = MaterialTheme.typography.headlineSmall.copy(
-                            fontSize = assets.tokens.typography.size.headline.sp,
-                            lineHeight = assets.tokens.typography.lineHeight.headline.sp,
-                            fontWeight = FontWeight.Bold,
-                        ),
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text(
-                        text = loginCopy.body,
-                        style = MaterialTheme.typography.bodyLarge.copy(
-                            fontSize = assets.tokens.typography.size.bodyStrong.sp,
-                            lineHeight = assets.tokens.typography.lineHeight.bodyStrong.sp,
-                        ),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                    Spacer(modifier = Modifier.height(20.dp))
-                    PhonePreviewCard(
-                        label = loginCopy.phoneLabel,
-                        hint = loginCopy.phoneHint,
-                        contentPadding = PaddingValues(assets.tokens.spacing.lg.dp),
-                    )
-                    Spacer(modifier = Modifier.height(24.dp))
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar(loginCopy.footer)
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            contentColor = MaterialTheme.colorScheme.onPrimary,
-                        ),
-                    ) {
-                        Text(
-                            text = loginCopy.continueLabel,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
+                    if (loginState.currentStep == DemoLoginStep.PhoneEntry) {
+                        PhoneEntryContent(
+                            assets = assets,
+                            loginCopy = loginCopy,
+                            phoneNumber = loginState.rawPhoneNumber,
+                            errorMessage = loginState.errorMessage,
+                            onPhoneChanged = onPhoneChanged,
+                            onContinue = onContinue,
+                        )
+                    } else {
+                        VerificationContent(
+                            assets = assets,
+                            loginCopy = loginCopy,
+                            verificationPhoneNumber = verificationPhoneNumber,
+                            onContinue = onContinue,
                         )
                     }
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Text(
-                        text = loginCopy.footer,
-                        style = MaterialTheme.typography.bodySmall.copy(
-                            fontSize = assets.tokens.typography.size.body.sp,
-                            lineHeight = assets.tokens.typography.lineHeight.body.sp,
-                        ),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
                 }
             }
         }
@@ -282,9 +298,137 @@ private fun LoginRoute(assets: StartupAssets) {
 }
 
 @Composable
+private fun PhoneEntryContent(
+    assets: StartupAssets,
+    loginCopy: LoginCopy,
+    phoneNumber: String,
+    errorMessage: String?,
+    onPhoneChanged: (String) -> Unit,
+    onContinue: () -> Unit,
+) {
+    Text(
+        text = loginCopy.headline,
+        style = MaterialTheme.typography.headlineSmall.copy(
+            fontSize = assets.tokens.typography.size.headline.sp,
+            lineHeight = assets.tokens.typography.lineHeight.headline.sp,
+            fontWeight = FontWeight.Bold,
+        ),
+        color = MaterialTheme.colorScheme.onSurface,
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+    Text(
+        text = loginCopy.body,
+        style = MaterialTheme.typography.bodyLarge.copy(
+            fontSize = assets.tokens.typography.size.bodyStrong.sp,
+            lineHeight = assets.tokens.typography.lineHeight.bodyStrong.sp,
+        ),
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    Spacer(modifier = Modifier.height(20.dp))
+    OutlinedTextField(
+        value = phoneNumber,
+        onValueChange = onPhoneChanged,
+        modifier = Modifier.fillMaxWidth(),
+        label = {
+            Text(text = loginCopy.phoneLabel)
+        },
+        placeholder = {
+            Text(text = loginCopy.phoneHint)
+        },
+        singleLine = true,
+        isError = errorMessage != null,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+        shape = RoundedCornerShape(assets.tokens.radius.field.dp),
+    )
+    if (errorMessage != null) {
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(
+            text = errorMessage,
+            style = MaterialTheme.typography.bodySmall.copy(
+                fontSize = assets.tokens.typography.size.body.sp,
+                lineHeight = assets.tokens.typography.lineHeight.body.sp,
+            ),
+            color = MaterialTheme.colorScheme.error,
+        )
+    }
+    Spacer(modifier = Modifier.height(24.dp))
+    ContinueButton(
+        label = loginCopy.continueLabel,
+        onContinue = onContinue,
+    )
+    Spacer(modifier = Modifier.height(16.dp))
+    Text(
+        text = loginCopy.footer,
+        style = MaterialTheme.typography.bodySmall.copy(
+            fontSize = assets.tokens.typography.size.body.sp,
+            lineHeight = assets.tokens.typography.lineHeight.body.sp,
+        ),
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+}
+
+@Composable
+private fun VerificationContent(
+    assets: StartupAssets,
+    loginCopy: LoginCopy,
+    verificationPhoneNumber: String,
+    onContinue: () -> Unit,
+) {
+    Text(
+        text = loginCopy.headline,
+        style = MaterialTheme.typography.headlineSmall.copy(
+            fontSize = assets.tokens.typography.size.headline.sp,
+            lineHeight = assets.tokens.typography.lineHeight.headline.sp,
+            fontWeight = FontWeight.Bold,
+        ),
+        color = MaterialTheme.colorScheme.onSurface,
+    )
+    Spacer(modifier = Modifier.height(12.dp))
+    Text(
+        text = loginCopy.footer,
+        style = MaterialTheme.typography.bodyLarge.copy(
+            fontSize = assets.tokens.typography.size.bodyStrong.sp,
+            lineHeight = assets.tokens.typography.lineHeight.bodyStrong.sp,
+        ),
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    Spacer(modifier = Modifier.height(20.dp))
+    PhonePreviewCard(
+        label = loginCopy.phoneLabel,
+        value = verificationPhoneNumber,
+        contentPadding = PaddingValues(assets.tokens.spacing.lg.dp),
+    )
+    Spacer(modifier = Modifier.height(24.dp))
+    ContinueButton(
+        label = loginCopy.continueLabel,
+        onContinue = onContinue,
+    )
+}
+
+@Composable
+private fun ContinueButton(
+    label: String,
+    onContinue: () -> Unit,
+) {
+    Button(
+        onClick = onContinue,
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+        ),
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.SemiBold),
+        )
+    }
+}
+
+@Composable
 private fun PhonePreviewCard(
     label: String,
-    hint: String,
+    value: String,
     contentPadding: PaddingValues,
 ) {
     Surface(
@@ -302,7 +446,7 @@ private fun PhonePreviewCard(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = hint,
+                text = value,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
                 color = MaterialTheme.colorScheme.onSurface,
             )

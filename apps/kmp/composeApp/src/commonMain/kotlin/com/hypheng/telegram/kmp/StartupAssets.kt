@@ -329,7 +329,11 @@ internal data class ConversationMockData(
 @Serializable
 internal data class ChatDetailMockData(
     val placeholderConversationId: String,
+    val subtitle: String? = null,
+    val typingSubtitle: String? = null,
+    val dateLabel: String? = null,
     val messages: List<SeedMessage>,
+    val composer: ComposerMockData? = null,
     val localSend: LocalSendMockData,
 )
 
@@ -338,7 +342,9 @@ internal data class SeedMessage(
     val id: String,
     val direction: String,
     val text: String,
-    val deliveryState: String,
+    val deliveryState: String? = null,
+    val timeLabel: String? = null,
+    val deliveryLabel: String? = null,
 )
 
 @Serializable
@@ -347,6 +353,11 @@ internal data class LocalSendMockData(
     val settledDeliveryState: String,
     val failureDeliveryState: String,
     val clearComposerOnSuccess: Boolean,
+)
+
+@Serializable
+internal data class ComposerMockData(
+    val placeholder: String,
 )
 
 @Serializable
@@ -369,4 +380,3 @@ internal data class CopyRule(
     val preserveFilenames: Boolean,
     val allowDirectRuntimeReadFromSharedSource: Boolean,
 )
-
