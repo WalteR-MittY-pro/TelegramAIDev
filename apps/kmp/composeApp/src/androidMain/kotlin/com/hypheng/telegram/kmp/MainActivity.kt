@@ -10,6 +10,8 @@ import androidx.activity.enableEdgeToEdge
 internal const val STARTUP_DEBUG_HOOK_EXTRA = "startup_debug_hook"
 internal const val STARTUP_DEBUG_HOOK_FORCE_FAILURE_VALUE = "force_failure"
 internal const val HOME_DEBUG_STATE_EXTRA = "home_debug_state"
+internal const val LOCAL_SEND_DEBUG_HOOK_EXTRA = "local_send_debug_hook"
+internal const val LOCAL_SEND_DEBUG_HOOK_FAIL_NEXT_SEND_VALUE = "fail_next_send"
 
 /**
  * Debug-only acceptance hook for issue #45.
@@ -30,11 +32,16 @@ class MainActivity : ComponentActivity() {
             intent = intent,
             isDebuggable = isDebuggableBuild(),
         )
+        val localSendRuntimeHook = resolveLocalSendRuntimeHook(
+            intent = intent,
+            isDebuggable = isDebuggableBuild(),
+        )
         setContent {
             TelegramDemoApp(
                 startupRuntimeHook = startupRuntimeHook,
                 sessionStore = AndroidDemoSessionStore(applicationContext),
                 chatListDebugState = chatListDebugState,
+                localSendRuntimeHook = localSendRuntimeHook,
             )
         }
     }
@@ -74,6 +81,27 @@ internal fun resolveChatListDebugState(
         "empty" -> ChatListDebugState.Empty
         "error" -> ChatListDebugState.Error
         else -> ChatListDebugState.Default
+    }
+}
+
+internal fun resolveLocalSendRuntimeHook(
+    intent: Intent?,
+    isDebuggable: Boolean,
+): LocalSendRuntimeHook = resolveLocalSendRuntimeHook(
+    hookValue = intent?.getStringExtra(LOCAL_SEND_DEBUG_HOOK_EXTRA),
+    isDebuggable = isDebuggable,
+)
+
+internal fun resolveLocalSendRuntimeHook(
+    hookValue: String?,
+    isDebuggable: Boolean,
+): LocalSendRuntimeHook {
+    if (!isDebuggable) {
+        return LocalSendRuntimeHook.None
+    }
+    return when (hookValue) {
+        LOCAL_SEND_DEBUG_HOOK_FAIL_NEXT_SEND_VALUE -> LocalSendRuntimeHook.FailNextSend
+        else -> LocalSendRuntimeHook.None
     }
 }
 

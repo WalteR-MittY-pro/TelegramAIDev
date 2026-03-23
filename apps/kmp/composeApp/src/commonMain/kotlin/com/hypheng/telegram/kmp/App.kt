@@ -51,6 +51,7 @@ internal fun TelegramDemoApp(
     startupRuntimeHook: StartupRuntimeHook = StartupRuntimeHook.None,
     sessionStore: DemoSessionStore = NoOpDemoSessionStore,
     chatListDebugState: ChatListDebugState = ChatListDebugState.Default,
+    localSendRuntimeHook: LocalSendRuntimeHook = LocalSendRuntimeHook.None,
 ) {
     var startupAssets by remember { mutableStateOf<StartupAssets?>(null) }
     val navController = rememberNavController()
@@ -126,6 +127,7 @@ internal fun TelegramDemoApp(
                         ChatDetailRoute(
                             assets = assets,
                             conversationId = backStackEntry.arguments?.getString(CHAT_DETAIL_ID_ARG),
+                            localSendRuntimeHook = localSendRuntimeHook,
                             onBack = { navController.popBackStack() },
                         )
                     }

@@ -56,6 +56,20 @@ class ChatDetailRouteTest {
         assertFalse(message.isOutgoing())
         assertEquals(null, message.displayDeliveryLabel())
     }
+
+    @Test
+    fun localDeliveryStateFallsBackToDisplayLabelWhenExplicitLabelMissing() {
+        val message = SeedMessage(
+            id = "local-1",
+            direction = "outgoing",
+            text = "Queued",
+            deliveryState = "pending",
+            timeLabel = null,
+            deliveryLabel = null,
+        )
+
+        assertEquals("pending", message.displayDeliveryLabel())
+    }
 }
 
 private fun sampleChatListMockData() = ChatListMockData(
