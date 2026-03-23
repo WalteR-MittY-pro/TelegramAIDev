@@ -1,5 +1,6 @@
 package com.hypheng.telegram.kmp
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -58,6 +59,7 @@ private enum class ChatListViewState {
 internal fun HomeShellRoute(
     assets: StartupAssets,
     chatListDebugState: ChatListDebugState,
+    onOpenConversation: (String) -> Unit,
 ) {
     val tabs = assets.sharedMockData.homeShell.tabs
     val defaultTabId = tabs.firstOrNull { it.id == assets.sharedMockData.homeShell.defaultTab }?.id
@@ -111,6 +113,7 @@ internal fun HomeShellRoute(
             "chats" -> ChatListScreen(
                 assets = assets,
                 state = chatListViewState,
+                onOpenConversation = onOpenConversation,
                 modifier = Modifier.padding(padding),
             )
 
@@ -127,6 +130,7 @@ internal fun HomeShellRoute(
 private fun ChatListScreen(
     assets: StartupAssets,
     state: ChatListViewState,
+    onOpenConversation: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     when (state) {
@@ -166,6 +170,7 @@ private fun ChatListScreen(
                 ConversationRow(
                     conversation = conversation,
                     assets = assets,
+                    onOpenConversation = onOpenConversation,
                 )
             }
         }
@@ -176,11 +181,13 @@ private fun ChatListScreen(
 private fun ConversationRow(
     conversation: ConversationMockData,
     assets: StartupAssets,
+    onOpenConversation: (String) -> Unit,
 ) {
     Card {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .clickable { onOpenConversation(conversation.id) }
                 .padding(assets.tokens.spacing.lg.dp),
             verticalAlignment = Alignment.Top,
         ) {

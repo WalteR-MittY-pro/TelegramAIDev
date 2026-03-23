@@ -44,6 +44,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 
 @Composable
 internal fun TelegramDemoApp(
@@ -106,6 +107,26 @@ internal fun TelegramDemoApp(
                         HomeShellRoute(
                             assets = assets,
                             chatListDebugState = chatListDebugState,
+                            onOpenConversation = { conversationId ->
+                                navController.navigate(chatDetailRoute(conversationId)) {
+                                    launchSingleTop = true
+                                }
+                            },
+                        )
+                    }
+                }
+                composable(
+                    route = "${AppRoute.ChatDetail.route}/{$CHAT_DETAIL_ID_ARG}",
+                    arguments = listOf(navArgument(CHAT_DETAIL_ID_ARG) { defaultValue = "" }),
+                ) { backStackEntry ->
+                    val assets = startupAssets
+                    if (assets == null) {
+                        BootstrapFallbackScreen()
+                    } else {
+                        ChatDetailRoute(
+                            assets = assets,
+                            conversationId = backStackEntry.arguments?.getString(CHAT_DETAIL_ID_ARG),
+                            onBack = { navController.popBackStack() },
                         )
                     }
                 }
@@ -540,8 +561,13 @@ internal enum class AppRoute(val route: String) {
     Bootstrap("bootstrap"),
     Login("login"),
     Home("home"),
+    ChatDetail("chat-detail"),
     AuthenticatedPlaceholder("authenticated-placeholder"),
 }
+
+internal const val CHAT_DETAIL_ID_ARG = "conversationId"
+
+internal fun chatDetailRoute(conversationId: String): String = "${AppRoute.ChatDetail.route}/$conversationId"
 
 internal fun authenticatedRouteForAssets(assets: StartupAssets): AppRoute {
     val homeShell = assets.sharedMockData.homeShell
