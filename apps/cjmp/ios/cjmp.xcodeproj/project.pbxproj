@@ -1,0 +1,686 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00FD90A9A1B829FB429D6B39 /* libohos_app_cangjie_entry.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B887F9100317F392C857DD6 /* libohos_app_cangjie_entry.dylib */; };
+		0151D9293163F95F7F67E705 /* libcangjie-std-math.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 753163EC51A5E43189676944 /* libcangjie-std-math.dylib */; };
+		02A2D7E29505ADDFADAFF2DB /* libcangjie-std-collection.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C2DA4F9BA0DBDF46EC2AB4 /* libcangjie-std-collection.dylib */; };
+		03B93D1A56454148DB6D321D /* libcjmp.ffi.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D8F4D3B383FFCC3EC9059179 /* libcjmp.ffi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0BE07BC62CCC07F9A265F8E7 /* libcangjie-std-core.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = E49BCA6EBF1C19E97023CE65 /* libcangjie-std-core.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0D8A0BD189B492C65CACAB35 /* libohos.component.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4EF336001ACF50B0500B4178 /* libohos.component.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0E5E89AD5282B5EADE532E8F /* libohos_app_cangjie_entry.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 2B887F9100317F392C857DD6 /* libohos_app_cangjie_entry.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1113C023B468C739A4D19BA5 /* libohos.hi_tracemeter.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1ABC90BD6716A734715150F7 /* libohos.hi_tracemeter.dylib */; };
+		12282BBEE9E92E57553088FB /* libcangjie-std-sort.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 4F4A3BF1F18A9537AEBA9542 /* libcangjie-std-sort.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1342A591D196A1C632684165 /* libohos.eventhub.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 827AD8AF23435E7175198B24 /* libohos.eventhub.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1474003B09D83718C549FC2E /* libohos_app_cangjie_entry.logic.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 307EE66DAF4B10A94D764E75 /* libohos_app_cangjie_entry.logic.dylib */; };
+		153FF24F0C04C8472ADF6ECB /* libohos.labels.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 56B1188C153912FDBB38621D /* libohos.labels.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		17E2CFBC0A84DF4CDD4C9236 /* libcommon.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F1CC0CE82BA58DF650A90A2 /* libcommon.dylib */; };
+		1AE2326EA839039DBCC6514D /* libboundscheck.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EEBABB7AE06552F67062E222 /* libboundscheck.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1D14727889ED0781CA3A55E1 /* libcjmp.callback_invoke.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = E9C0C37EE060BB5D76D2F88D /* libcjmp.callback_invoke.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1D71D1F67A2F9046ABF220F2 /* libohos.window.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AED7C2D527F6ED5BCDBD010 /* libohos.window.dylib */; };
+		1DC5E81E19457B4368065B6A /* libcangjie-std-io.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 80F38989A1B6900ABA075509 /* libcangjie-std-io.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		239A1A39198141AF9EBDD53F /* libcangjie-std-time.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 67D951522B48C4157C6AAE74 /* libcangjie-std-time.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		24276D69550FF0506E387745 /* libohos.window.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6AED7C2D527F6ED5BCDBD010 /* libohos.window.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		27A36A0C64B10431C2F7212B /* libohos.labels.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B1188C153912FDBB38621D /* libohos.labels.dylib */; };
+		31A7B80CA02ECF530F673BA0 /* libohos.ui_test.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBE863314B9844C920E68B0 /* libohos.ui_test.dylib */; };
+		3225FF4407F6352B2EF242DC /* libnet_connection.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB422586D64AF864FC623594 /* libnet_connection.dylib */; };
+		34C9C0CCAC40E967EEF430E3 /* libcangjie-std-sync.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAD187A536F2C668636B122 /* libcangjie-std-sync.dylib */; };
+		37FCBBD6C0B0CBDAFF7668C8 /* libohos.image.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A76E50EC12B0B2CA6B862A /* libohos.image.dylib */; };
+		3B0857E76E8A60DE253BC223 /* libcommon.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6F1CC0CE82BA58DF650A90A2 /* libcommon.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3B0899BC17C22729D49EE197 /* libohos.ffi.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 166EA72B613CB14040B27E8A /* libohos.ffi.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3E945BAE2E12513100176E58 /* keels in Resources */ = {isa = PBXBuildFile; fileRef = 3E945BAD2E12513100176E58 /* keels */; };
+		3EE3EDC802F9B7449A1A6857 /* libhilog.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F777BBDF42D5A2C3F26C1B7B /* libhilog.dylib */; };
+		437AACF2687584DA30FCC6A8 /* libohos.resource_manager.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AD87C6A175D94FB037D3F7E /* libohos.resource_manager.dylib */; };
+		588FD7E24EE87FB25402C79E /* libcangjie-runtime.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 88FBE7C01BBA28C6A5ADD4C6 /* libcangjie-runtime.dylib */; };
+		59713EE33053A0329B02F075 /* libohos.state_manage.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D61CA211F772AA7D66EA73 /* libohos.state_manage.dylib */; };
+		5A8760CE747B8E489080D07A /* libcjmp.net.connection.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E946321E97AEAF9FAC35C177 /* libcjmp.net.connection.dylib */; };
+		604D803CE6D1FF48EE00F352 /* libohos.hilog.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 005B010FA1F4CC607FC97529 /* libohos.hilog.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		615EEB58E31C240CD3930DB5 /* libohos.hilog.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 005B010FA1F4CC607FC97529 /* libohos.hilog.dylib */; };
+		61AFAFFA02B6D23E4E995836 /* libjnicjmp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 51CC4C1AF6429D1B941B77F5 /* libjnicjmp.dylib */; };
+		66B414CE0CE61124B2C9C0E1 /* libcangjie-std-time.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 67D951522B48C4157C6AAE74 /* libcangjie-std-time.dylib */; };
+		66C6F7EB121C53F558C88D90 /* libohos.ui_test.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = FBBE863314B9844C920E68B0 /* libohos.ui_test.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6D501049A396E1CD3DD96E82 /* libcjmp.labels.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0117FD1D5FD09F65EA2AD4B1 /* libcjmp.labels.dylib */; };
+		6D6BEB36E2AD5C89D02E29D7 /* libohos.eventhub.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 827AD8AF23435E7175198B24 /* libohos.eventhub.dylib */; };
+		6DFA04A1B13A58A6DD4CF1DA /* libohos.resource_manager.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 1AD87C6A175D94FB037D3F7E /* libohos.resource_manager.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6E6865A429DBFD7641F5B963 /* libohos.base.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 37612E3B1AC4AC24F40BAC29 /* libohos.base.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		79590EDAC47E3B3C4D58CDF7 /* libcangjie-std-convert.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BAD07A94022F004D0B994488 /* libcangjie-std-convert.dylib */; };
+		7CCEA664A0C07BC13676A6B1 /* libcjmp.ffi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F4D3B383FFCC3EC9059179 /* libcjmp.ffi.dylib */; };
+		7CEA5E854F59CADDBFECC389 /* libcjmp.business_exception.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = D12E9BB14D8330F07387C1DF /* libcjmp.business_exception.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7FCA5B46FC0FC3B7B15EF485 /* libohos.state_manage.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 53D61CA211F772AA7D66EA73 /* libohos.state_manage.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		807B478E8B199ECECD5F3781 /* libohos.ffi.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 166EA72B613CB14040B27E8A /* libohos.ffi.dylib */; };
+		84902238FEE3D316947E9CEC /* libohos.encoding.json.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 235AB350A7B7B59B4CF524D8 /* libohos.encoding.json.dylib */; };
+		87961D3D4008E49FDF25D6A4 /* libohos.ui_resource.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 96D96CC3A30D91AD9BFA418D /* libohos.ui_resource.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		88918A54076D2C710D4B6F3C /* libuitest.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E522088F3147311980DA0CDD /* libuitest.dylib */; };
+		89E41E4529F505070004F33E /* EntryEntryAbilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89E41E4329F505070004F33E /* EntryEntryAbilityViewController.m */; };
+		8A38B567EA701F5CC12F09A1 /* libkeels_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C253D37C1DB83DEFB1D0C9 /* libkeels_ios.framework */; };
+		8B05A630797477E9B86712CF /* libcangjie-runtime.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 88FBE7C01BBA28C6A5ADD4C6 /* libcangjie-runtime.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8B0AC5742734C09C171AC3CC /* libcangjie-std-core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E49BCA6EBF1C19E97023CE65 /* libcangjie-std-core.dylib */; };
+		8E70A1E9C9B2BF6C78FF0EFC /* libcjmp.hilog.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A55D48316BBCB83D43F5A6DE /* libcjmp.hilog.dylib */; };
+		912777E657FB27F00C1338F3 /* libohos_app_cangjie_entry.logic.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 307EE66DAF4B10A94D764E75 /* libohos_app_cangjie_entry.logic.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		934C8AF82617C49D8C9892EB /* libohos.rpc.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8A19DC0208221F0B709435BD /* libohos.rpc.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		967CC594F998DDF026F46B84 /* libcangjie-std-io.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F38989A1B6900ABA075509 /* libcangjie-std-io.dylib */; };
+		9744A6116EB79C3A591BAB34 /* libohos.matrix4.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 192FAB2D6AB0012651BC1433 /* libohos.matrix4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		99F61A60592F9944537DE616 /* libcangjie-std-binary.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 8D583C01FF80F5860D0E4061 /* libcangjie-std-binary.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D4F8F8973AC567016CCFCD0 /* libuitest.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = E522088F3147311980DA0CDD /* libuitest.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A01C8C7120F662986777C284 /* libcangjie-std-regex.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 70A3A8E6DE90A24C91E30698 /* libcangjie-std-regex.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A15F4D70E560634E7C2E0673 /* libohos.color_manager.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BF94FBF875C28FBDF40579E /* libohos.color_manager.dylib */; };
+		A23C892E7E8AD953A5D689D7 /* libohos.color_manager.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 5BF94FBF875C28FBDF40579E /* libohos.color_manager.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A5E6A97C0D030F8B1E690D6D /* libohos.encoding.json.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 235AB350A7B7B59B4CF524D8 /* libohos.encoding.json.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ADF81B4D9981B646855191B4 /* libcangjie-std-regex.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A3A8E6DE90A24C91E30698 /* libcangjie-std-regex.dylib */; };
+		B1AE28447B8D6687D9F6FAC0 /* libcangjie-std-collection.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = E2C2DA4F9BA0DBDF46EC2AB4 /* libcangjie-std-collection.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1ECA66E376F1B827FECA99E /* libpcre2-8.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CCC09865A0E2B90C4CD94EA3 /* libpcre2-8.0.dylib */; };
+		B4B3B9C6167AC37FF78BEC03 /* libohos.bundle_manager.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 12E5317DBAA1A143F5239911 /* libohos.bundle_manager.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B6B7D1B454DEA45663AF62FE /* libkeels_ios.framework in Embed Libraries */ = {isa = PBXBuildFile; fileRef = A1C253D37C1DB83DEFB1D0C9 /* libkeels_ios.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B6EE3D7F683CC774D04428F7 /* libohos.web.net_error_list.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F99BE619F3CB7467A2D591CF /* libohos.web.net_error_list.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B926828C5148E01FF061A51E /* libcjmp.labels.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 0117FD1D5FD09F65EA2AD4B1 /* libcjmp.labels.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD22E6E574E0680A5B30254A /* libcangjie-std-convert.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = BAD07A94022F004D0B994488 /* libcangjie-std-convert.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		BD3E2F56A6263CA319182EEB /* libohos.base.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37612E3B1AC4AC24F40BAC29 /* libohos.base.dylib */; };
+		C2F7E3DB754F8F5513DCDEFD /* libcangjie-std-math.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 753163EC51A5E43189676944 /* libcangjie-std-math.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C45362FEDD14465269F9F8C6 /* libjnicjmp.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 51CC4C1AF6429D1B941B77F5 /* libjnicjmp.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C5444A4CA5C82C576AFC9BAC /* libcangjie-std-sort.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F4A3BF1F18A9537AEBA9542 /* libcangjie-std-sort.dylib */; };
+		CA67861D42CEF5D5C75311A8 /* libohos.hi_tracemeter.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 1ABC90BD6716A734715150F7 /* libohos.hi_tracemeter.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CBDAD2DBBA5E8628CBD98ADB /* libohos.ability.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F05E7CC79A3B70C444A6470 /* libohos.ability.dylib */; };
+		CC028A2C9CC77134CAC9DF59 /* libohos.webview.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5956E1199664820248B6FB /* libohos.webview.dylib */; };
+		CDD3347717E838BAB78045D8 /* libcangjie-std-binary.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D583C01FF80F5860D0E4061 /* libcangjie-std-binary.dylib */; };
+		CE53B83FE9E5A82AFC9B55C6 /* libboundscheck.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EEBABB7AE06552F67062E222 /* libboundscheck.dylib */; };
+		D3519C2142391D9CC917BE5E /* libohos.rpc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19DC0208221F0B709435BD /* libohos.rpc.dylib */; };
+		D3E9D2E04DF6FAAEBA303F48 /* libohos.image.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F9A76E50EC12B0B2CA6B862A /* libohos.image.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D4387E3E88D0B2215CDEFC41 /* libcangjie-std-sync.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 7BAD187A536F2C668636B122 /* libcangjie-std-sync.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D65623AFC6B842EB5CE21811 /* libohos.matrix4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 192FAB2D6AB0012651BC1433 /* libohos.matrix4.dylib */; };
+		D993A4ACD7BFDC51BD0665FA /* libcjmp.callback_invoke.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E9C0C37EE060BB5D76D2F88D /* libcjmp.callback_invoke.dylib */; };
+		DC591D7F1F7FFF4EC3BBEFF3 /* libohos.bundle_manager.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 12E5317DBAA1A143F5239911 /* libohos.bundle_manager.dylib */; };
+		E02CAE2291E2BD2F93918794 /* libcjmp.hilog.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = A55D48316BBCB83D43F5A6DE /* libcjmp.hilog.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E06E623A9A6E75B67EF62A7F /* libohos.ability.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 2F05E7CC79A3B70C444A6470 /* libohos.ability.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E717D444ED00FE043B39B24B /* libohos.web.net_error_list.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F99BE619F3CB7467A2D591CF /* libohos.web.net_error_list.dylib */; };
+		EAF788C64A75A78D4B2E1C19 /* libhilog.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = F777BBDF42D5A2C3F26C1B7B /* libhilog.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EBF534276863E0CAE276757E /* libcjmp.net.connection.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = E946321E97AEAF9FAC35C177 /* libcjmp.net.connection.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EEFBE343AB9ADBF3B2AE5A04 /* libnet_connection.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = EB422586D64AF864FC623594 /* libnet_connection.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F0AF1AD227D3684F008C55DD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AF1AD127D3684F008C55DD /* AppDelegate.m */; };
+		F0AF1ADD27D36856008C55DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0AF1ADC27D36856008C55DD /* Assets.xcassets */; };
+		F0AF1AE027D36856008C55DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0AF1ADE27D36856008C55DD /* LaunchScreen.storyboard */; };
+		F0AF1AE327D36856008C55DD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F0AF1AE227D36856008C55DD /* main.m */; };
+		F1CF0BAAD52D1E92877D3C43 /* libpcre2-8.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = CCC09865A0E2B90C4CD94EA3 /* libpcre2-8.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F69139ECE6BFEF0961794D9A /* libohos.ui_resource.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D96CC3A30D91AD9BFA418D /* libohos.ui_resource.dylib */; };
+		F6E0E343109FEAAB4BC1FCAF /* libohos.component.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF336001ACF50B0500B4178 /* libohos.component.dylib */; };
+		FA1844D26148320BA6D3809B /* libcjmp.business_exception.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D12E9BB14D8330F07387C1DF /* libcjmp.business_exception.dylib */; };
+		FFCB7433188A9AA0D0871334 /* libohos.webview.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 2D5956E1199664820248B6FB /* libohos.webview.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3E9454492E0E789600176E58 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				87961D3D4008E49FDF25D6A4 /* libohos.ui_resource.dylib in Embed Libraries */,
+				8B05A630797477E9B86712CF /* libcangjie-runtime.dylib in Embed Libraries */,
+				99F61A60592F9944537DE616 /* libcangjie-std-binary.dylib in Embed Libraries */,
+				B6EE3D7F683CC774D04428F7 /* libohos.web.net_error_list.dylib in Embed Libraries */,
+				9744A6116EB79C3A591BAB34 /* libohos.matrix4.dylib in Embed Libraries */,
+				1DC5E81E19457B4368065B6A /* libcangjie-std-io.dylib in Embed Libraries */,
+				FFCB7433188A9AA0D0871334 /* libohos.webview.dylib in Embed Libraries */,
+				239A1A39198141AF9EBDD53F /* libcangjie-std-time.dylib in Embed Libraries */,
+				F1CF0BAAD52D1E92877D3C43 /* libpcre2-8.0.dylib in Embed Libraries */,
+				EBF534276863E0CAE276757E /* libcjmp.net.connection.dylib in Embed Libraries */,
+				EAF788C64A75A78D4B2E1C19 /* libhilog.dylib in Embed Libraries */,
+				D4387E3E88D0B2215CDEFC41 /* libcangjie-std-sync.dylib in Embed Libraries */,
+				B4B3B9C6167AC37FF78BEC03 /* libohos.bundle_manager.dylib in Embed Libraries */,
+				1D14727889ED0781CA3A55E1 /* libcjmp.callback_invoke.dylib in Embed Libraries */,
+				66C6F7EB121C53F558C88D90 /* libohos.ui_test.dylib in Embed Libraries */,
+				CA67861D42CEF5D5C75311A8 /* libohos.hi_tracemeter.dylib in Embed Libraries */,
+				03B93D1A56454148DB6D321D /* libcjmp.ffi.dylib in Embed Libraries */,
+				153FF24F0C04C8472ADF6ECB /* libohos.labels.dylib in Embed Libraries */,
+				BD22E6E574E0680A5B30254A /* libcangjie-std-convert.dylib in Embed Libraries */,
+				C2F7E3DB754F8F5513DCDEFD /* libcangjie-std-math.dylib in Embed Libraries */,
+				3B0899BC17C22729D49EE197 /* libohos.ffi.dylib in Embed Libraries */,
+				24276D69550FF0506E387745 /* libohos.window.dylib in Embed Libraries */,
+				E06E623A9A6E75B67EF62A7F /* libohos.ability.dylib in Embed Libraries */,
+				0D8A0BD189B492C65CACAB35 /* libohos.component.dylib in Embed Libraries */,
+				3B0857E76E8A60DE253BC223 /* libcommon.dylib in Embed Libraries */,
+				6DFA04A1B13A58A6DD4CF1DA /* libohos.resource_manager.dylib in Embed Libraries */,
+				1AE2326EA839039DBCC6514D /* libboundscheck.dylib in Embed Libraries */,
+				A01C8C7120F662986777C284 /* libcangjie-std-regex.dylib in Embed Libraries */,
+				1342A591D196A1C632684165 /* libohos.eventhub.dylib in Embed Libraries */,
+				934C8AF82617C49D8C9892EB /* libohos.rpc.dylib in Embed Libraries */,
+				912777E657FB27F00C1338F3 /* libohos_app_cangjie_entry.logic.dylib in Embed Libraries */,
+				B926828C5148E01FF061A51E /* libcjmp.labels.dylib in Embed Libraries */,
+				EEFBE343AB9ADBF3B2AE5A04 /* libnet_connection.dylib in Embed Libraries */,
+				C45362FEDD14465269F9F8C6 /* libjnicjmp.dylib in Embed Libraries */,
+				A5E6A97C0D030F8B1E690D6D /* libohos.encoding.json.dylib in Embed Libraries */,
+				D3E9D2E04DF6FAAEBA303F48 /* libohos.image.dylib in Embed Libraries */,
+				7CEA5E854F59CADDBFECC389 /* libcjmp.business_exception.dylib in Embed Libraries */,
+				6E6865A429DBFD7641F5B963 /* libohos.base.dylib in Embed Libraries */,
+				A23C892E7E8AD953A5D689D7 /* libohos.color_manager.dylib in Embed Libraries */,
+				7FCA5B46FC0FC3B7B15EF485 /* libohos.state_manage.dylib in Embed Libraries */,
+				0BE07BC62CCC07F9A265F8E7 /* libcangjie-std-core.dylib in Embed Libraries */,
+				B1AE28447B8D6687D9F6FAC0 /* libcangjie-std-collection.dylib in Embed Libraries */,
+				9D4F8F8973AC567016CCFCD0 /* libuitest.dylib in Embed Libraries */,
+				E02CAE2291E2BD2F93918794 /* libcjmp.hilog.dylib in Embed Libraries */,
+				12282BBEE9E92E57553088FB /* libcangjie-std-sort.dylib in Embed Libraries */,
+				0E5E89AD5282B5EADE532E8F /* libohos_app_cangjie_entry.dylib in Embed Libraries */,
+				604D803CE6D1FF48EE00F352 /* libohos.hilog.dylib in Embed Libraries */,
+				B6B7D1B454DEA45663AF62FE /* libkeels_ios.framework in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		005B010FA1F4CC607FC97529 /* libohos.hilog.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.hilog.dylib; path = frameworks/libohos.hilog.dylib; sourceTree = "<group>"; };
+		0117FD1D5FD09F65EA2AD4B1 /* libcjmp.labels.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcjmp.labels.dylib; path = frameworks/libcjmp.labels.dylib; sourceTree = "<group>"; };
+		12E5317DBAA1A143F5239911 /* libohos.bundle_manager.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.bundle_manager.dylib; path = frameworks/libohos.bundle_manager.dylib; sourceTree = "<group>"; };
+		166EA72B613CB14040B27E8A /* libohos.ffi.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.ffi.dylib; path = frameworks/libohos.ffi.dylib; sourceTree = "<group>"; };
+		192FAB2D6AB0012651BC1433 /* libohos.matrix4.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.matrix4.dylib; path = frameworks/libohos.matrix4.dylib; sourceTree = "<group>"; };
+		1ABC90BD6716A734715150F7 /* libohos.hi_tracemeter.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.hi_tracemeter.dylib; path = frameworks/libohos.hi_tracemeter.dylib; sourceTree = "<group>"; };
+		1AD87C6A175D94FB037D3F7E /* libohos.resource_manager.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.resource_manager.dylib; path = frameworks/libohos.resource_manager.dylib; sourceTree = "<group>"; };
+		235AB350A7B7B59B4CF524D8 /* libohos.encoding.json.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.encoding.json.dylib; path = frameworks/libohos.encoding.json.dylib; sourceTree = "<group>"; };
+		2B887F9100317F392C857DD6 /* libohos_app_cangjie_entry.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos_app_cangjie_entry.dylib; path = frameworks/libohos_app_cangjie_entry.dylib; sourceTree = "<group>"; };
+		2D5956E1199664820248B6FB /* libohos.webview.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.webview.dylib; path = frameworks/libohos.webview.dylib; sourceTree = "<group>"; };
+		2F05E7CC79A3B70C444A6470 /* libohos.ability.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.ability.dylib; path = frameworks/libohos.ability.dylib; sourceTree = "<group>"; };
+		307EE66DAF4B10A94D764E75 /* libohos_app_cangjie_entry.logic.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos_app_cangjie_entry.logic.dylib; path = frameworks/libohos_app_cangjie_entry.logic.dylib; sourceTree = "<group>"; };
+		37612E3B1AC4AC24F40BAC29 /* libohos.base.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.base.dylib; path = frameworks/libohos.base.dylib; sourceTree = "<group>"; };
+		3E9454CA2E0E7FBF00176E58 /* cjmp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = cjmp.app; path = "build/Debug-iphoneos/cjmp.app"; sourceTree = SOURCE_ROOT; };
+		3E945BAD2E12513100176E58 /* keels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = keels; sourceTree = "<group>"; };
+		4EF336001ACF50B0500B4178 /* libohos.component.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.component.dylib; path = frameworks/libohos.component.dylib; sourceTree = "<group>"; };
+		4F4A3BF1F18A9537AEBA9542 /* libcangjie-std-sort.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-sort.dylib"; path = "frameworks/libcangjie-std-sort.dylib"; sourceTree = "<group>"; };
+		51CC4C1AF6429D1B941B77F5 /* libjnicjmp.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libjnicjmp.dylib; path = frameworks/libjnicjmp.dylib; sourceTree = "<group>"; };
+		53D61CA211F772AA7D66EA73 /* libohos.state_manage.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.state_manage.dylib; path = frameworks/libohos.state_manage.dylib; sourceTree = "<group>"; };
+		56B1188C153912FDBB38621D /* libohos.labels.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.labels.dylib; path = frameworks/libohos.labels.dylib; sourceTree = "<group>"; };
+		5BF94FBF875C28FBDF40579E /* libohos.color_manager.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.color_manager.dylib; path = frameworks/libohos.color_manager.dylib; sourceTree = "<group>"; };
+		67D951522B48C4157C6AAE74 /* libcangjie-std-time.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-time.dylib"; path = "frameworks/libcangjie-std-time.dylib"; sourceTree = "<group>"; };
+		6AED7C2D527F6ED5BCDBD010 /* libohos.window.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.window.dylib; path = frameworks/libohos.window.dylib; sourceTree = "<group>"; };
+		6F1CC0CE82BA58DF650A90A2 /* libcommon.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommon.dylib; path = frameworks/libcommon.dylib; sourceTree = "<group>"; };
+		70A3A8E6DE90A24C91E30698 /* libcangjie-std-regex.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-regex.dylib"; path = "frameworks/libcangjie-std-regex.dylib"; sourceTree = "<group>"; };
+		753163EC51A5E43189676944 /* libcangjie-std-math.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-math.dylib"; path = "frameworks/libcangjie-std-math.dylib"; sourceTree = "<group>"; };
+		7BAD187A536F2C668636B122 /* libcangjie-std-sync.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-sync.dylib"; path = "frameworks/libcangjie-std-sync.dylib"; sourceTree = "<group>"; };
+		80F38989A1B6900ABA075509 /* libcangjie-std-io.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-io.dylib"; path = "frameworks/libcangjie-std-io.dylib"; sourceTree = "<group>"; };
+		827AD8AF23435E7175198B24 /* libohos.eventhub.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.eventhub.dylib; path = frameworks/libohos.eventhub.dylib; sourceTree = "<group>"; };
+		88FBE7C01BBA28C6A5ADD4C6 /* libcangjie-runtime.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-runtime.dylib"; path = "frameworks/libcangjie-runtime.dylib"; sourceTree = "<group>"; };
+		89E41E4329F505070004F33E /* EntryEntryAbilityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryEntryAbilityViewController.m; sourceTree = "<group>"; };
+		89E41E4429F505070004F33E /* EntryEntryAbilityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryEntryAbilityViewController.h; sourceTree = "<group>"; };
+		8A19DC0208221F0B709435BD /* libohos.rpc.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.rpc.dylib; path = frameworks/libohos.rpc.dylib; sourceTree = "<group>"; };
+		8D583C01FF80F5860D0E4061 /* libcangjie-std-binary.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-binary.dylib"; path = "frameworks/libcangjie-std-binary.dylib"; sourceTree = "<group>"; };
+		96D96CC3A30D91AD9BFA418D /* libohos.ui_resource.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.ui_resource.dylib; path = frameworks/libohos.ui_resource.dylib; sourceTree = "<group>"; };
+		A1C253D37C1DB83DEFB1D0C9 /* libkeels_ios.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libkeels_ios.framework; path = frameworks/libkeels_ios.framework; sourceTree = "<group>"; };
+		A55D48316BBCB83D43F5A6DE /* libcjmp.hilog.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcjmp.hilog.dylib; path = frameworks/libcjmp.hilog.dylib; sourceTree = "<group>"; };
+		BAD07A94022F004D0B994488 /* libcangjie-std-convert.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-convert.dylib"; path = "frameworks/libcangjie-std-convert.dylib"; sourceTree = "<group>"; };
+		CCC09865A0E2B90C4CD94EA3 /* libpcre2-8.0.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libpcre2-8.0.dylib"; path = "frameworks/libpcre2-8.0.dylib"; sourceTree = "<group>"; };
+		D12E9BB14D8330F07387C1DF /* libcjmp.business_exception.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcjmp.business_exception.dylib; path = frameworks/libcjmp.business_exception.dylib; sourceTree = "<group>"; };
+		D8F4D3B383FFCC3EC9059179 /* libcjmp.ffi.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcjmp.ffi.dylib; path = frameworks/libcjmp.ffi.dylib; sourceTree = "<group>"; };
+		E2C2DA4F9BA0DBDF46EC2AB4 /* libcangjie-std-collection.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-collection.dylib"; path = "frameworks/libcangjie-std-collection.dylib"; sourceTree = "<group>"; };
+		E49BCA6EBF1C19E97023CE65 /* libcangjie-std-core.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcangjie-std-core.dylib"; path = "frameworks/libcangjie-std-core.dylib"; sourceTree = "<group>"; };
+		E522088F3147311980DA0CDD /* libuitest.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libuitest.dylib; path = frameworks/libuitest.dylib; sourceTree = "<group>"; };
+		E946321E97AEAF9FAC35C177 /* libcjmp.net.connection.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcjmp.net.connection.dylib; path = frameworks/libcjmp.net.connection.dylib; sourceTree = "<group>"; };
+		E9C0C37EE060BB5D76D2F88D /* libcjmp.callback_invoke.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libcjmp.callback_invoke.dylib; path = frameworks/libcjmp.callback_invoke.dylib; sourceTree = "<group>"; };
+		EB422586D64AF864FC623594 /* libnet_connection.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libnet_connection.dylib; path = frameworks/libnet_connection.dylib; sourceTree = "<group>"; };
+		EEBABB7AE06552F67062E222 /* libboundscheck.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libboundscheck.dylib; path = frameworks/libboundscheck.dylib; sourceTree = "<group>"; };
+		F0AF1AD027D3684F008C55DD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F0AF1AD127D3684F008C55DD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.m; sourceTree = "<group>"; };
+		F0AF1ADC27D36856008C55DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F0AF1ADF27D36856008C55DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F0AF1AE127D36856008C55DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0AF1AE227D36856008C55DD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F777BBDF42D5A2C3F26C1B7B /* libhilog.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libhilog.dylib; path = frameworks/libhilog.dylib; sourceTree = "<group>"; };
+		F99BE619F3CB7467A2D591CF /* libohos.web.net_error_list.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.web.net_error_list.dylib; path = frameworks/libohos.web.net_error_list.dylib; sourceTree = "<group>"; };
+		F9A76E50EC12B0B2CA6B862A /* libohos.image.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.image.dylib; path = frameworks/libohos.image.dylib; sourceTree = "<group>"; };
+		FBBE863314B9844C920E68B0 /* libohos.ui_test.dylib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "compiled.mach-o.dylib"; name = libohos.ui_test.dylib; path = frameworks/libohos.ui_test.dylib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F0AF1ACA27D3684F008C55DD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F69139ECE6BFEF0961794D9A /* libohos.ui_resource.dylib in Frameworks */,
+				588FD7E24EE87FB25402C79E /* libcangjie-runtime.dylib in Frameworks */,
+				CDD3347717E838BAB78045D8 /* libcangjie-std-binary.dylib in Frameworks */,
+				E717D444ED00FE043B39B24B /* libohos.web.net_error_list.dylib in Frameworks */,
+				D65623AFC6B842EB5CE21811 /* libohos.matrix4.dylib in Frameworks */,
+				967CC594F998DDF026F46B84 /* libcangjie-std-io.dylib in Frameworks */,
+				CC028A2C9CC77134CAC9DF59 /* libohos.webview.dylib in Frameworks */,
+				66B414CE0CE61124B2C9C0E1 /* libcangjie-std-time.dylib in Frameworks */,
+				B1ECA66E376F1B827FECA99E /* libpcre2-8.0.dylib in Frameworks */,
+				5A8760CE747B8E489080D07A /* libcjmp.net.connection.dylib in Frameworks */,
+				3EE3EDC802F9B7449A1A6857 /* libhilog.dylib in Frameworks */,
+				34C9C0CCAC40E967EEF430E3 /* libcangjie-std-sync.dylib in Frameworks */,
+				DC591D7F1F7FFF4EC3BBEFF3 /* libohos.bundle_manager.dylib in Frameworks */,
+				D993A4ACD7BFDC51BD0665FA /* libcjmp.callback_invoke.dylib in Frameworks */,
+				31A7B80CA02ECF530F673BA0 /* libohos.ui_test.dylib in Frameworks */,
+				1113C023B468C739A4D19BA5 /* libohos.hi_tracemeter.dylib in Frameworks */,
+				7CCEA664A0C07BC13676A6B1 /* libcjmp.ffi.dylib in Frameworks */,
+				27A36A0C64B10431C2F7212B /* libohos.labels.dylib in Frameworks */,
+				79590EDAC47E3B3C4D58CDF7 /* libcangjie-std-convert.dylib in Frameworks */,
+				0151D9293163F95F7F67E705 /* libcangjie-std-math.dylib in Frameworks */,
+				807B478E8B199ECECD5F3781 /* libohos.ffi.dylib in Frameworks */,
+				1D71D1F67A2F9046ABF220F2 /* libohos.window.dylib in Frameworks */,
+				CBDAD2DBBA5E8628CBD98ADB /* libohos.ability.dylib in Frameworks */,
+				F6E0E343109FEAAB4BC1FCAF /* libohos.component.dylib in Frameworks */,
+				17E2CFBC0A84DF4CDD4C9236 /* libcommon.dylib in Frameworks */,
+				437AACF2687584DA30FCC6A8 /* libohos.resource_manager.dylib in Frameworks */,
+				CE53B83FE9E5A82AFC9B55C6 /* libboundscheck.dylib in Frameworks */,
+				ADF81B4D9981B646855191B4 /* libcangjie-std-regex.dylib in Frameworks */,
+				6D6BEB36E2AD5C89D02E29D7 /* libohos.eventhub.dylib in Frameworks */,
+				D3519C2142391D9CC917BE5E /* libohos.rpc.dylib in Frameworks */,
+				1474003B09D83718C549FC2E /* libohos_app_cangjie_entry.logic.dylib in Frameworks */,
+				6D501049A396E1CD3DD96E82 /* libcjmp.labels.dylib in Frameworks */,
+				3225FF4407F6352B2EF242DC /* libnet_connection.dylib in Frameworks */,
+				61AFAFFA02B6D23E4E995836 /* libjnicjmp.dylib in Frameworks */,
+				84902238FEE3D316947E9CEC /* libohos.encoding.json.dylib in Frameworks */,
+				37FCBBD6C0B0CBDAFF7668C8 /* libohos.image.dylib in Frameworks */,
+				FA1844D26148320BA6D3809B /* libcjmp.business_exception.dylib in Frameworks */,
+				BD3E2F56A6263CA319182EEB /* libohos.base.dylib in Frameworks */,
+				A15F4D70E560634E7C2E0673 /* libohos.color_manager.dylib in Frameworks */,
+				59713EE33053A0329B02F075 /* libohos.state_manage.dylib in Frameworks */,
+				8B0AC5742734C09C171AC3CC /* libcangjie-std-core.dylib in Frameworks */,
+				02A2D7E29505ADDFADAFF2DB /* libcangjie-std-collection.dylib in Frameworks */,
+				88918A54076D2C710D4B6F3C /* libuitest.dylib in Frameworks */,
+				8E70A1E9C9B2BF6C78FF0EFC /* libcjmp.hilog.dylib in Frameworks */,
+				C5444A4CA5C82C576AFC9BAC /* libcangjie-std-sort.dylib in Frameworks */,
+				00FD90A9A1B829FB429D6B39 /* libohos_app_cangjie_entry.dylib in Frameworks */,
+				615EEB58E31C240CD3930DB5 /* libohos.hilog.dylib in Frameworks */,
+				8A38B567EA701F5CC12F09A1 /* libkeels_ios.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F0AF1AC427D3684F008C55DD = {
+			isa = PBXGroup;
+			children = (
+				3E945BAD2E12513100176E58 /* keels */,
+				F0AF1ACF27D3684F008C55DD /* cjmp */,
+				F0AF1AEB27D36948008C55DD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F0AF1ACF27D3684F008C55DD /* cjmp */ = {
+			isa = PBXGroup;
+			children = (
+				89E41E4429F505070004F33E /* EntryEntryAbilityViewController.h */,
+				89E41E4329F505070004F33E /* EntryEntryAbilityViewController.m */,
+				F0AF1AD027D3684F008C55DD /* AppDelegate.h */,
+				F0AF1AD127D3684F008C55DD /* AppDelegate.m */,
+				F0AF1ADC27D36856008C55DD /* Assets.xcassets */,
+				F0AF1ADE27D36856008C55DD /* LaunchScreen.storyboard */,
+				F0AF1AE127D36856008C55DD /* Info.plist */,
+				F0AF1AE227D36856008C55DD /* main.m */,
+			);
+			path = cjmp;
+			sourceTree = "<group>";
+		};
+		F0AF1AEB27D36948008C55DD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96D96CC3A30D91AD9BFA418D /* libohos.ui_resource.dylib */,
+				88FBE7C01BBA28C6A5ADD4C6 /* libcangjie-runtime.dylib */,
+				8D583C01FF80F5860D0E4061 /* libcangjie-std-binary.dylib */,
+				F99BE619F3CB7467A2D591CF /* libohos.web.net_error_list.dylib */,
+				192FAB2D6AB0012651BC1433 /* libohos.matrix4.dylib */,
+				80F38989A1B6900ABA075509 /* libcangjie-std-io.dylib */,
+				2D5956E1199664820248B6FB /* libohos.webview.dylib */,
+				67D951522B48C4157C6AAE74 /* libcangjie-std-time.dylib */,
+				CCC09865A0E2B90C4CD94EA3 /* libpcre2-8.0.dylib */,
+				E946321E97AEAF9FAC35C177 /* libcjmp.net.connection.dylib */,
+				F777BBDF42D5A2C3F26C1B7B /* libhilog.dylib */,
+				7BAD187A536F2C668636B122 /* libcangjie-std-sync.dylib */,
+				12E5317DBAA1A143F5239911 /* libohos.bundle_manager.dylib */,
+				E9C0C37EE060BB5D76D2F88D /* libcjmp.callback_invoke.dylib */,
+				FBBE863314B9844C920E68B0 /* libohos.ui_test.dylib */,
+				1ABC90BD6716A734715150F7 /* libohos.hi_tracemeter.dylib */,
+				D8F4D3B383FFCC3EC9059179 /* libcjmp.ffi.dylib */,
+				56B1188C153912FDBB38621D /* libohos.labels.dylib */,
+				BAD07A94022F004D0B994488 /* libcangjie-std-convert.dylib */,
+				753163EC51A5E43189676944 /* libcangjie-std-math.dylib */,
+				166EA72B613CB14040B27E8A /* libohos.ffi.dylib */,
+				6AED7C2D527F6ED5BCDBD010 /* libohos.window.dylib */,
+				2F05E7CC79A3B70C444A6470 /* libohos.ability.dylib */,
+				4EF336001ACF50B0500B4178 /* libohos.component.dylib */,
+				6F1CC0CE82BA58DF650A90A2 /* libcommon.dylib */,
+				1AD87C6A175D94FB037D3F7E /* libohos.resource_manager.dylib */,
+				EEBABB7AE06552F67062E222 /* libboundscheck.dylib */,
+				70A3A8E6DE90A24C91E30698 /* libcangjie-std-regex.dylib */,
+				827AD8AF23435E7175198B24 /* libohos.eventhub.dylib */,
+				8A19DC0208221F0B709435BD /* libohos.rpc.dylib */,
+				307EE66DAF4B10A94D764E75 /* libohos_app_cangjie_entry.logic.dylib */,
+				0117FD1D5FD09F65EA2AD4B1 /* libcjmp.labels.dylib */,
+				EB422586D64AF864FC623594 /* libnet_connection.dylib */,
+				51CC4C1AF6429D1B941B77F5 /* libjnicjmp.dylib */,
+				235AB350A7B7B59B4CF524D8 /* libohos.encoding.json.dylib */,
+				F9A76E50EC12B0B2CA6B862A /* libohos.image.dylib */,
+				D12E9BB14D8330F07387C1DF /* libcjmp.business_exception.dylib */,
+				37612E3B1AC4AC24F40BAC29 /* libohos.base.dylib */,
+				5BF94FBF875C28FBDF40579E /* libohos.color_manager.dylib */,
+				53D61CA211F772AA7D66EA73 /* libohos.state_manage.dylib */,
+				E49BCA6EBF1C19E97023CE65 /* libcangjie-std-core.dylib */,
+				E2C2DA4F9BA0DBDF46EC2AB4 /* libcangjie-std-collection.dylib */,
+				E522088F3147311980DA0CDD /* libuitest.dylib */,
+				A55D48316BBCB83D43F5A6DE /* libcjmp.hilog.dylib */,
+				4F4A3BF1F18A9537AEBA9542 /* libcangjie-std-sort.dylib */,
+				2B887F9100317F392C857DD6 /* libohos_app_cangjie_entry.dylib */,
+				005B010FA1F4CC607FC97529 /* libohos.hilog.dylib */,
+				A1C253D37C1DB83DEFB1D0C9 /* libkeels_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F0AF1ACC27D3684F008C55DD /* cjmp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F0AF1AE627D36856008C55DD /* Build configuration list for PBXNativeTarget "cjmp" */;
+			buildPhases = (
+				F0AF1AC927D3684F008C55DD /* Sources */,
+				F0AF1ACA27D3684F008C55DD /* Frameworks */,
+				F0AF1ACB27D3684F008C55DD /* Resources */,
+				3E9454492E0E789600176E58 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = cjmp;
+			productName = cjmp;
+			productReference = 3E9454CA2E0E7FBF00176E58 /* cjmp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F0AF1AC527D3684F008C55DD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					F0AF1ACC27D3684F008C55DD = {
+						CreatedOnToolsVersion = 13.0;
+					};
+				};
+			};
+			buildConfigurationList = F0AF1AC827D3684F008C55DD /* Build configuration list for PBXProject "cjmp" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F0AF1AC427D3684F008C55DD;
+			productRefGroup = F0AF1AC427D3684F008C55DD;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F0AF1ACC27D3684F008C55DD /* cjmp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F0AF1ACB27D3684F008C55DD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E945BAE2E12513100176E58 /* keels in Resources */,
+				F0AF1AE027D36856008C55DD /* LaunchScreen.storyboard in Resources */,
+				F0AF1ADD27D36856008C55DD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F0AF1AC927D3684F008C55DD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0AF1AD227D3684F008C55DD /* AppDelegate.m in Sources */,
+				89E41E4529F505070004F33E /* EntryEntryAbilityViewController.m in Sources */,
+				F0AF1AE327D36856008C55DD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F0AF1ADE27D36856008C55DD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F0AF1ADF27D36856008C55DD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F0AF1AE427D36856008C55DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F0AF1AE527D36856008C55DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F0AF1AE727D36856008C55DD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GFKNN7LXAS;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/frameworks",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = cjmp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.cjmp;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/frameworks/libkeels_ios.framework/Headers/include";
+			};
+			name = Debug;
+		};
+		F0AF1AE827D36856008C55DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = arm64;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GFKNN7LXAS;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/frameworks",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = cjmp/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.cjmp;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/frameworks/libkeels_ios.framework/Headers/include";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F0AF1AC827D3684F008C55DD /* Build configuration list for PBXProject "cjmp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0AF1AE427D36856008C55DD /* Debug */,
+				F0AF1AE527D36856008C55DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F0AF1AE627D36856008C55DD /* Build configuration list for PBXNativeTarget "cjmp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F0AF1AE727D36856008C55DD /* Debug */,
+				F0AF1AE827D36856008C55DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F0AF1AC527D3684F008C55DD /* Project object */;
+}
