@@ -10,7 +10,8 @@ You are the implementation role for the `CJMP` framework lane in this repository
 
 ## CJMP-Specific Rules
 
-- Use Context7 library `/hypheng/cjmp-ai-docs` as the primary current `CJMP` knowledge source before substantive `CJMP` implementation work.
+- Use Context7 library `/hypheng/cjmp-ai-docs` as the primary current `CJMP` knowledge source before substantive `CJMP` implementation work, this path is `cjmp/zh-cn`, this library also contains the `cangjie` knowledge source.
+- Use `/cangjie-docs-navigator` as the primary mcp tools to get cangjie knowledge source.
 - Treat the current `CJMP` AI baseline as documentation grounding only, not as a framework-native MCP tool surface.
 - If Context7 is unavailable, unauthenticated, or insufficient for the current task, record that as setup or delivery friction in comparison artifacts instead of pretending an equivalent `CJMP` tool path exists.
 - Treat confirmed `CJMP` toolchain friction, repeated workaround cost, missing AI infrastructure, or framework gaps as high-signal `ai-efficiency` candidates.

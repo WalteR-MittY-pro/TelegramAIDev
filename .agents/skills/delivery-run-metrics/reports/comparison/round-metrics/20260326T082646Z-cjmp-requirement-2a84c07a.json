@@ -1,0 +1,78 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/03/26/rollout-2026-03-26T16-06-47-019d292e-8378-7af0-9aaa-5deb45825512.jsonl",
+  "codex_thread_id": "019d292e-8378-7af0-9aaa-5deb45825512",
+  "ended_at": "2026-03-26T08:55:17Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260326T082646Z-cjmp-requirement-2a84c07a",
+  "started_at": "2026-03-26T08:26:46Z",
+  "steps": [
+    {
+      "duration_sec": 371,
+      "ended_at": "2026-03-26T08:33:08Z",
+      "name": "implementation",
+      "started_at": "2026-03-26T08:26:57Z"
+    },
+    {
+      "duration_sec": 0,
+      "ended_at": "2026-03-26T08:33:08Z",
+      "name": "build-validation",
+      "started_at": "2026-03-26T08:33:08Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 6447616,
+    "input_tokens": 7926157,
+    "output_tokens": 15330,
+    "reasoning_output_tokens": 7300,
+    "total_tokens": 7941487
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 6447616,
+    "input_tokens": 7926157,
+    "output_tokens": 15330,
+    "reasoning_output_tokens": 7300,
+    "total_tokens": 7941487
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 190208,
+      "input_tokens": 191253,
+      "output_tokens": 227,
+      "reasoning_output_tokens": 162,
+      "total_tokens": 191480
+    },
+    "model_context_window": 258400,
+    "timestamp": "2026-03-26T08:55:06.290Z",
+    "total": {
+      "cached_input_tokens": 8032128,
+      "input_tokens": 9920221,
+      "output_tokens": 25279,
+      "reasoning_output_tokens": 12900,
+      "total_tokens": 9945500
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 2560,
+      "input_tokens": 76420,
+      "output_tokens": 243,
+      "reasoning_output_tokens": 87,
+      "total_tokens": 76663
+    },
+    "model_context_window": 258400,
+    "timestamp": "2026-03-26T08:26:45.720Z",
+    "total": {
+      "cached_input_tokens": 1584512,
+      "input_tokens": 1994064,
+      "output_tokens": 9949,
+      "reasoning_output_tokens": 5600,
+      "total_tokens": 2004013
+    }
+  },
+  "total_duration_sec": 1711,
+  "version": 1,
+  "work_item_ref": "slice1-app-shell-startup-routing",
+  "work_item_type": "requirement",
+  "working_effort_summary": "Implemented CJMP slice1 startup routing states (login/failure/auth-placeholder), copied shared design assets into apps/cjmp local assets, fixed route matching bug, and validated build via keels build hap/apk and run on Android after removing quarantine xattr from CJMP macro dylibs."
+}

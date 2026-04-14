@@ -3,6 +3,7 @@ package ohos_app_cangjie_entry
 internal import ohos.base.AppLog
 internal import ohos.ability.AbilityStage
 internal import ohos.ability.LaunchReason
+import ohos.ability.*
 
 class MainAbility <: Ability {
     public init() {

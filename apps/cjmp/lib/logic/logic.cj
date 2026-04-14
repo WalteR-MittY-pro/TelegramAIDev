@@ -5,10 +5,13 @@ import ohos.hilog.Hilog
 @When[target_platform != "hos"]
 public func logicTest(): String {
     let testStr: CString = unsafe { FfiLogicTest() }
-    testStr.toString()
+    let result = testStr.toString()
+    unsafe { FfiFreeString(testStr) }
+    result
 }
 
 foreign func FfiLogicTest(): CString
+foreign func FfiFreeString(str: CString): Unit
 
 @When[target_platform == "hos"]
 public func logicTest(): String {

@@ -1,0 +1,72 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/04/13/rollout-2026-04-13T16-55-59-019d860e-0593-7753-bdbe-be2cd449537e.jsonl",
+  "codex_thread_id": "019d860e-0593-7753-bdbe-be2cd449537e",
+  "ended_at": "2026-04-13T11:42:59Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260413T113244Z-cjmp-bug-fix-bcb9eba6",
+  "started_at": "2026-04-13T11:32:44Z",
+  "steps": [
+    {
+      "duration_sec": 597,
+      "ended_at": "2026-04-13T11:42:59Z",
+      "name": "reproduction",
+      "started_at": "2026-04-13T11:33:02Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 5003008,
+    "input_tokens": 5366695,
+    "output_tokens": 5970,
+    "reasoning_output_tokens": 2353,
+    "total_tokens": 5372665
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 5003008,
+    "input_tokens": 5366695,
+    "output_tokens": 5970,
+    "reasoning_output_tokens": 2353,
+    "total_tokens": 5372665
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 332672,
+      "input_tokens": 333252,
+      "output_tokens": 37,
+      "reasoning_output_tokens": 0,
+      "total_tokens": 333289
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-13T11:42:32.867Z",
+    "total": {
+      "cached_input_tokens": 16254720,
+      "input_tokens": 18357111,
+      "output_tokens": 57284,
+      "reasoning_output_tokens": 24849,
+      "total_tokens": 18414395
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 295808,
+      "input_tokens": 305959,
+      "output_tokens": 788,
+      "reasoning_output_tokens": 375,
+      "total_tokens": 306747
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-13T11:32:08.247Z",
+    "total": {
+      "cached_input_tokens": 11251712,
+      "input_tokens": 12990416,
+      "output_tokens": 51314,
+      "reasoning_output_tokens": 22496,
+      "total_tokens": 13041730
+    }
+  },
+  "total_duration_sec": 615,
+  "version": 1,
+  "work_item_ref": "compile-fix-clickability",
+  "work_item_type": "bug-fix",
+  "working_effort_summary": "fixed the click-handler callback signatures in home_shell_page.cj and repaired build.sh cleanup so CJMP build.sh now exits successfully after cjpm build; verified both ios and ios-sim builds pass when run sequentially"
+}

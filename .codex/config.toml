@@ -22,3 +22,14 @@ command = "dart"
 args = ["mcp-server", "--force-roots-fallback"]
 required = false
 startup_timeout_sec = 20
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
+required = false
+startup_timeout_sec = 20
+
+[mcp_servers."cangjie-docs"]
+command = "/Users/dzy/Desktop/project/TelegramAIDev/cangje-docs-mcp-macos-arm64"
+args = []
+required = false
+startup_timeout_sec = 20

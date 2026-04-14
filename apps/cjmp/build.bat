@@ -12,11 +12,8 @@ set cangjieFolder=cangjie-%buildTarget%
 set CJMP_UI_PATH=!CJMP_SDK_HOME!\cjmp-ui
 set CJMP_ENGINE_PATH=!CJMP_SDK_HOME!\ui-engine
 set CJMP_TOOL_PATH=!CJMP_SDK_HOME!\cjmp-tools
-set CJMP_TEST_PATH=!CJMP_SDK_HOME!\cjmp-test
 set CJMP_LIBS_PATH=!CJMP_SDK_HOME!\cjmp-libs
 set CANGJIE_STDX_PATH=!CJMP_TOOL_PATH!/third_party/cangjie-stdx
-set LIBRARY_PATH=!CJMP_TOOL_PATH!/third_party/openssl
-set "PATH=!LIBRARY_PATH!;%PATH%"
 
 @REM Platform-specific configuration
 if "%buildTarget%"=="android" (
@@ -30,7 +27,6 @@ if "%buildTarget%"=="android" (
     set ANDROID_BRIDGE=!SCRIPT_DIR!\android\app\build\intermediates\cmake\!buildType!\obj\arm64-v8a
     set lib_share_path=!ANDROID_NDK_DIR!\toolchains\llvm\prebuilt\windows-x86_64\sysroot\usr\lib\aarch64-linux-android\libc++_shared.so
     set SYSTEM_STRING=windows-x86_64
-    set ANDROID_TEST_PATH=!CJMP_TEST_PATH!\android\ohos
 )
 
 @REM Build type configuration
@@ -70,7 +66,7 @@ if "%buildTarget%"=="android" (
     call :copy_libs "!ANDROID_BRIDGE!" "!outputDir!\arm64-v8a" "so"
 
     @REM copy: library dependencies
-    call :analyze_dependencies "!outputDir!\arm64-v8a" "android" "!ANDROID_CANGJIE_PATH!" "!ANDROID_CJ_FRONTEND!" "!ANDROID_CANGJIE_STDX_PATH!" "!ANDROID_CJMP_LIBS_PATH!" "!ANDROID_TEST_PATH!"
+    call :analyze_dependencies "!outputDir!\arm64-v8a" "android" "!ANDROID_CANGJIE_PATH!" "!ANDROID_CJ_FRONTEND!" "!ANDROID_CANGJIE_STDX_PATH!" "!ANDROID_CJMP_LIBS_PATH!"
     call :copy_dependencies "!outputDir!\arm64-v8a" "!DEP_FILE!"
 
     @REM copy: additional dependencies

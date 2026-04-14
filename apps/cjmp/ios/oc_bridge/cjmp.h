@@ -8,6 +8,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface cjmp : NSObject
 
 + (NSString *)logicTest;
++ (BOOL)saveDemoSessionPhone:(NSString *)phoneNumber;
++ (NSString *)loadDemoSessionPhone;
++ (void)clearDemoSessionPhone;
 
 @end
 

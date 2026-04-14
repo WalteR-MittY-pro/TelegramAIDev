@@ -34,3 +34,7 @@ The project should keep comparing those approaches on comparable slices, expose 
 
 - Use GitHub issues to drive the project.
 - Keep framework-agnostic product and UI designs separate from framework specific implementation details.
+
+- Support application developers using CJMP.
+- When Cangjie syntax documentation is needed, use Context7 to search the `hypheng/cjmp-ai-docs` repository, or use the local `cangjie-docs-navigator` skill.
+- When CJMP-related content is needed, use Context7 to retrieve documentation from the `cjmp/zh-cn` directory in the `hypheng/cjmp-ai-docs` repository.

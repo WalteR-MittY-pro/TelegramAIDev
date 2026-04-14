@@ -1,26 +1,96 @@
 {
   "bootstrap": {
-    "title": "Loading Telegram Demo...",
+    "title": "Loading Telegram...",
     "body": "Preparing startup routing and shared design assets before the first-launch handoff.",
     "failureNotice": "Shared design assets failed to load. The app is using embedded fallback content."
   },
   "login": {
-    "brandTitle": "Telegram Demo",
-    "headline": "Start with your phone number",
-    "body": "Complete the demo sign-in flow to unlock the authenticated app shell.",
+    "brandTitle": "Telegram",
+    "countryLabel": "Country / Region",
+    "countryValue": "China",
     "phoneLabel": "Phone number",
-    "phoneHint": "+1 415 555 0199",
+    "phoneValue": "+86",
+    "phoneHint": "+86",
+    "keepSignedInLabel": "Keep me signed in on this device",
+    "loginLabel": "Login",
     "continueLabel": "Continue",
-    "footer": "Demo verification is local-only and does not contact a real backend.",
-    "invalidInputNotice": "Enter a valid demo phone number to continue."
+    "verificationTitle": "Phone Number",
+    "verificationInputLabel": "Verification Code",
+    "verificationInputHint": "12345",
+    "verificationHint": "Demo verification stays local and keeps the login shell intact.",
+    "verificationCodeHint": "Enter any 5-digit demo code to continue.",
+    "invalidInputNotice": "Enter a valid demo phone number to continue.",
+    "invalidCodeNotice": "Enter a 5-digit demo code to continue.",
+    "restoreInvalidNotice": "Saved demo session was invalid. Continue with phone login.",
+    "verificationBackLabel": "Edit phone number"
   },
   "homeShell": {
+    "titles": {
+      "chats": "Telegram",
+      "contacts": "Contacts",
+      "settings": "Settings"
+    },
+    "subtitles": {
+      "chats": "Shared seed conversations with pinned, muted, and unread cues.",
+      "contacts": "People, invites, and synced contacts.",
+      "settings": "Account and app preferences."
+    },
     "tabs": {
       "chats": "Chats",
       "contacts": "Contacts",
       "settings": "Settings"
     },
-    "placeholderNotice": "This destination is intentionally scoped as a placeholder in the current MVP slice."
+    "actions": {
+      "edit": "Edit",
+      "find": "Find"
+    },
+    "stateFilters": {
+      "loaded": "Loaded",
+      "loading": "Loading",
+      "empty": "Empty",
+      "error": "Error"
+    },
+    "actionNoticeTemplate": "{actionLabel} is not wired yet in this demo.",
+    "actionNoticeSuffix": "is not wired yet in this demo.",
+    "placeholderNotice": "This destination is intentionally scoped as a placeholder in the current MVP slice.",
+    "contactsCardTitle": "Contacts",
+    "contactsCardBody": "Search, quick actions, and an alphabetical contact list keep the tab close to Telegram without adding full contact management yet.",
+    "settingsCardTitle": "Settings",
+    "settingsCardBody": "A compact settings home keeps the demo believable while deeper detail pages stay out of scope.",
+    "settingsEmptyHeadline": "No local demo session is active.",
+    "settingsEmptyBody": "Return to login to seed a local demo session for later slices.",
+    "settingsSignOutLabel": "Sign out"
+  },
+  "contacts": {
+    "searchPlaceholder": "Search",
+    "searchEmptyTitle": "No contacts found",
+    "searchEmptyBody": "Try searching by name or status.",
+    "quickActionsTitle": "Quick Actions",
+    "quickActions": {
+      "addContact": "Add Contact",
+      "peopleNearby": "People Nearby",
+      "inviteFriends": "Invite Friends"
+    },
+    "sectionStyle": "alphabetical",
+    "statusOnline": "online",
+    "statusLastSeenRecently": "last seen recently",
+    "statusLastSeen2Hours": "last seen 2 hours ago"
+  },
+  "settings": {
+    "sectionTitles": {
+      "account": "Account",
+      "preferences": "Preferences",
+      "session": "Session"
+    },
+    "profileTitle": "Telegram Demo",
+    "profilePhone": "+86 138 0013 8000",
+    "disclosureIndicator": ">",
+    "sessionPresentation": {
+      "freshModeLabel": "Signed in during this run",
+      "restoredModeLabel": "Restored local demo session",
+      "persistedDetail": "This session is saved on this device until you clear it.",
+      "ephemeralDetail": "This session is active for this run only and will not restore on relaunch."
+    }
   },
   "chatList": {
     "title": "Telegram",
@@ -28,12 +98,26 @@
     "emptyTitle": "No chats yet",
     "emptyBody": "Shared seed conversations have not been loaded.",
     "errorTitle": "Couldn't load chats",
-    "errorBody": "Check shared mock data and retry."
+    "errorBody": "Check shared mock data and retry.",
+    "retryLabel": "Reload shared chats"
   },
   "chatDetail": {
+    "backLabel": "Back",
     "titleFallback": "Conversation",
+    "subtitleFallback": "last seen recently",
     "composerPlaceholder": "Message",
     "sendLabel": "Send",
+    "deliveryReadLabel": "Read",
+    "deliveryPendingLabel": "Pending",
+    "deliverySentLabel": "Sent",
     "sendFailureNotice": "The local demo message could not be sent. Try again."
+  },
+  "authenticatedPlaceholder": {
+    "title": "Demo session ready",
+    "phoneLabel": "Demo phone",
+    "destinationPill": "authenticated-placeholder",
+    "backLabel": "Back to login shell",
+    "clearSessionLabel": "Clear local demo session",
+    "placeholderNotice": "This destination is intentionally scoped as a placeholder in the current MVP slice."
   }
 }

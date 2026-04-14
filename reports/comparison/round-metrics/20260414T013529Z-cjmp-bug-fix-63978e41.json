@@ -1,0 +1,72 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/04/13/rollout-2026-04-13T16-55-59-019d860e-0593-7753-bdbe-be2cd449537e.jsonl",
+  "codex_thread_id": "019d860e-0593-7753-bdbe-be2cd449537e",
+  "ended_at": "2026-04-14T01:39:10Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260414T013529Z-cjmp-bug-fix-63978e41",
+  "started_at": "2026-04-14T01:35:29Z",
+  "steps": [
+    {
+      "duration_sec": 90,
+      "ended_at": "2026-04-14T01:37:17Z",
+      "name": "implementation",
+      "started_at": "2026-04-14T01:35:47Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 2866688,
+    "input_tokens": 2877980,
+    "output_tokens": 5053,
+    "reasoning_output_tokens": 2159,
+    "total_tokens": 2883033
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 2866688,
+    "input_tokens": 2877980,
+    "output_tokens": 5053,
+    "reasoning_output_tokens": 2159,
+    "total_tokens": 2883033
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 361856,
+      "input_tokens": 362366,
+      "output_tokens": 37,
+      "reasoning_output_tokens": 0,
+      "total_tokens": 362403
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-14T01:38:44.465Z",
+    "total": {
+      "cached_input_tokens": 20812288,
+      "input_tokens": 23614625,
+      "output_tokens": 68657,
+      "reasoning_output_tokens": 31511,
+      "total_tokens": 23683282
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 2432,
+      "input_tokens": 348136,
+      "output_tokens": 643,
+      "reasoning_output_tokens": 276,
+      "total_tokens": 348779
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-14T01:33:40.582Z",
+    "total": {
+      "cached_input_tokens": 17945600,
+      "input_tokens": 20736645,
+      "output_tokens": 63604,
+      "reasoning_output_tokens": 29352,
+      "total_tokens": 20800249
+    }
+  },
+  "total_duration_sec": 221,
+  "version": 1,
+  "work_item_ref": "contacts-scroll-logging",
+  "work_item_type": "bug-fix",
+  "working_effort_summary": "added targeted smoke logging around Contacts list scrolling and surface snapshots so the failing Contacts bottom-scroll path now emits detailed AppLog breadcrumbs before and after each probe; verified the updated smoke code compiles via apps/cjmp/build.sh debug ios"
+}

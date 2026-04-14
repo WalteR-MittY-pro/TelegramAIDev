@@ -1,9 +1,29 @@
 {
+  "meta": {
+    "name": "telegram-commercial-mvp-mock-data",
+    "version": "1.1.0",
+    "description": "Mock data, navigation routing, and behavioral specs for the Telegram Commercial MVP. Aligned with CJMP implementation through slice 6."
+  },
   "startup": {
-    "defaultAuthenticatedDestination": "authenticated-placeholder"
+    "defaultAuthenticatedDestination": "home-shell",
+    "restoreBehavior": {
+      "validSessionDestination": "home-shell",
+      "invalidSessionDestination": "login"
+    }
+  },
+  "login": {
+    "brandTitle": "Telegram",
+    "countryValue": "China",
+    "phonePrefix": "+86",
+    "verificationCodeExample": "12345"
   },
   "homeShell": {
     "defaultTab": "chats",
+    "layout": {
+      "appBarStyle": "title-subtitle with trailing utility actions",
+      "contentAreaStyle": "full-height grouped list inside padded shell",
+      "tabBarStyle": "three pill buttons"
+    },
     "tabs": [
       {
         "id": "chats",
@@ -16,15 +36,49 @@
         "labelKey": "homeShell.tabs.contacts",
         "iconId": "contacts",
         "implementedInSlice": 4,
-        "placeholderDestination": true
+        "placeholderDestination": false,
+        "surfaceStyle": "grouped-list"
       },
       {
         "id": "settings",
         "labelKey": "homeShell.tabs.settings",
         "iconId": "settings",
         "implementedInSlice": 4,
-        "placeholderDestination": true
+        "placeholderDestination": false,
+        "surfaceStyle": "grouped-list"
       }
+    ],
+    "tabContent": {
+      "chats": {
+        "title": "Telegram",
+        "subtitle": "Shared seed conversations with pinned, muted, and unread cues.",
+        "showsStateFilters": true
+      },
+      "contacts": {
+        "title": "Contacts",
+        "subtitle": "People, invites, and synced contacts."
+      },
+      "settings": {
+        "title": "Settings",
+        "subtitle": "Account and app preferences."
+      }
+    },
+    "implementationOnlyActions": {
+      "chats": [
+        "edit",
+        "find"
+      ],
+      "contacts": [
+        "add"
+      ]
+    }
+  },
+  "chatListStates": {
+    "available": [
+      "populated",
+      "loading",
+      "empty",
+      "error"
     ]
   },
   "chatList": {
@@ -36,6 +90,7 @@
         "timestamp": "09:41",
         "unreadCount": 2,
         "pinned": true,
+        "metaLabel": "Pinned",
         "muted": false,
         "avatarResource": "avatar-placeholder.svg",
         "avatarTint": "blue"
@@ -47,6 +102,7 @@
         "timestamp": "Yesterday",
         "unreadCount": 0,
         "pinned": false,
+        "metaLabel": "Muted",
         "muted": true,
         "avatarResource": "avatar-placeholder.svg",
         "avatarTint": "purple"
@@ -58,16 +114,197 @@
         "timestamp": "Thu",
         "unreadCount": 1,
         "pinned": false,
+        "metaLabel": null,
         "muted": false,
         "avatarResource": "avatar-placeholder.svg",
         "avatarTint": "green"
       }
+    ],
+    "loadingState": {
+      "title": "Loading conversations...",
+      "indicator": "spinner"
+    },
+    "emptyState": {
+      "title": "No chats yet",
+      "body": "Shared seed conversations have not been loaded."
+    },
+    "errorState": {
+      "title": "Couldn't load chats",
+      "body": "Check shared mock data and retry.",
+      "retryLabel": "Reload shared chats"
+    }
+  },
+  "contactsSurface": {
+    "layout": "grouped-list",
+    "searchPlaceholder": "Search",
+    "searchBehavior": {
+      "filtering": "prefix-and-word-boundary case-insensitive match against contact name and status",
+      "hideQuickActions": true,
+      "emptyResultTitle": "No contacts found",
+      "emptyResultBody": "Try searching by name or status."
+    },
+    "quickActions": [
+      {
+        "id": "add-contact",
+        "label": "Add Contact",
+        "iconStyle": "brand-soft-circle"
+      },
+      {
+        "id": "people-nearby",
+        "label": "People Nearby",
+        "iconStyle": "brand-soft-circle"
+      },
+      {
+        "id": "invite-friends",
+        "label": "Invite Friends",
+        "iconStyle": "brand-soft-circle"
+      }
+    ],
+    "alphabetSections": [
+      {
+        "letter": "A",
+        "contacts": [
+          {
+            "id": "contact-alex",
+            "name": "Alex Mason",
+            "avatarText": "AM",
+            "avatarTint": "blue",
+            "status": "online",
+            "online": true
+          }
+        ]
+      },
+      {
+        "letter": "J",
+        "contacts": [
+          {
+            "id": "contact-jun",
+            "name": "Jun Liu",
+            "avatarText": "JL",
+            "avatarTint": "green",
+            "status": "last seen recently",
+            "online": false
+          }
+        ]
+      },
+      {
+        "letter": "M",
+        "contacts": [
+          {
+            "id": "contact-mina",
+            "name": "Mina Park",
+            "avatarText": "MP",
+            "avatarTint": "purple",
+            "status": "online",
+            "online": true
+          }
+        ]
+      },
+      {
+        "letter": "R",
+        "contacts": [
+          {
+            "id": "contact-ravi",
+            "name": "Ravi Tan",
+            "avatarText": "RT",
+            "avatarTint": "blue",
+            "status": "last seen 2 hours ago",
+            "online": false
+          }
+        ]
+      },
+      {
+        "letter": "S",
+        "contacts": [
+          {
+            "id": "contact-sara",
+            "name": "Sara Kim",
+            "avatarText": "SK",
+            "avatarTint": "orange",
+            "status": "last seen recently",
+            "online": false
+          }
+        ]
+      }
     ]
+  },
+  "settingsSurface": {
+    "layout": "grouped-list",
+    "profileCard": {
+      "title": "Telegram Demo",
+      "phoneNumber": "+86 138 0013 8000",
+      "avatarText": "TG",
+      "avatarTint": "blue"
+    },
+    "sections": [
+      {
+        "id": "account",
+        "title": "Account",
+        "items": [
+          {
+            "id": "devices",
+            "label": "Devices"
+          },
+          {
+            "id": "privacy",
+            "label": "Privacy and Security"
+          },
+          {
+            "id": "notifications",
+            "label": "Notifications and Sounds"
+          }
+        ]
+      },
+      {
+        "id": "preferences",
+        "title": "Preferences",
+        "items": [
+          {
+            "id": "appearance",
+            "label": "Appearance"
+          },
+          {
+            "id": "language",
+            "label": "Language"
+          },
+          {
+            "id": "folders",
+            "label": "Chat Folders"
+          }
+        ]
+      }
+    ],
+    "signOutPlacement": "inside-profile-card",
+    "signOutLabel": "Sign out",
+    "sessionPresentation": {
+      "emptyHeadline": "No local demo session is active.",
+      "emptyBody": "Return to login to seed a local demo session for later slices.",
+      "freshModeLabel": "Signed in during this run",
+      "restoredModeLabel": "Restored local demo session",
+      "persistedDetail": "This session is saved on this device until you clear it.",
+      "ephemeralDetail": "This session is active for this run only and will not restore on relaunch."
+    }
   },
   "chatDetail": {
     "placeholderConversationId": "chat-alex",
-    "subtitle": "last seen recently",
-    "typingSubtitle": "typing...",
+    "conversations": [
+      {
+        "id": "chat-alex",
+        "title": "Alex Mason",
+        "subtitle": "last seen recently"
+      },
+      {
+        "id": "chat-design",
+        "title": "Design Sync",
+        "subtitle": "5 members, 2 online"
+      },
+      {
+        "id": "chat-ops",
+        "title": "Ops Bot",
+        "subtitle": "service notifications"
+      }
+    ],
+    "subtitleFallback": "last seen recently",
     "dateLabel": "Today",
     "messages": [
       {
@@ -100,13 +337,21 @@
       }
     ],
     "composer": {
-      "placeholder": "Type a message..."
+      "placeholder": "Message",
+      "sendLabel": "Send"
     },
     "localSend": {
-      "initialDeliveryState": "pending",
-      "settledDeliveryState": "sent",
+      "failureCommandPrefix": "/fail",
+      "localMessageTimeLabel": "09:28",
+      "initialDeliveryState": "Pending",
+      "settledDeliveryState": "Sent",
+      "settleDelayMs": 900,
+      "readDeliveryState": "Read",
       "failureDeliveryState": "failed",
-      "clearComposerOnSuccess": true
+      "clearComposerOnSuccess": true,
+      "preserveDraftOnFailure": true,
+      "maxVisibleLocalMessages": 2,
+      "overflowBehavior": "shift-oldest-out"
     }
   }
 }

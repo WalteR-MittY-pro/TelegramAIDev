@@ -1,5 +1,6 @@
 package ohos_app_cangjie_entry
 
+internal import ohos.base.AppLog
 internal import ohos.ability.Ability
 internal import ohos.ability.Want
 internal import ohos.ability.LaunchParam

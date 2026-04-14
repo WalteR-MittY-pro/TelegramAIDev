@@ -1,0 +1,78 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/04/13/rollout-2026-04-13T16-55-59-019d860e-0593-7753-bdbe-be2cd449537e.jsonl",
+  "codex_thread_id": "019d860e-0593-7753-bdbe-be2cd449537e",
+  "ended_at": "2026-04-13T11:23:37Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260413T110048Z-cjmp-bug-fix-332bf7ba",
+  "started_at": "2026-04-13T11:00:48Z",
+  "steps": [
+    {
+      "duration_sec": 354,
+      "ended_at": "2026-04-13T11:06:59Z",
+      "name": "implementation",
+      "started_at": "2026-04-13T11:01:05Z"
+    },
+    {
+      "duration_sec": 962,
+      "ended_at": "2026-04-13T11:23:17Z",
+      "name": "verification",
+      "started_at": "2026-04-13T11:07:15Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 6118016,
+    "input_tokens": 6708013,
+    "output_tokens": 17416,
+    "reasoning_output_tokens": 8499,
+    "total_tokens": 6725429
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 6118016,
+    "input_tokens": 6708013,
+    "output_tokens": 17416,
+    "reasoning_output_tokens": 8499,
+    "total_tokens": 6725429
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 284928,
+      "input_tokens": 294407,
+      "output_tokens": 1279,
+      "reasoning_output_tokens": 961,
+      "total_tokens": 295686
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-13T11:23:23.590Z",
+    "total": {
+      "cached_input_tokens": 10371328,
+      "input_tokens": 12092461,
+      "output_tokens": 50100,
+      "reasoning_output_tokens": 22064,
+      "total_tokens": 12142561
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 176256,
+      "input_tokens": 176473,
+      "output_tokens": 798,
+      "reasoning_output_tokens": 474,
+      "total_tokens": 177271
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-13T10:58:38.391Z",
+    "total": {
+      "cached_input_tokens": 4253312,
+      "input_tokens": 5384448,
+      "output_tokens": 32684,
+      "reasoning_output_tokens": 13565,
+      "total_tokens": 5417132
+    }
+  },
+  "total_duration_sec": 1369,
+  "version": 1,
+  "work_item_ref": "contacts-settings-clickability",
+  "work_item_type": "bug-fix",
+  "working_effort_summary": "made Contacts quick actions, Settings account/preference rows, and the Contacts app-bar Add affordance clickable with deferred demo feedback; attempted repeated real-device iOS smoke validation, but the existing smoke chain no longer surfaced a terminal status after the new interaction coverage"
+}

@@ -1,0 +1,72 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/04/13/rollout-2026-04-13T16-55-59-019d860e-0593-7753-bdbe-be2cd449537e.jsonl",
+  "codex_thread_id": "019d860e-0593-7753-bdbe-be2cd449537e",
+  "ended_at": "2026-04-14T02:16:34Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260414T021007Z-cjmp-bug-fix-45e7e379",
+  "started_at": "2026-04-14T02:10:07Z",
+  "steps": [
+    {
+      "duration_sec": 68,
+      "ended_at": "2026-04-14T02:11:32Z",
+      "name": "implementation",
+      "started_at": "2026-04-14T02:10:24Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 4042752,
+    "input_tokens": 4535605,
+    "output_tokens": 3744,
+    "reasoning_output_tokens": 1787,
+    "total_tokens": 4539349
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 4042752,
+    "input_tokens": 4535605,
+    "output_tokens": 3744,
+    "reasoning_output_tokens": 1787,
+    "total_tokens": 4539349
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 431232,
+      "input_tokens": 444138,
+      "output_tokens": 194,
+      "reasoning_output_tokens": 9,
+      "total_tokens": 444332
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-14T02:15:31.447Z",
+    "total": {
+      "cached_input_tokens": 26708608,
+      "input_tokens": 30080769,
+      "output_tokens": 75929,
+      "reasoning_output_tokens": 35270,
+      "total_tokens": 30156698
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 389632,
+      "input_tokens": 390768,
+      "output_tokens": 1317,
+      "reasoning_output_tokens": 686,
+      "total_tokens": 392085
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-14T02:08:48.858Z",
+    "total": {
+      "cached_input_tokens": 22665856,
+      "input_tokens": 25545164,
+      "output_tokens": 72185,
+      "reasoning_output_tokens": 33483,
+      "total_tokens": 25617349
+    }
+  },
+  "total_duration_sec": 387,
+  "version": 1,
+  "work_item_ref": "contacts-token-prefix-search",
+  "work_item_type": "bug-fix",
+  "working_effort_summary": "changed Contacts search from arbitrary substring matching to token-prefix matching and revalidated on a connected iPhone; the previous Alex/Mason false-positive path is no longer the evident blocker, but the outer Xcode UI smoke still fails because the app never returns to a smoke terminal status and remains on the Contacts surface"
+}

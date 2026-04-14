@@ -10,6 +10,7 @@ Related acceptance: `docs/acceptance/telegram-commercial-mvp.md`
 ## Figma Status
 
 - Figma artifact: pending
+- local `docs/design/figma-source/index.html` mirrors the approved early login shell for slices `#1` and `#2`, but this document remains the canonical framework-agnostic design contract
 - Until the Figma file is created, this document is the source of truth for framework-agnostic design decisions.
 
 ## Shared Design Asset Contract
@@ -88,6 +89,19 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 - shared startup and login copy
 - shared startup and login mock data
 
+#### Approved Early Login Shell Visual Contract
+
+- center the Telegram paper-plane badge and `Telegram` wordmark above the form
+- use a soft gray-white background with clean white input surfaces instead of a heavy card-within-card treatment
+- keep the default login state minimal:
+  - no dense support copy on the main slice `#1` shell
+  - concise supporting copy is reserved for slice `#2` verification or validation states
+- use two separate rounded inputs with left-aligned content:
+  - `Country / Region` with `China` as the visible value and a dropdown affordance
+  - `Phone number` with `+86` as the visible value
+- include an interactive `Keep me signed in on this device` control directly below the inputs
+- treat framework-specific smoke or test-entry controls as implementation-only; they are not part of the canonical shared product design
+
 ### Slice #3: Session restore
 
 #### Allowed In This Slice
@@ -120,6 +134,8 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 - real home shell
 - `Chats`, `Contacts`, and `Settings` tabs
 - shared home shell tab metadata
+- lightweight `Contacts` surface with search, quick actions, and alphabetical contact grouping
+- simplified `Settings` surface with profile summary and grouped entry sections
 - chat list rows and state surfaces
 - chat list mock data and placeholder avatar resources
 
@@ -128,11 +144,13 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 - chat detail
 - composer
 - local send flow
+- real contacts sync or edit flows
+- deep settings detail pages or nested settings stacks
 
 #### Temporary Placeholder Allowed
 
-- `Contacts` and `Settings` destinations may remain placeholders
-- placeholders must still use shared copy and tokens
+- `Contacts` and `Settings` may remain shallow first-level destinations
+- shallow destinations must use shared copy and tokens and render concrete grouped-list content instead of centered placeholder cards
 
 #### Depends On Prior Slice Outputs
 
@@ -209,11 +227,14 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 
 ### Login
 
-- title and short explanatory text
-- phone input
-- primary continue CTA
+- centered Telegram logo mark and wordmark
+- sparse default state without long explanatory copy on slice `#1`
+- separate `Country / Region` and `Phone number` inputs with left-aligned values
+- interactive keep-signed-in control
+- primary login CTA
 - lightweight verification step for demo entry
 - inline validation and failure messaging
+- framework-specific smoke or test-entry affordances are excluded from the canonical product design
 
 ### Home Shell
 
@@ -222,7 +243,34 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 - `Contacts` tab
 - `Settings` tab
 - `Chats` is the default active tab after login and session restore
-- `Contacts` and `Settings` may be placeholder destinations in the MVP, but they must exist in the shell and look intentional
+- `Contacts` and `Settings` should feel like real first-level destinations, even if they stop at one level deep in the MVP
+
+### Contacts
+
+- top app bar with `Contacts` title and a lightweight add action
+- search field directly below the app bar
+- grouped quick-action list with:
+  - `Add Contact`
+  - `People Nearby`
+  - `Invite Friends`
+- alphabetical contact sections using one or a few rows per letter group
+- each row includes:
+  - avatar
+  - name
+  - lightweight presence or last-seen status
+- avoid chat-list affordances such as unread badges, pinned states, or message snippets
+
+### Settings
+
+- profile summary card at the top of the screen
+- grouped list sections with restrained copy and simple disclosure affordances
+- compact section set for the MVP:
+  - `Account`
+  - `Preferences`
+  - `Session`
+- `Account` should feel Telegram-like and may include `Devices`, `Privacy and Security`, and `Notifications and Sounds`
+- `Preferences` should stay short and may include `Appearance`, `Language`, and `Chat Folders`
+- `Session` should expose a clear `Sign out` affordance without requiring deeper settings detail pages
 
 ### Chat List
 
@@ -267,6 +315,18 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 - empty list
 - load failure
 
+### Contacts
+
+- populated grouped list
+- search field present
+- quick actions visible
+
+### Settings
+
+- populated grouped list
+- session-present summary card
+- destructive sign-out affordance visible
+
 ### Chat Detail
 
 - loading conversation
@@ -281,6 +341,9 @@ The canonical shared asset contract now includes tokens, shared copy, shared moc
 - avoid presenting the product as only a chat list page; the home shell should communicate a broader Telegram-like product surface
 - prioritize readable density, clear timestamps, legible snippets, and familiar chat affordances
 - use a restrained accent color and neutral surfaces
+- keep `Contacts` and `Settings` visually closer to Telegram's grouped-list rhythm than to a dashboard card grid
+- let `Contacts` feel slightly denser and more list-like than `Chats`
+- keep `Settings` more restrained than `Contacts`, with fewer subtitles and less visual noise
 - keep touch targets production-credible on mobile
 
 ## Design Rules
@@ -297,8 +360,11 @@ When the Figma file is created, it should include at least:
 
 1. login
 2. login validation state
-3. chat list default state
-4. home shell with visible `Chats`, `Contacts`, and `Settings` tabs
-5. chat list loading or empty state
-6. chat detail default state
-7. chat detail send-pending state
+3. login verification step
+4. chat list default state
+5. home shell with visible `Chats`, `Contacts`, and `Settings` tabs
+6. contacts grouped-list screen with search and quick actions
+7. settings grouped-list screen with profile summary and simplified sections
+8. chat list loading or empty state
+9. chat detail default state
+10. chat detail send-pending state

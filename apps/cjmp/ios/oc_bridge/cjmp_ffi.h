@@ -6,6 +6,10 @@ extern "C" {
 #endif
 
 const char* FfiLogicTest(void);
+void FfiFreeString(const char* str);
+long long FfiSaveDemoSessionPhone(const char* phoneNumber);
+const char* FfiLoadDemoSessionPhone(void);
+void FfiClearDemoSessionPhone(void);
 
 #ifdef __cplusplus
 }

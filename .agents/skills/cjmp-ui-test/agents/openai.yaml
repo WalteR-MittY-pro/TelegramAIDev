@@ -1,0 +1,4 @@
+interface:
+  display_name: "CJMP iOS UI Test Runner"
+  short_description: "Configure and run CJMP iOS UI tests on iPhone"
+  default_prompt: "Use $cjmp-ui-test to configure the mandatory ohos.ui_test plus Xcode UI Test stack and validate the latest CJMP iOS UI flow on the connected device."

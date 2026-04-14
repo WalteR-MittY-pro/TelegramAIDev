@@ -66,7 +66,7 @@ elif [[ "${buildTarget}" == "ios-sim" ]]; then
     export IOS_BRIDGE="$SCRIPT_DIR/ios/oc_bridge"
 fi
 
-if [[ "${buildTarget}" == "ios" ]] || [[ "${buildTarget}" == "ios-sim" ]]; then 
+if [[ "${buildTarget}" == "ios" ]] || [[ "${buildTarget}" == "ios-sim" ]]; then
     # compile oc_bridge code
     oc_bridge_dir="$SCRIPT_DIR/ios/oc_bridge"
     echo "Compiling Objective-C code in $oc_bridge_dir"
@@ -99,21 +99,24 @@ fi
 # Build cangjie libraries
 build_path="$SCRIPT_DIR/build"
 src_path="$SCRIPT_DIR/lib"
+cjpm_toml_path="$src_path/cjpm.toml"
+cjpm_toml_backup_path="$src_path/cjpm.toml.backup"
 
 cd $src_path
-cp cjpm.toml cjpm.toml.backup
+cp "$cjpm_toml_path" "$cjpm_toml_backup_path"
 cleanup() {
-    if [ -f cjpm.toml.backup ]; then
-        mv cjpm.toml.backup cjpm.toml
+    if [ -f "$cjpm_toml_backup_path" ]; then
+        mv "$cjpm_toml_backup_path" "$cjpm_toml_path"
     fi
 }
 trap cleanup EXIT INT TERM
 if [[ "${buildTarget}" == "ios" || "${buildTarget}" == "ios-sim" ]]; then
-    python3 $CJMP_TOOL_PATH/tools/keels_tools/utils/update_toml.py $src_path/cjpm.toml
+    python3 $CJMP_TOOL_PATH/tools/keels_tools/utils/update_toml.py "$cjpm_toml_path"
 fi
 source "$CJMP_TOOL_PATH/third_party/${cangjieFolder}/envsetup.sh"
 cjpm build --no-feature-deduce --target-dir "${build_path}" --target="${cangjieTarget}" ${cangjieExtraArgs}
 cleanup
+trap - EXIT INT TERM
 cd $SCRIPT_DIR
 
 # Copy files with specified extensions
@@ -199,7 +202,7 @@ copy_dependencies() {
         if [[ -f "$dep_path" ]]; then
             local dep_file_name
             dep_file_name=$(basename "$dep_path")
-            local dest_path="$output_dir/$dep_file_name"
+            local dest_path="$outputDir/$dep_file_name"
             # Skip if source and destination are the same file
             if [[ -f "$dest_path" ]] && [[ "$(realpath "$dep_path")" == "$(realpath "$dest_path")" ]]; then
                 echo "Skipped (same file): $dep_file_name"

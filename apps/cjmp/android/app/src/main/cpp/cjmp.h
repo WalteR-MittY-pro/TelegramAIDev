@@ -6,6 +6,7 @@
 extern "C" {
 void InitJni(JNIEnv *env);
 const char *FfiLogicTest(void);
+void FfiFreeString(const char *str);
 }
 
 # endif

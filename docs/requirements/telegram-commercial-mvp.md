@@ -25,7 +25,9 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
 - session restore on relaunch
 - home shell with Telegram-like primary navigation presence
 - chat list as the default home tab
-- visible `Contacts` and `Settings` tabs on the home shell, even if their inner functionality is not implemented in the MVP
+- visible `Contacts` and `Settings` tabs on the home shell with lightweight but concrete inner content
+- a Telegram-like `Contacts` surface with search, quick actions, and an alphabetical contact list
+- a simplified `Settings` surface with profile summary and grouped entry sections
 - chat detail screen with realistic message rendering
 - sending a local demo text message
 - core loading, empty, and error states on major screens
@@ -36,8 +38,8 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
 - real backend integration
 - real SMS verification
 - contacts sync
-- contacts management flows
-- settings detail flows
+- full contacts management flows
+- deep settings detail flows and secondary drill-down pages
 - voice and video calls
 - channels, bots, payments, stories, mini apps
 - advanced moderation and admin controls
@@ -58,9 +60,11 @@ The MVP must be strong enough to expose real product, UI, state-management, navi
    - Successful login routes to the home shell with the chat list tab active.
 2. Relaunch with valid session
    - User reopens the app and is routed directly into the home shell with the chat list tab active after restore.
-3. Browse chats
+3. Browse the home shell
    - User sees a Telegram-like home shell with `Chats`, `Contacts`, and `Settings` tabs present.
    - The `Chats` tab is active by default and shows a realistic list of conversations with avatar, title, snippet, timestamp, unread state, and pinned or muted cues where relevant.
+   - The `Contacts` tab exposes search, quick actions, and a lightweight alphabetical list.
+   - The `Settings` tab exposes a compact settings home with profile summary plus grouped account and preference entries.
 4. Open a conversation
    - User enters chat detail and sees a believable mix of incoming and outgoing messages, grouped with date separators and delivery states where relevant.
 5. Send a message
@@ -108,6 +112,18 @@ Issue-by-issue delivery must follow the slice contracts below instead of pulling
 
 - none
 
+#### Approved Early Login Shell Profile
+
+- use a centered Telegram paper-plane badge and `Telegram` wordmark on a soft gray-white mobile background
+- keep the default slice `#1` login view visually sparse and easy to scan
+- do not rely on long instructional or descriptive copy on the main slice `#1` login screen
+- show two stacked rounded white fields:
+  - `Country / Region`, preset to `China`, with a dropdown affordance
+  - `Phone number`, preset to `+86`
+- place an interactive `Keep me signed in on this device` control beneath the fields
+- keep the product-facing login shell centered on a single primary authentication CTA
+- framework-specific smoke or validation-entry affordances may exist for delivery, but they are implementation-local and must not be treated as canonical product UI
+
 ### Slice #2: Demo login flow
 
 #### Allowed In This Slice
@@ -133,6 +149,12 @@ Issue-by-issue delivery must follow the slice contracts below instead of pulling
 #### Depends On Prior Slice Outputs
 
 - slice `#1` app shell and startup routing
+
+#### Approved Visual Continuity Into Slice `#2`
+
+- carry forward the same Telegram badge, wordmark, and restrained field styling from slice `#1`
+- keep phone-entry copy concise, with validation feedback presented inline rather than replacing the layout with dense helper text
+- verification may introduce short instructional text, but it must remain compact and visually secondary to the main action
 
 ### Slice #3: Session restore
 
@@ -168,6 +190,8 @@ Issue-by-issue delivery must follow the slice contracts below instead of pulling
 - visible `Chats`, `Contacts`, and `Settings` tabs
 - `Chats` as the default active tab
 - chat list surface
+- lightweight `Contacts` surface with search, quick actions, and alphabetical grouping
+- simplified `Settings` surface with profile summary and grouped list entries
 - conversation rows with shared mock data
 - loading, empty, and error states
 - stable list scrolling
@@ -177,11 +201,13 @@ Issue-by-issue delivery must follow the slice contracts below instead of pulling
 - chat detail
 - composer
 - local send flow
+- real contacts sync or editing flows
+- deep settings detail pages
 
 #### Temporary Placeholder Allowed
 
-- `Contacts` and `Settings` inner destinations may remain placeholder screens in the MVP
-- placeholder destinations must look intentional and must not appear broken
+- `Contacts` and `Settings` may remain shallow first-level surfaces without full drill-down implementations
+- shallow surfaces must still render concrete structured content and must not appear broken or accidental
 
 #### Depends On Prior Slice Outputs
 

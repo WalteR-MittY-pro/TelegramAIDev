@@ -1,0 +1,78 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/03/26/rollout-2026-03-26T16-06-47-019d292e-8378-7af0-9aaa-5deb45825512.jsonl",
+  "codex_thread_id": "019d292e-8378-7af0-9aaa-5deb45825512",
+  "ended_at": "2026-03-26T08:56:04Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260326T085531Z-cjmp-requirement-573fa786",
+  "started_at": "2026-03-26T08:55:31Z",
+  "steps": [
+    {
+      "duration_sec": 0,
+      "ended_at": "2026-03-26T08:55:47Z",
+      "name": "runtime-validation",
+      "started_at": "2026-03-26T08:55:47Z"
+    },
+    {
+      "duration_sec": 0,
+      "ended_at": "2026-03-26T08:55:47Z",
+      "name": "evidence-capture",
+      "started_at": "2026-03-26T08:55:47Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 383104,
+    "input_tokens": 387609,
+    "output_tokens": 405,
+    "reasoning_output_tokens": 120,
+    "total_tokens": 388014
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 383104,
+    "input_tokens": 387609,
+    "output_tokens": 405,
+    "reasoning_output_tokens": 120,
+    "total_tokens": 388014
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 192640,
+      "input_tokens": 193977,
+      "output_tokens": 238,
+      "reasoning_output_tokens": 24,
+      "total_tokens": 194215
+    },
+    "model_context_window": 258400,
+    "timestamp": "2026-03-26T08:55:51.350Z",
+    "total": {
+      "cached_input_tokens": 8606208,
+      "input_tokens": 10500570,
+      "output_tokens": 26082,
+      "reasoning_output_tokens": 13225,
+      "total_tokens": 10526652
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 190976,
+      "input_tokens": 192740,
+      "output_tokens": 398,
+      "reasoning_output_tokens": 205,
+      "total_tokens": 193138
+    },
+    "model_context_window": 258400,
+    "timestamp": "2026-03-26T08:55:21.515Z",
+    "total": {
+      "cached_input_tokens": 8223104,
+      "input_tokens": 10112961,
+      "output_tokens": 25677,
+      "reasoning_output_tokens": 13105,
+      "total_tokens": 10138638
+    }
+  },
+  "total_duration_sec": 33,
+  "version": 1,
+  "work_item_ref": "slice1-acceptance-validation",
+  "work_item_type": "requirement",
+  "working_effort_summary": "Runtime acceptance on Android device 3d62be73 verified slice1 contracts: first launch after pm clear lands on login with Continue CTA, startup failure notice is reachable and recoverable back to login, and authenticated route reaches explicit placeholder (not home/chat)."
+}

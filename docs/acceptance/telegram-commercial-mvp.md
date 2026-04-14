@@ -43,6 +43,8 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 
 - first launch without session reaches login cleanly
 - startup failure does not leave the app stuck on a spinner
+- the login shell clearly shows the Telegram mark and wordmark, separate country and phone fields, and an interactive keep-signed-in control
+- the default login state remains visually sparse instead of relying on dense explanatory copy
 - any authenticated destination reachable in this slice is clearly a placeholder, not a later-slice implementation
 
 ### Slice #2: Demo login flow
@@ -75,6 +77,7 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 
 - the user can complete the demo login path without developer knowledge
 - invalid or incomplete input gets clear feedback
+- phone-entry validation stays inline and preserves the overall shell instead of replacing it with a verbose error screen
 - success ends in the authenticated placeholder handoff, not in the real home shell or chat list
 
 ### Slice #3: Session restore
@@ -116,6 +119,8 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 - visible `Chats`, `Contacts`, and `Settings` tabs
 - `Chats` as the default active tab
 - chat list rows and metadata
+- lightweight `Contacts` surface with search, quick actions, and alphabetical sections
+- simplified `Settings` surface with profile summary and grouped entries
 - loading, empty, and error states
 - stable list scrolling
 
@@ -124,11 +129,13 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 - chat detail
 - composer
 - local send flow
+- real contacts sync or editing flows
+- deep settings detail pages
 
 #### Temporary Placeholder Allowed
 
-- `Contacts` and `Settings` inner screens may be placeholder destinations
-- the placeholder destinations must look intentional and must not appear broken
+- `Contacts` and `Settings` may remain shallow first-level destinations without full drill-down behavior
+- shallow destinations must still render concrete structured content and must not appear broken
 
 #### Depends On Prior Slice Outputs
 
@@ -140,6 +147,8 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 
 - login and restore now land in the real home shell with `Chats` active
 - the home shell visibly includes `Chats`, `Contacts`, and `Settings`
+- `Contacts` exposes search, quick actions, and an alphabetical contact list that feels close to Telegram
+- `Settings` exposes a compact grouped settings home with profile summary and a visible `Sign out` affordance
 - the chat list meets the required metadata, state, and scrolling quality bar
 
 ### Slice #5: Chat detail
@@ -223,7 +232,7 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 ### Pass Criteria
 
 - the app lands on the login flow
-- the user can see a primary CTA to continue
+- the user can see separate country and phone inputs plus a primary login CTA
 - the screen does not look like a developer placeholder or raw scaffold
 
 ## Acceptance Scenario 2: Demo Login Enters The Product
@@ -278,9 +287,49 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 - the home shell visibly includes `Chats`, `Contacts`, and `Settings`
 - the navigation presence feels close to a real Telegram-like app rather than a single-screen prototype
 - `Chats` is the default active destination after login and restore
-- `Contacts` and `Settings` do not need full inner functionality in the MVP, but their presence must not look broken or accidental
+- `Contacts` and `Settings` do not need deep inner functionality in the MVP, but they must look like intentional first-level destinations rather than placeholders
 
-## Acceptance Scenario 5: Chat List Feels Telegram-Like
+## Acceptance Scenario 5: Contacts Feels Telegram-Like
+
+### Preconditions
+
+- user is authenticated
+- home shell is visible
+
+### Steps
+
+1. Switch to the `Contacts` tab.
+2. Inspect the top of the page.
+3. Inspect the quick actions and the contact list.
+
+### Pass Criteria
+
+- the screen shows a `Contacts` title and a visible search field
+- the screen shows lightweight quick actions such as `Add Contact`, `People Nearby`, and `Invite Friends`
+- the main content is an alphabetical contact list rather than a centered placeholder card
+- contact rows use person-oriented metadata such as presence or last-seen status, not chat-list snippets or unread badges
+
+## Acceptance Scenario 6: Settings Feels Like A Real First-Level Destination
+
+### Preconditions
+
+- user is authenticated
+- home shell is visible
+
+### Steps
+
+1. Switch to the `Settings` tab.
+2. Inspect the profile summary area.
+3. Inspect the grouped settings sections.
+
+### Pass Criteria
+
+- the screen shows a compact profile summary near the top
+- the settings content is organized into grouped sections such as `Account`, `Preferences`, and `Session`
+- the screen stays intentionally lightweight and does not require deep drill-down pages to feel complete
+- a visible `Sign out` affordance exists and reads as the destructive action on the page
+
+## Acceptance Scenario 7: Chat List Feels Telegram-Like
 
 ### Preconditions
 
@@ -299,7 +348,7 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 - loading, empty, and error states are coherent and usable
 - scrolling is stable and does not visibly degrade core usability
 
-## Acceptance Scenario 6: Opening Chat Shows A Credible Conversation
+## Acceptance Scenario 8: Opening Chat Shows A Credible Conversation
 
 ### Preconditions
 
@@ -316,7 +365,7 @@ For issue-by-issue acceptance of slices `#1` through `#6`, use the contracts bel
 - date separators and delivery-state cues are shown where relevant
 - the conversation is believable as a commercial messaging app, not a mock debug screen
 
-## Acceptance Scenario 7: Sending A Local Text Message Works
+## Acceptance Scenario 9: Sending A Local Text Message Works
 
 ### Preconditions
 
