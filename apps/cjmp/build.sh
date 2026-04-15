@@ -5,6 +5,7 @@ set -e
 # Build configuration
 export buildType="${1}"
 export buildTarget="${2}"
+export uiTestMode="${3:-off}"
 export cangjieFolder="cangjie-${buildTarget}"
 
 # Script directory
@@ -112,6 +113,9 @@ cleanup() {
 trap cleanup EXIT INT TERM
 if [[ "${buildTarget}" == "ios" || "${buildTarget}" == "ios-sim" ]]; then
     python3 $CJMP_TOOL_PATH/tools/keels_tools/utils/update_toml.py "$cjpm_toml_path"
+fi
+if [[ "${uiTestMode}" == "autorun" ]]; then
+    sed -i '' "s/--cfg ui_test=off/--cfg ui_test=autorun/g" "$cjpm_toml_path"
 fi
 source "$CJMP_TOOL_PATH/third_party/${cangjieFolder}/envsetup.sh"
 cjpm build --no-feature-deduce --target-dir "${build_path}" --target="${cangjieTarget}" ${cangjieExtraArgs}

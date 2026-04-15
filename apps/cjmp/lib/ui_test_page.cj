@@ -7,8 +7,8 @@ import ohos.state_macro_manage.Entry
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.State
 import std.unittest.*
+import std.time.*
 
-@When[test_option == "test"]
 @Entry
 @Component
 class UITestPage {
@@ -16,6 +16,18 @@ class UITestPage {
     var smokeStatus: String = SMOKE_IDLE
     @State
     var smokeDetail: String = getSmokeTrace()
+
+    protected override func aboutToAppear(): Unit {
+        if (isUiTestAutorunEnabled()) {
+            clearDemoSession()
+            setSmokeTrace("Auto-run: cleared session, launching smoke suite")
+            this.smokeDetail = getSmokeTrace()
+            let _ = spawn {
+                sleep(500 * Duration.millisecond)
+                this.runSmokeSuite()
+            }
+        }
+    }
 
     func runSmokeSuite(): Unit {
         if (this.smokeStatus == SMOKE_RUNNING) {

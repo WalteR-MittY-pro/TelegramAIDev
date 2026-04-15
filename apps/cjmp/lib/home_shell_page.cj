@@ -309,16 +309,16 @@ class HomeShellPage {
                                 })
                         }
 
-                        Button(HOME_OPEN_SMOKE_LABEL)
-                            .id(ID_HOME_OPEN_SMOKE)
-                            .height(40)
-                            .backgroundColor(COLOR_BRAND_SOFT)
-                            .fontColor(COLOR_BRAND)
-                            .borderRadius(20)
-                            .padding(left: 14, right: 14)
-                            .onClick({ =>
-                                Router.push(url: ROUTE_UI_TEST_PAGE)
-                            })
+                        // Button(HOME_OPEN_SMOKE_LABEL)
+                        //     .id(ID_HOME_OPEN_SMOKE)
+                        //     .height(40)
+                        //     .backgroundColor(COLOR_BRAND_SOFT)
+                        //     .fontColor(COLOR_BRAND)
+                        //     .borderRadius(20)
+                        //     .padding(left: 14, right: 14)
+                        //     .onClick({ =>
+                        //         Router.push(url: ROUTE_UI_TEST_PAGE)
+                        //     })
                     }
                 }
             }

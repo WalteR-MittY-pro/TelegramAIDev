@@ -59,16 +59,6 @@ let LOGIN_STEP_VERIFICATION = "verification"
 let PLACEHOLDER_NOTICE =
     "This destination is intentionally scoped as a placeholder in the current MVP slice."
 
-let SMOKE_IDLE = "Smoke suite idle"
-let SMOKE_RUNNING = "Smoke suite running"
-let SMOKE_PASSED = "Smoke suite passed"
-let SMOKE_FAILED = "Smoke suite failed"
-let SMOKE_CRASHED = "Smoke suite crashed"
-
-func isSmokePreviewMode(mode: String): Bool {
-    return mode == ENTRY_MODE_SMOKE_LOGIN || mode == ENTRY_MODE_SMOKE_LOGIN_DEMO || mode == ENTRY_MODE_SMOKE_FAILURE
-}
-
 func isSmokeDemoLoginMode(mode: String): Bool {
     return mode == ENTRY_MODE_SMOKE_LOGIN_DEMO
 }
@@ -106,6 +96,8 @@ class EntryView {
     var restoreNotice: String = ""
     @State
     var pendingRestoreRedirect: Bool = false
+    @State
+    var pendingUiTestRoute: Bool = false
 
     private var entryMode: String = ENTRY_MODE_DEFAULT
     private var didStartBootstrap: Bool = false
@@ -140,12 +132,16 @@ class EntryView {
         this.restoreNotice = ""
         this.isSubmittingPhone = false
         this.pendingRestoreRedirect = false
+        this.pendingUiTestRoute = false
         this.startupState = STARTUP_LOADING
         let modeCopy = this.entryMode
         let _ = spawn {
             sleep(700 * Duration.millisecond)
             if (modeCopy == ENTRY_MODE_SMOKE_FAILURE) {
                 this.startupState = STARTUP_FAILURE
+            } else if (isUiTestAutorunEnabled()) {
+                this.startupState = STARTUP_LOGIN
+                this.pendingUiTestRoute = true
             } else if (modeCopy == ENTRY_MODE_DEFAULT) {
                 let restoreState = resolveDemoSessionRestoreState()
                 if (restoreState == SESSION_RESTORE_RESTORED) {
@@ -160,14 +156,6 @@ class EntryView {
             } else {
                 this.startupState = STARTUP_LOGIN
             }
-        }
-    }
-
-    func openSmokeTools(): Unit {
-        if (isSmokePreviewMode(this.entryMode)) {
-            Router.back()
-        } else {
-            Router.push(url: ROUTE_UI_TEST_PAGE)
         }
     }
 
@@ -196,6 +184,17 @@ class EntryView {
             restored: true,
             persisted: true
         )
+    }
+
+    func handlePendingUiTestRoute(): Unit {
+        if (!this.pendingUiTestRoute) {
+            return
+        }
+        this.pendingUiTestRoute = false
+        if (!tryMarkUiTestAutoRouteStarted()) {
+            return
+        }
+        Router.push(url: ROUTE_UI_TEST_PAGE)
     }
 
     func submitPhoneEntry(): Unit {
@@ -317,21 +316,6 @@ class EntryView {
                     .onClick({ =>
                         this.entryMode = ENTRY_MODE_DEFAULT
                         this.beginBootstrap()
-                    })
-
-                Button(if (isSmokePreviewMode(this.entryMode)) {
-                    "Back to UI test page"
-                } else {
-                    "Open UI test page"
-                })
-                    .id(ID_FAILURE_SMOKE_ENTRY)
-                    .width(100.percent)
-                    .height(44)
-                    .backgroundColor(COLOR_BRAND_SOFT)
-                    .fontColor(COLOR_BRAND)
-                    .borderRadius(22)
-                    .onClick({ =>
-                        this.openSmokeTools()
                     })
             }
             .id(ID_FAILURE_ROOT)
@@ -581,20 +565,6 @@ class EntryView {
                         .width(LOGIN_FORM_WIDTH)
                     }
 
-                    Button(if (isSmokePreviewMode(this.entryMode)) {
-                        "Back to UI test page"
-                    } else {
-                        "Open UI test page"
-                    })
-                        .id(ID_LOGIN_SMOKE_ENTRY)
-                        .width(100.percent)
-                        .height(44)
-                        .backgroundColor(COLOR_BRAND_SOFT)
-                        .fontColor(COLOR_BRAND)
-                        .borderRadius(22)
-                        .onClick({ =>
-                            this.openSmokeTools()
-                        })
                 }
                 .width(100.percent)
             }
@@ -607,6 +577,7 @@ class EntryView {
             .backgroundColor(COLOR_APP_BACKGROUND)
             .onAppear({ =>
                 this.handlePendingRestoreRedirect()
+                this.handlePendingUiTestRoute()
             })
         }
     }

@@ -169,6 +169,12 @@ public let ID_CHAT_DETAIL_LOCAL_MESSAGE_BUBBLE = "slice6_chat_detail_local_messa
 public let ID_CHAT_DETAIL_LOCAL_MESSAGE_TEXT = "slice6_chat_detail_local_message_text"
 public let ID_CHAT_DETAIL_LOCAL_MESSAGE_DELIVERY = "slice6_chat_detail_local_message_delivery"
 
+public let SMOKE_IDLE = "Smoke suite idle"
+public let SMOKE_RUNNING = "Smoke suite running"
+public let SMOKE_PASSED = "Smoke suite passed"
+public let SMOKE_FAILED = "Smoke suite failed"
+public let SMOKE_CRASHED = "Smoke suite crashed"
+
 var smokeTrace: String = "Smoke trace idle"
 
 func setSmokeTrace(trace: String): Unit {
