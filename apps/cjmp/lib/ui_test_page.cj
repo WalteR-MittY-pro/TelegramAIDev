@@ -45,6 +45,8 @@ class UITestPage {
                 this.smokeStatus = SMOKE_FAILED
             }
             AppLog.info("telegram ui smoke report: case=${report.caseCount} failed=${report.failedCount} error=${report.errorCount} detail=${this.smokeDetail}")
+            let value = getNetIPName()
+            AppLog.info("getNetIPName(),value = ${value}")
         }
     }
 
