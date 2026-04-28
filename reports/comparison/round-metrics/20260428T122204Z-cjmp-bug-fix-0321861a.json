@@ -1,0 +1,84 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/04/28/rollout-2026-04-28T19-58-35-019dd3f4-97e0-7e31-86ca-e056a93e284d.jsonl",
+  "codex_thread_id": "019dd3f4-97e0-7e31-86ca-e056a93e284d",
+  "ended_at": "2026-04-28T12:29:45Z",
+  "framework_lane": "cjmp",
+  "round_id": "20260428T122204Z-cjmp-bug-fix-0321861a",
+  "started_at": "2026-04-28T12:22:04Z",
+  "steps": [
+    {
+      "duration_sec": 107,
+      "ended_at": "2026-04-28T12:24:03Z",
+      "name": "investigation",
+      "started_at": "2026-04-28T12:22:16Z"
+    },
+    {
+      "duration_sec": 133,
+      "ended_at": "2026-04-28T12:28:12Z",
+      "name": "implementation",
+      "started_at": "2026-04-28T12:25:59Z"
+    },
+    {
+      "duration_sec": 93,
+      "ended_at": "2026-04-28T12:29:45Z",
+      "name": "verification",
+      "started_at": "2026-04-28T12:28:12Z"
+    }
+  ],
+  "token_consumption": {
+    "cached_input_tokens": 4394368,
+    "input_tokens": 4745847,
+    "output_tokens": 12026,
+    "reasoning_output_tokens": 6294,
+    "total_tokens": 4757873
+  },
+  "token_usage_delta": {
+    "cached_input_tokens": 4394368,
+    "input_tokens": 4745847,
+    "output_tokens": 12026,
+    "reasoning_output_tokens": 6294,
+    "total_tokens": 4757873
+  },
+  "token_usage_end": {
+    "last": {
+      "cached_input_tokens": 244096,
+      "input_tokens": 244663,
+      "output_tokens": 37,
+      "reasoning_output_tokens": 0,
+      "total_tokens": 244700
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-28T12:29:27.276Z",
+    "total": {
+      "cached_input_tokens": 5520512,
+      "input_tokens": 6189346,
+      "output_tokens": 23531,
+      "reasoning_output_tokens": 12424,
+      "total_tokens": 6212877
+    }
+  },
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": {
+    "last": {
+      "cached_input_tokens": 84352,
+      "input_tokens": 124571,
+      "output_tokens": 796,
+      "reasoning_output_tokens": 516,
+      "total_tokens": 125367
+    },
+    "model_context_window": 950000,
+    "timestamp": "2026-04-28T12:21:50.177Z",
+    "total": {
+      "cached_input_tokens": 1126144,
+      "input_tokens": 1443499,
+      "output_tokens": 11505,
+      "reasoning_output_tokens": 6130,
+      "total_tokens": 1455004
+    }
+  },
+  "total_duration_sec": 461,
+  "version": 1,
+  "work_item_ref": "autorun-smoke-ios-fix",
+  "work_item_type": "bug-fix",
+  "working_effort_summary": "Made autorun opt-in for CJMP iOS/Android builds, stabilized the smoke tools page so the Alex detail entry stays visible in smoke builds, rebuilt product and smoke artifacts, and passed the iOS real-device UI smoke test."
+}

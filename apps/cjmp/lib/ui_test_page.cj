@@ -58,7 +58,7 @@ class UITestPage {
     }
 
     func build() {
-        Column(16) {
+        Column(12) {
             Text("Telegram MVP UI smoke tools")
                 .fontSize(24)
                 .fontColor(COLOR_TEXT_PRIMARY)
@@ -92,28 +92,6 @@ class UITestPage {
                 .borderRadius(16)
                 .maxLines(4)
 
-            Button("Open login shell")
-                .id(ID_SMOKE_OPEN_LOGIN)
-                .width(100.percent)
-                .height(48)
-                .backgroundColor(COLOR_SURFACE)
-                .fontColor(COLOR_TEXT_PRIMARY)
-                .borderRadius(18)
-                .onClick({ =>
-                    Router.push(url: "EntryView", params: ENTRY_MODE_SMOKE_LOGIN)
-                })
-
-            Button("Open demo login shell")
-                .id(ID_SMOKE_OPEN_LOGIN_DEMO)
-                .width(100.percent)
-                .height(48)
-                .backgroundColor(COLOR_SURFACE)
-                .fontColor(COLOR_TEXT_PRIMARY)
-                .borderRadius(18)
-                .onClick({ =>
-                    Router.push(url: "EntryView", params: ENTRY_MODE_SMOKE_LOGIN_DEMO)
-                })
-
             Button("Open home shell preview")
                 .id(ID_SMOKE_OPEN_HOME)
                 .width(100.percent)
@@ -136,17 +114,6 @@ class UITestPage {
                     Router.push(url: ROUTE_CHAT_DETAIL, params: CHAT_DETAIL_CONVERSATION_ALEX)
                 })
 
-            Button("Clear local demo session")
-                .id(ID_SMOKE_CLEAR_SESSION)
-                .width(100.percent)
-                .height(48)
-                .backgroundColor(COLOR_SURFACE)
-                .fontColor(COLOR_TEXT_PRIMARY)
-                .borderRadius(18)
-                .onClick({ =>
-                    this.clearSavedDemoSession()
-                })
-
             Button("Run smoke check")
                 .id(ID_SMOKE_RUN)
                 .width(100.percent)
@@ -159,21 +126,56 @@ class UITestPage {
                     this.runSmokeSuite()
                 })
 
-            Button("Back to login shell")
-                .id(ID_SMOKE_BACK)
-                .width(100.percent)
-                .height(44)
-                .backgroundColor(COLOR_BRAND_SOFT)
-                .fontColor(COLOR_BRAND)
-                .borderRadius(22)
-                .onClick({ =>
-                    Router.back()
-                })
+            if (!isUiTestAutorunEnabled()) {
+                Button("Open login shell")
+                    .id(ID_SMOKE_OPEN_LOGIN)
+                    .width(100.percent)
+                    .height(48)
+                    .backgroundColor(COLOR_SURFACE)
+                    .fontColor(COLOR_TEXT_PRIMARY)
+                    .borderRadius(18)
+                    .onClick({ =>
+                        Router.push(url: "EntryView", params: ENTRY_MODE_SMOKE_LOGIN)
+                    })
+
+                Button("Open demo login shell")
+                    .id(ID_SMOKE_OPEN_LOGIN_DEMO)
+                    .width(100.percent)
+                    .height(48)
+                    .backgroundColor(COLOR_SURFACE)
+                    .fontColor(COLOR_TEXT_PRIMARY)
+                    .borderRadius(18)
+                    .onClick({ =>
+                        Router.push(url: "EntryView", params: ENTRY_MODE_SMOKE_LOGIN_DEMO)
+                    })
+
+                Button("Clear local demo session")
+                    .id(ID_SMOKE_CLEAR_SESSION)
+                    .width(100.percent)
+                    .height(48)
+                    .backgroundColor(COLOR_SURFACE)
+                    .fontColor(COLOR_TEXT_PRIMARY)
+                    .borderRadius(18)
+                    .onClick({ =>
+                        this.clearSavedDemoSession()
+                    })
+
+                Button("Back to login shell")
+                    .id(ID_SMOKE_BACK)
+                    .width(100.percent)
+                    .height(44)
+                    .backgroundColor(COLOR_BRAND_SOFT)
+                    .fontColor(COLOR_BRAND)
+                    .borderRadius(22)
+                    .onClick({ =>
+                        Router.back()
+                    })
+            }
         }
         .id(ID_SMOKE_ROOT)
         .width(100.percent)
         .height(100.percent)
-        .justifyContent(FlexAlign.Center)
+        .justifyContent(FlexAlign.Start)
         .alignItems(HorizontalAlign.Center)
         .padding(left: 24, right: 24, top: 24, bottom: 24)
         .backgroundColor(COLOR_APP_BACKGROUND)

@@ -16,6 +16,35 @@ Each round entry should include:
 - AI-efficiency friction summary, or `no confirmed friction in this round`
 - 
 
+## 2026-04-28 Round J
+
+- timestamp: `2026-04-28T12:22:04Z` to `2026-04-28T12:29:45Z`
+- framework lane: `CJMP`
+- work item type and issue reference: `bug-fix`, `autorun-smoke-ios-fix`
+- concise working effort summary:
+  - changed [/Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/lib/cjpm.toml](/Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/lib/cjpm.toml) so every target now defaults to `--cfg ui_test=off`, making non-`autorun` builds produce the product code path by default
+  - tightened [/Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/build.sh](/Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/build.sh) so `uiTestMode` is explicit: only `autorun` flips the smoke build on, anything else now errors instead of silently compiling the wrong mode
+  - stabilized [/Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/lib/ui_test_page.cj](/Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/lib/ui_test_page.cj) by top-aligning the smoke tools surface, promoting the `Open home shell preview`, `Open Alex chat detail preview`, and `Run smoke check` controls, and hiding manual-only buttons during `autorun` builds so the real-device smoke suite can reliably find `slice5_smoke_open_chat_detail_alex`
+- total duration: `7m 41s`
+- internal step duration:
+  - `investigation`: `1m 47s`
+  - `implementation`: `2m 13s`
+  - `verification`: `1m 33s`
+- token consumption: `total=4757873, input=4745847, cached_input=4394368, output=12026, reasoning_output=6294`
+- validation completed in the round:
+  - `./build.sh debug android` passed as the product build path
+  - `./build.sh debug android autorun` passed as the Android smoke build path
+  - `./build.sh debug ios` passed as the product build path
+  - `./build.sh debug ios autorun` passed as the iOS smoke build path
+  - `xcodebuild test -project /Users/dzy/Desktop/project/TelegramAIDev/apps/cjmp/ios/cjmp.xcodeproj -scheme cjmp -destination 'id=00008140-000408510A02801C' -only-testing:cjmpUITests/CjmpUITests/testRunSmokeCheckFromUiTestPage` passed on real device `Cen的iPhone`
+  - exported `/tmp/cjmp-ui-test-20260428T122654Z.xcresult` attachments confirm the terminal state screenshot shows `Smoke suite passed`
+- parity impact / delivery status / notable workaround:
+  - `CJMP` now has a clean split between product and smoke builds without requiring manual file edits before switching platforms
+  - the iOS smoke harness is again real-device-stable for the slice6 chat-detail path
+  - notable workaround: the smoke tools page had been vertically centered with too many controls, which let the required Alex detail trigger fall out of the real-device visible/testable area
+- AI-efficiency friction summary:
+  - no confirmed new `CJMP` framework/tooling friction in this round; the failures were caused by repo-local build configuration drift and a repo-local smoke harness layout assumption
+
 ## 2026-03-26 Round A
 
 - timestamp: `2026-03-26T08:26:46Z` to `2026-03-26T08:55:17Z`

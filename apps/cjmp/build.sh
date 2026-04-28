@@ -8,6 +8,11 @@ export buildTarget="${2}"
 export uiTestMode="${3:-off}"
 export cangjieFolder="cangjie-${buildTarget}"
 
+if [[ "${uiTestMode}" != "off" && "${uiTestMode}" != "autorun" ]]; then
+    echo "error: uiTestMode must be 'off' or 'autorun', got '${uiTestMode}'" >&2
+    exit 1
+fi
+
 # Script directory
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd -P)
 
