@@ -241,7 +241,7 @@ if [[ "${buildTarget}" == "android" ]]; then
     # copy: main library files
     copy_libs "$ANDROID_ENGINE_PATH" "$outputDir" "jar" # keels_android_adapter.jar
     copy_libs "$inputDir" "$outputDir/arm64-v8a" "so" "cjo" # libohos_app_cangjie_entry.so; ohos_app_cangjie_entry.cjo
-    copy_libs "$ANDROID_BRIDGE" "$outputDir/arm64-v8a" "so"
+    # jnicjmp is packaged from the Gradle/CMake output; copying it here causes duplicate native libs.
     cp "${lib_share_path}" "$outputDir/arm64-v8a" #libc++_shared.so
 
     # copy: library dependencies

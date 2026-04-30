@@ -20,10 +20,16 @@ xcodebuild test \
 产品：
 keels build ios
 keels run
+
 ## android
 测试
 ./build.sh debug android autorun
+cd android
+./gradlew assembleDebug -x app:buildCangjieResourcesDebug
 
+adb devices
+adb -s 3d62be73 install -r app/build/outputs/apk/debug/app-debug.apk
+adb -s 3d62be73 shell am start -n com.example.cjmp/.EntryEntryAbilityActivity
 
 产品：
 keels build apk

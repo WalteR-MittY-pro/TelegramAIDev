@@ -25,6 +25,7 @@ public class EntryEntryAbilityActivity extends StageActivity {
             intent.putExtra("timeout", "101");           // value对于本测试框架无意义
         }
 
+        cjmp.initDemoSessionStorageRoot(getFilesDir().getAbsolutePath());
         setInstanceName("com.example.cjmp:entry:EntryAbility:");
         super.onCreate(savedInstanceState);
     }

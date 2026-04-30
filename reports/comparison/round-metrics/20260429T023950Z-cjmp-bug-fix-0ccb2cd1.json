@@ -1,0 +1,38 @@
+{
+  "codex_session_file": "/Users/dzy/.codex/sessions/2026/04/28/rollout-2026-04-28T19-58-35-019dd3f4-97e0-7e31-86ca-e056a93e284d.jsonl",
+  "codex_thread_id": "019dd3f4-97e0-7e31-86ca-e056a93e284d",
+  "ended_at": null,
+  "framework_lane": "cjmp",
+  "round_id": "20260429T023950Z-cjmp-bug-fix-0ccb2cd1",
+  "started_at": "2026-04-29T02:39:50Z",
+  "steps": [
+    {
+      "duration_sec": 150,
+      "ended_at": "2026-04-29T02:43:19Z",
+      "name": "inspect",
+      "started_at": "2026-04-29T02:40:49Z"
+    },
+    {
+      "duration_sec": 199,
+      "ended_at": "2026-04-29T02:46:43Z",
+      "name": "implement",
+      "started_at": "2026-04-29T02:43:24Z"
+    },
+    {
+      "duration_sec": null,
+      "ended_at": null,
+      "name": "validate",
+      "started_at": "2026-04-29T02:46:50Z"
+    }
+  ],
+  "token_consumption": null,
+  "token_usage_delta": null,
+  "token_usage_end": null,
+  "token_usage_source": "codex-session-jsonl",
+  "token_usage_start": null,
+  "total_duration_sec": null,
+  "version": 1,
+  "work_item_ref": "android-ios-shared-smoke-scheme-b",
+  "work_item_type": "bug-fix",
+  "working_effort_summary": null
+}

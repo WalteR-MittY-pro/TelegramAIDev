@@ -4,8 +4,11 @@
 #include <jni.h>
 
 extern "C" {
-void InitJni(JNIEnv *env);
 const char *FfiLogicTest(void);
+long long FfiStartSmokeSuiteRunner(void);
+long long FfiSaveDemoSessionPhone(const char *phoneNumber);
+const char *FfiLoadDemoSessionPhone(void);
+void FfiClearDemoSessionPhone(void);
 void FfiFreeString(const char *str);
 }
 

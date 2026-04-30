@@ -4,6 +4,15 @@ plugins {
     id 'com.android.application'
 }
 
+def requestedUiTestMode = (
+        project.findProperty("cjmpUiTestMode")
+                ?: (gradle.startParameter.taskNames.any { it.toLowerCase().contains("androidtest") } ? "autorun" : "off")
+).toString()
+
+if (!["off", "autorun"].contains(requestedUiTestMode)) {
+    throw new GradleException("cjmpUiTestMode must be 'off' or 'autorun', got '${requestedUiTestMode}'")
+}
+
 android {
     namespace "com.example.cjmp"
     compileSdk 34
@@ -55,9 +64,9 @@ android {
             dependsOn variant.externalNativeBuildTasks
             workingDir "../.."
             if (os.isWindows()) {
-                commandLine "cmd", "/C", "build.bat", variant.name, "android"
+                commandLine "cmd", "/C", "build.bat", variant.name, "android", requestedUiTestMode
             } else {
-                commandLine "bash", "build.sh", variant.name, "android"
+                commandLine "bash", "build.sh", variant.name, "android", requestedUiTestMode
             }
         }
         variant.javaCompileProvider.get().dependsOn(postBuildTask)
@@ -72,4 +81,5 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
 }

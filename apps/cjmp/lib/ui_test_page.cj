@@ -9,6 +9,90 @@ import ohos.state_macro_manage.State
 import std.unittest.*
 import std.time.*
 
+var smokeSuiteStatusSnapshot: String = SMOKE_IDLE
+var smokeSuiteDetailSnapshot: String = getSmokeTrace()
+
+func updateSmokeSuiteSnapshots(status: String, detail: String): Unit {
+    smokeSuiteStatusSnapshot = status
+    smokeSuiteDetailSnapshot = detail
+}
+
+func getSmokeSuiteStatusSnapshot(): String {
+    return smokeSuiteStatusSnapshot
+}
+
+func getSmokeSuiteDetailSnapshot(): String {
+    return smokeSuiteDetailSnapshot
+}
+
+@When[target_platform == "android"]
+func scheduleSmokeSuiteStart(page: UITestPage): Unit {
+    page.runSmokeSuite()
+}
+
+@When[target_platform != "android"]
+func scheduleSmokeSuiteStart(page: UITestPage): Unit {
+    let _ = spawn {
+        sleep(500 * Duration.millisecond)
+        page.runSmokeSuite()
+    }
+}
+
+@When[target_platform == "android"]
+func startSmokeSuiteOnCurrentPlatform(page: UITestPage): Unit {
+    updateSmokeSuiteSnapshots(SMOKE_RUNNING, getSmokeTrace())
+    if (unsafe { FfiStartSmokeSuiteRunner() } != 1) {
+        setSmokeTrace("Smoke suite crashed: Android runner failed to start")
+        updateSmokeSuiteSnapshots(SMOKE_CRASHED, getSmokeTrace())
+        page.markSmokeCrashed(getSmokeTrace())
+        return
+    }
+    let _ = spawn {
+        while (true) {
+            page.syncSmokeStateFromSnapshots()
+            if (getSmokeSuiteStatusSnapshot() != SMOKE_RUNNING) {
+                AppLog.info("telegram ui smoke report: detail=${getSmokeSuiteDetailSnapshot()}")
+                break
+            }
+            sleep(200 * Duration.millisecond)
+        }
+    }
+}
+
+@When[target_platform != "android"]
+func startSmokeSuiteOnCurrentPlatform(page: UITestPage): Unit {
+    let _ = spawn {
+        let report = TelegramSlice6SmokeSuite().asTestSuite().runTests()
+        page.smokeDetail = getSmokeTrace()
+        if (report.failedCount == 0 && report.errorCount == 0) {
+            page.smokeStatus = SMOKE_PASSED
+        } else {
+            page.smokeStatus = SMOKE_FAILED
+        }
+        updateSmokeSuiteSnapshots(page.smokeStatus, page.smokeDetail)
+        AppLog.info("telegram ui smoke report: case=${report.caseCount} failed=${report.failedCount} error=${report.errorCount} detail=${page.smokeDetail}")
+    }
+}
+
+@C
+public func RunSmokeSuiteFromAttachedThread(): Int64 {
+    try {
+        let report = TelegramSlice6SmokeSuite().asTestSuite().runTests()
+        let detail = getSmokeTrace()
+        if (report.failedCount == 0 && report.errorCount == 0) {
+            updateSmokeSuiteSnapshots(SMOKE_PASSED, detail)
+            return 1
+        }
+        updateSmokeSuiteSnapshots(SMOKE_FAILED, detail)
+        return 0
+    } catch (e: Exception) {
+        let detail = "Smoke suite crashed: ${e}"
+        setSmokeTrace(detail)
+        updateSmokeSuiteSnapshots(SMOKE_CRASHED, getSmokeTrace())
+        return 0
+    }
+}
+
 @Entry
 @Component
 class UITestPage {
@@ -22,10 +106,7 @@ class UITestPage {
             clearDemoSession()
             setSmokeTrace("Auto-run: cleared session, launching smoke suite")
             this.smokeDetail = getSmokeTrace()
-            let _ = spawn {
-                sleep(500 * Duration.millisecond)
-                this.runSmokeSuite()
-            }
+            scheduleSmokeSuiteStart(this)
         }
     }
 
@@ -36,18 +117,8 @@ class UITestPage {
         setSmokeTrace("Launching smoke suite")
         this.smokeStatus = SMOKE_RUNNING
         this.smokeDetail = getSmokeTrace()
-        let _ = spawn {
-            let report = TelegramSlice6SmokeSuite().asTestSuite().runTests()
-            this.smokeDetail = getSmokeTrace()
-            if (report.failedCount == 0 && report.errorCount == 0) {
-                this.smokeStatus = SMOKE_PASSED
-            } else {
-                this.smokeStatus = SMOKE_FAILED
-            }
-            AppLog.info("telegram ui smoke report: case=${report.caseCount} failed=${report.failedCount} error=${report.errorCount} detail=${this.smokeDetail}")
-            let value = getNetIPName()
-            AppLog.info("getNetIPName(),value = ${value}")
-        }
+        updateSmokeSuiteSnapshots(this.smokeStatus, this.smokeDetail)
+        startSmokeSuiteOnCurrentPlatform(this)
     }
 
     func clearSavedDemoSession(): Unit {
@@ -55,6 +126,16 @@ class UITestPage {
         setSmokeTrace("Saved demo session cleared")
         this.smokeStatus = SMOKE_IDLE
         this.smokeDetail = getSmokeTrace()
+    }
+
+    func markSmokeCrashed(detail: String): Unit {
+        this.smokeStatus = SMOKE_CRASHED
+        this.smokeDetail = detail
+    }
+
+    func syncSmokeStateFromSnapshots(): Unit {
+        this.smokeStatus = getSmokeSuiteStatusSnapshot()
+        this.smokeDetail = getSmokeSuiteDetailSnapshot()
     }
 
     func build() {
@@ -181,3 +262,6 @@ class UITestPage {
         .backgroundColor(COLOR_APP_BACKGROUND)
     }
 }
+
+@When[target_platform == "android"]
+foreign func FfiStartSmokeSuiteRunner(): Int64

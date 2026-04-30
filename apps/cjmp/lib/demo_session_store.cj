@@ -19,6 +19,7 @@ let LOGIN_RESTORE_INVALID_NOTICE = "Saved demo session was invalid. Continue wit
 var currentDemoSessionPhoneNumber: String = ""
 var currentDemoSessionRestored: Bool = false
 var currentDemoSessionPersisted: Bool = false
+var androidDemoSessionStoredPhoneNumber: String = ""
 
 func clearCurrentDemoSessionPresentation(): Unit {
     currentDemoSessionPhoneNumber = ""
@@ -78,6 +79,12 @@ func writeDemoSessionStorage(phoneNumber: String): Bool {
     return didPersist == 1
 }
 
+@When[target_platform == "android"]
+func writeDemoSessionStorage(phoneNumber: String): Bool {
+    androidDemoSessionStoredPhoneNumber = phoneNumber
+    return true
+}
+
 @When[target_platform == "ios"]
 func readDemoSessionStorage(): String {
     let storedPhone: CString = unsafe { FfiLoadDemoSessionPhone() }
@@ -94,6 +101,11 @@ func readDemoSessionStorage(): String {
     return result
 }
 
+@When[target_platform == "android"]
+func readDemoSessionStorage(): String {
+    return androidDemoSessionStoredPhoneNumber
+}
+
 @When[target_platform == "ios"]
 func clearDemoSessionStorage(): Unit {
     unsafe { FfiClearDemoSessionPhone() }
@@ -104,18 +116,23 @@ func clearDemoSessionStorage(): Unit {
     unsafe { FfiClearDemoSessionPhone() }
 }
 
-@When[target_platform != "ios" && target_platform != "ios-sim"]
+@When[target_platform == "android"]
+func clearDemoSessionStorage(): Unit {
+    androidDemoSessionStoredPhoneNumber = ""
+}
+
+@When[target_platform != "ios" && target_platform != "ios-sim" && target_platform != "android"]
 func writeDemoSessionStorage(phoneNumber: String): Bool {
     AppLog.error("demo session persistence is unavailable on the current target platform")
     return false
 }
 
-@When[target_platform != "ios" && target_platform != "ios-sim"]
+@When[target_platform != "ios" && target_platform != "ios-sim" && target_platform != "android"]
 func readDemoSessionStorage(): String {
     return ""
 }
 
-@When[target_platform != "ios" && target_platform != "ios-sim"]
+@When[target_platform != "ios" && target_platform != "ios-sim" && target_platform != "android"]
 func clearDemoSessionStorage(): Unit {
 }
 
