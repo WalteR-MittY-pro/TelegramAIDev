@@ -1,4 +1,4 @@
-import { hapTasks } from '@ohos/hvigor-ohos-plugin';
+import { hapTasks } from '@ohos/cangjie-build-support';
 import * as path from 'path';
 import { restoreCangjieEntryPlugin } from '../restore-cangjie-entry';
 
